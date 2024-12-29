@@ -12,3 +12,4 @@ C:\Users\Diana\Desktop\Programacion\PROYECTO!!\Maze Runners\obj\Debug\net9.0\ref
 C:\Users\Diana\Desktop\Programacion\PROYECTO!!\Maze Runners\obj\Debug\net9.0\Maze Runners.pdb
 C:\Users\Diana\Desktop\Programacion\PROYECTO!!\Maze Runners\obj\Debug\net9.0\Maze Runners.genruntimeconfig.cache
 C:\Users\Diana\Desktop\Programacion\PROYECTO!!\Maze Runners\obj\Debug\net9.0\ref\Maze Runners.dll
+C:\Users\Diana\Desktop\Programacion\PROYECTO!!\Maze Runners\obj\Debug\net9.0\Maze Runners.sourcelink.json

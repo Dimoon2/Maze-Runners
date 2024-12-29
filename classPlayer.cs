@@ -1,12 +1,28 @@
 class Player
 {
     public string name { get; set; }
-    public List<Token> tokens { get; set; }
+    public List<Token> SelectedToken { get; set; }
+    
     //constructor:
-    public Player(string name, List<Token> tokens)
+    public Player(string name)
     {
         this.name = name;
-        this.tokens = tokens;
+        SelectedToken = new List<Token>();
+    }
+
+     public void AddToken(Token token)
+    {
+        SelectedToken.Add(token);
+    }
+
+    //mostrar tokens:
+     public void DisplayTokens()
+    {
+        Console.WriteLine($"{name}'s Tokens:");
+        foreach (var token in SelectedToken)
+        {
+            token.DisplayInfo();
+        }
     }
 
     //para verificar si la posicion es valida:
@@ -18,8 +34,7 @@ class Player
         { return false; }
     }
 
-    //dado un string el usuario me dice a que posicion quiere ir
-
+    //dado un string el usuario me dice a que posicion quiere ir:
     public Tuple<int, int> GetPosition(string position, int positionActualX, int positionActualY)
     {
         int x = positionActualX;
@@ -59,5 +74,7 @@ class Player
         }
 
         return positionFinal;
+
+
     }
 }

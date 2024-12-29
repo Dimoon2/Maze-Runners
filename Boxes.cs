@@ -1,4 +1,4 @@
 public enum Boxes
         {
-            path, obstacle, visited, trap, treasure
+            path, obstacle, visited, trap, Astharoth
         }
