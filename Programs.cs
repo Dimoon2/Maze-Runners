@@ -6,31 +6,40 @@ public class Programs
     while (true)
     {
       //inicio del juego:
+      Console.Clear();
       Console.WriteLine("Welcome to: The Sprit Trail by Diana, press A if you want to start this adventure or 1 if you want to exit");
       ConsoleKeyInfo key = Console.ReadKey(true);
 
       if (key.KeyChar == 'A' || key.KeyChar == 'a')
       {
+        Console.Clear();
         Console.WriteLine("In a world where the celestial realm of Elysium and the infernal depths of the Abyss have long been at war");
         Console.WriteLine("Press any key to continue");
-        ConsoleKeyInfo key1 = Console.ReadKey(true);
+        Console.ReadKey(true);
         if (key.KeyChar == 'A' || key.KeyChar == 'a')
         {
+          Console.Clear();
           Console.WriteLine("A fragile truce is shattered when a poweful artifact known as the Celestial Heart is stolen from the Archangels");
           Console.WriteLine("This heart, said to contain the essence of creation itself, has fallen into the hands of a cunning demon, Astharoth, who seeks chaos upon both realms");
 
+
           Console.WriteLine("Press any key to continue");
-          ConsoleKeyInfo key2 = Console.ReadKey(true);
+          Console.ReadKey(true);
           if (key.KeyChar == 'A' || key.KeyChar == 'a')
           {
+            Console.Clear();
             Console.WriteLine("It is known that lord Astharoth hides in a dangerous maze called The Spirit Trail full of mortal traps");
             Console.WriteLine("It is your quest, if you dare, to help the angels and demons recover the weapon and face The Spirit Trail by meeting Astharoth at the middle of the trail");
 
             Console.WriteLine("Press any key to contine");
-            ConsoleKeyInfo key3 = Console.ReadKey(true);
+            Console.ReadKey(true);
+
+
             if (key.KeyChar == 'A' || key.KeyChar == 'a')
             {
+              Console.Clear();
               Console.WriteLine("We shall wish you luck, you'll need it ...`");
+
             }
           }
         }
@@ -46,13 +55,15 @@ public class Programs
       }
 
       //personajes
-      Console.WriteLine("Please fill in your name");
+      Console.WriteLine("Player 1 fill your name");
       Player namePlayer1 = new Player(Console.ReadLine() ?? string.Empty);
       Console.WriteLine($"{namePlayer1.name} you are Player 1");
 
-      Console.WriteLine("Please fill in your name");
+      Console.Clear();
+      Console.WriteLine("Player 2 fill your name");
       Player namePlayer2 = new Player(Console.ReadLine() ?? string.Empty);
       Console.WriteLine($"{namePlayer2.name}, you are Player 2");
+
 
 
       //inicializacion del mapa:<3
@@ -60,22 +71,28 @@ public class Programs
       Boxes[,] maze = mazes.GenerateMaze();
       int NumOfTraps = mazes.NumTraps(maze);
 
+
       //Reglas:
+      Console.Clear();
       Console.WriteLine($"{namePlayer1.name}, you lead the firt group");
       Console.WriteLine($"{namePlayer2.name}, you lead the second");
+
 
       Console.WriteLine("Press any key to continue");
       ConsoleKeyInfo key4 = Console.ReadKey(true);
       if (key.KeyChar == 'A' || key.KeyChar == 'a')
       {
+        Console.Clear();
         Console.WriteLine("Whoever kills the beast first, wins the game, you will start in oposite places and have the same chances to win");
         Console.WriteLine($"But be cautious, there are {NumOfTraps} traps in the maze");
 
+
         Console.WriteLine("Press any key to continue");
         ConsoleKeyInfo key5 = Console.ReadKey(true);
+        Console.Clear();
         if (key.KeyChar == 'A' || key.KeyChar == 'a')
         {
-          Console.WriteLine("This are the tokens available");
+          Console.WriteLine("To select the tokens you must input the number of the one you want0");
 
           //llamar a los tokens:
           Console.WriteLine("There are six tokens, select wisely");
@@ -139,10 +156,12 @@ public class Programs
               }
             }
 
+
             //resultados finales:
             Console.WriteLine("\nThis are your tokens:");
             namePlayer1.DisplayTokens();
             namePlayer2.DisplayTokens();
+
           }
         }
       }
@@ -150,10 +169,12 @@ public class Programs
       {
         throw new Exception("Please press any key to continue");
       }
-      
+
       //mostrar maze en terminal:
-      ShowInTerminal.PrintMaze(maze);
-      Console.WriteLine("Let the game begin");
+      Console.Clear();
+      List<Token> tokens1 = Token.CreateTokens();
+      GameActions.PrintMaze(maze, tokens1);
+      Console.WriteLine("Let the game begin...");
 
 
       //pedir movimiento
