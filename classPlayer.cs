@@ -2,21 +2,23 @@ class Player
 {
     public string name { get; set; }
     public List<Token> SelectedToken { get; set; }
-    
+    public bool playerTurn { get; set; }
+
     //constructor:
-    public Player(string name)
+    public Player(string name, bool playerTurn)
     {
         this.name = name;
-        SelectedToken = new List<Token>();
+        this.SelectedToken = new List<Token>();
+        this.playerTurn = playerTurn;
     }
 
-     public void AddToken(Token token)
+    public void AddToken(Token token)
     {
         SelectedToken.Add(token);
     }
 
     //mostrar tokens:
-     public void DisplayTokens()
+    public void DisplayTokens()
     {
         Console.WriteLine($"{name}'s Tokens:");
         foreach (var token in SelectedToken)
@@ -24,6 +26,9 @@ class Player
             token.DisplayInfo();
         }
     }
+
+    //turno de jugadores
+   
 
     //para verificar si la posicion es valida:
     public bool ValidPosition(Boxes[,] maze, int x, int y)

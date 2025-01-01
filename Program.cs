@@ -7,6 +7,8 @@ public class Programs
     {
       //inicio del juego:
       Console.Clear();
+      Console.WriteLine("◽◽◽◽MAIN MENU◽◽◽◽");
+      Console.Clear();
       Console.WriteLine("Welcome to: The Sprit Trail by Diana, press A if you want to start this adventure or 1 if you want to exit");
       ConsoleKeyInfo key = Console.ReadKey(true);
 
@@ -56,12 +58,12 @@ public class Programs
 
       //personajes
       Console.WriteLine("Player 1 fill your name");
-      Player namePlayer1 = new Player(Console.ReadLine() ?? string.Empty);
+      Player namePlayer1 = new Player(Console.ReadLine() ?? string.Empty, false);
       Console.WriteLine($"{namePlayer1.name} you are Player 1");
 
       Console.Clear();
       Console.WriteLine("Player 2 fill your name");
-      Player namePlayer2 = new Player(Console.ReadLine() ?? string.Empty);
+      Player namePlayer2 = new Player(Console.ReadLine() ?? string.Empty, true);
       Console.WriteLine($"{namePlayer2.name}, you are Player 2");
 
 
@@ -101,12 +103,12 @@ public class Programs
 
           List<Token> tokens = new List<Token>
       {
-      new Token("Force", "Demon", 5, 2, "Breaks an obstacle", 5),
-      new Token("Shield", "Angel", 6, 1, "If this token falls into a trap, it won't hurt him", -1),
-      new Token("Vous", "Demon", 4, 2, "Leaves a trap behind", -1),
-      new Token("Vitality", "Angel", 4, 2, "Regenerates its life", 12),
-      new Token("Crow", "Demon", 5, 2, "Upgrades 2 points of his attack", -1),
-      new Token("Cass", "Angel", 5, 2, "Disables a trap", -1)
+      new Token("Force", "Demon", 5, 2, "Breaks an obstacle", 5, [1,1]),
+      new Token("Shield", "Angel", 6, 1, "If this token falls into a trap, it won't hurt him", -1, [1,15]),
+      new Token("Vous", "Demon", 4, 2, "Leaves a trap behind", -1, [1,16]),
+      new Token("Vitality", "Angel", 4, 2, "Regenerates its life", 12, [16,2]),
+      new Token("Crow", "Demon", 5, 2, "Upgrades 2 points of his attack", -1, [16,1]),
+      new Token("Cass", "Angel", 5, 2, "Disables a trap", -1, [16,16])
       };
 
           // Mostrar información de los tokens
@@ -176,11 +178,51 @@ public class Programs
       GameActions.PrintMaze(maze, tokens1);
       Console.WriteLine("Let the game begin...");
 
+      //turnos:
+      Console.Clear();
+      Console.WriteLine("Game has started, if you want to exit, press 1");
 
-      //pedir movimiento
-      Console.WriteLine("Please enter: W if you wanna move up, S if you wanna move down, A if you wanna move left and S if you wanna move right");
-      string position = Console.ReadLine() ?? string.Empty;
+      Console.Clear();
+      while (true)
+      {
+        Console.WriteLine("Do you wish to continue?");
+        ConsoleKeyInfo key1 = Console.ReadKey(true);
+        if (key1.KeyChar == 1)
+        {
+          break;
+        }
+        else
+        {
+          if (namePlayer1.playerTurn == false)
+          {
+            Console.Clear();
+            Console.WriteLine("Yeahhh, I like your actitud!!!!");
 
+            Console.Clear();
+            Console.WriteLine($"It's {namePlayer1}'s turn");
+
+            Console.Clear();
+            Console.WriteLine("With witch token do you wish to play?");
+            string tokenDesition = Console.ReadLine() ?? string.Empty;
+
+            if (tokenDesition == )
+            {
+
+            }
+            //pedir movimiento
+            Console.WriteLine("Please enter: W if you wanna move up, S if you wanna move down, A if you wanna move left and S if you wanna move right");
+            string position = Console.ReadLine() ?? string.Empty;
+
+          }
+          else if (namePlayer2.playerTurn == true)
+          {
+
+          }
+
+          else { break; }
+
+        }
+      }
     }
   }
 }

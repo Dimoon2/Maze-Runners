@@ -8,9 +8,13 @@ class Token
     public string ability { get; set; }
     public int cooldown { get; set; } // implementar cada cuantas celdas se usa
     public int[] currentPosition { get; set; }
+    public virtual void Power()
+    {
+        Console.WriteLine("Using power");
+    }
 
 
-    public Token(string name, string type, float life, int attack, string ability, int cooldown, int[] currentPosition = null)
+    public Token(string name, string type, float life, int attack, string ability, int cooldown, int[] currentPosition)
     {
         this.name = name;
         this.type = type;
@@ -39,6 +43,82 @@ class Token
       new Token("Crow", "Demon", 5, 2, "his attack upgrades 2 points", -1,[16,1]),
       new Token("Cass", "Angel", 5, 2, "Disables a trap",-1,[16,16])
 
+
+
        };
     }
+
+    class Force : Token
+    {
+        public Force(string name, string type, float life, int attack, string ability, int cooldown, int[] currentPosition) : base (name, type, life, attack, ability, cooldown, currentPosition)
+        {}    
+            public override void Power()
+        {
+            Console.WriteLine();
+            
+        }
+    }
+
+    class Shield : Token
+    {
+        public Shield(string name, string type, float life, int attack, string ability, int cooldown, int[] currentPosition) : base (name, type, life, attack, ability, cooldown, currentPosition)
+        {}    
+            public override void Power()
+            {
+                Console.WriteLine();
+            }
+        
+    }
+
+    class Vous : Token
+    {
+        public Vous(string name, string type, float life, int attack, string ability, int cooldown, int[] currentPosition) : base (name, type, life, attack, ability, cooldown, currentPosition)
+        {}    
+            public override void Power()
+            {
+                Console.WriteLine();
+            }
+        
+    }
+
+    class Vitality : Token
+    {
+        public Vitality(string name, string type, float life, int attack, string ability, int cooldown, int[] currentPosition) : base (name, type, life, attack, ability, cooldown, currentPosition)
+        {}    
+            public override void Power()
+            {
+                Console.WriteLine();
+            }
+        
+    }
+
+    class Crow : Token
+    {
+        public Crow(string name, string type, float life, int attack, string ability, int cooldown, int[] currentPosition) : base (name, type, life, attack, ability, cooldown, currentPosition)
+        {}    
+            public override void Power()
+            {
+                Console.WriteLine();
+            }
+        
+    }
+
+    class Cass : Token
+    {
+        public Cass(string name, string type, float life, int attack, string ability, int cooldown, int[] currentPosition) : base (name, type, life, attack, ability, cooldown, currentPosition)
+        {}    
+            public override void Power()
+            {
+                Console.WriteLine();
+            }
+        
+    }
 }
+//habilidades de los tokens
+//   public static bool AbilityForce(Token token)
+//   {
+//     if (token.name == "Force")
+//     {
+// token.currentPosition = 
+//     }
+//   }
