@@ -40,37 +40,37 @@ class Player
     }
 
     //dado un string el usuario me dice a que posicion quiere ir:
-    public Tuple<int, int> GetPosition(string position, int positionActualX, int positionActualY)
+    public int[] GetPosition(string position, int positionActualX, int positionActualY)
     {
         int x = positionActualX;
         int y = positionActualY;
-        Tuple<int, int> positionFinal = new Tuple<int, int>(x, y);
+       int[] positionFinal = new int[2];
 
         if (position == "W" || position == "w")
         {
             x = positionActualX - 1;
             y = positionActualY;
-            positionFinal = new Tuple<int, int>(x, y);
+            positionFinal = new int [2] {x,y};
         }
         else if (position == "S" || position == "s")
         {
             x = positionActualX + 1;
             y = positionActualY;
-            positionFinal = new Tuple<int, int>(x, y);
+            positionFinal = new int [2] {x,y};
 
         }
         else if (position == "D" || position == "d")
         {
             x = positionActualX;
             y = positionActualY + 1;
-            positionFinal = new Tuple<int, int>(x, y);
+            positionFinal = new int [2] {x,y};
 
         }
         else if (position == "A" || position == "a")
         {
             x = positionActualX;
             y = positionActualY - 1;
-            positionFinal = new Tuple<int, int>(x, y);
+            positionFinal = new int [2] {x,y};
 
         }
         else
