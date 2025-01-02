@@ -8,8 +8,9 @@ public class Programs
       //inicio del juego:
       Console.Clear();
       Console.WriteLine("◽◽◽◽MAIN MENU◽◽◽◽");
-      Console.Clear();
+
       Console.WriteLine("Welcome to: The Sprit Trail by Diana, press A if you want to start this adventure or 1 if you want to exit");
+      Console.WriteLine("WARNING: if you don't press any the game will close");
       ConsoleKeyInfo key = Console.ReadKey(true);
 
       if (key.KeyChar == 'A' || key.KeyChar == 'a')
@@ -53,18 +54,24 @@ public class Programs
       }
       else
       {
-        throw new Exception("What are you doing with your life :/, press A to start or press 1 to exit");
+        throw new Exception("What are you doing with your life :/, game over");
       }
 
       //personajes
       Console.WriteLine("Player 1 fill your name");
-      Player namePlayer1 = new Player(Console.ReadLine() ?? string.Empty, false);
-      Console.WriteLine($"{namePlayer1.name} you are Player 1");
+      Player Player1 = new Player(Console.ReadLine() ?? string.Empty, false);
+      Console.WriteLine($"{Player1.name} you are Player 1");
 
       Console.Clear();
       Console.WriteLine("Player 2 fill your name");
-      Player namePlayer2 = new Player(Console.ReadLine() ?? string.Empty, true);
-      Console.WriteLine($"{namePlayer2.name}, you are Player 2");
+      Player Player2 = new Player(Console.ReadLine() ?? string.Empty, true);
+      while (Player1.name == Player2.name)
+      {
+        Console.WriteLine("Not valid name, please write another");
+        Console.WriteLine("Player 2 fill your name");
+        Player2 = new Player(Console.ReadLine() ?? string.Empty, true);
+      }
+      Console.WriteLine($"{Player2.name}, you are Player 2");
 
 
 
@@ -76,8 +83,8 @@ public class Programs
 
       //Reglas:
       Console.Clear();
-      Console.WriteLine($"{namePlayer1.name}, you lead the firt group");
-      Console.WriteLine($"{namePlayer2.name}, you lead the second");
+      Console.WriteLine($"{Player1.name}, you lead the firt group");
+      Console.WriteLine($"{Player2.name}, you lead the second");
 
 
       Console.WriteLine("Press any key to continue");
@@ -94,7 +101,7 @@ public class Programs
         Console.Clear();
         if (key.KeyChar == 'A' || key.KeyChar == 'a')
         {
-          Console.WriteLine("To select the tokens you must input the number of the one you want0");
+          Console.WriteLine("To select the tokens you must input the number of the one you want");
 
           //llamar a los tokens:
           Console.WriteLine("There are six tokens, select wisely");
@@ -118,14 +125,13 @@ public class Programs
           }
 
           System.Console.WriteLine("Press any key to continue");
-          ConsoleKeyInfo key6 = Console.ReadKey(true);
           if (key.KeyChar == 'A' || key.KeyChar == 'a')
           {
             Console.WriteLine("Please select your tokens");
-            //seleccion de tokens:
+            // Selección de tokens:
             for (int turn = 0; turn < 3; turn++)
             {
-              foreach (Player currentPlayer in new[] { namePlayer1, namePlayer2 })
+              foreach (Player currentPlayer in new[] { Player1, Player2 })
               {
                 Console.WriteLine($"\nIt's {currentPlayer.name} turn:");
                 Console.WriteLine("Select a token:");
@@ -136,91 +142,109 @@ public class Programs
                   Console.WriteLine($"{i} {tokens[i].name}");
                 }
 
+                int selection;
+                bool validSelection = false;
 
-                int selection = int.Parse(Console.ReadLine() ?? string.Empty);
-
-                //validar seleccion:
-                if (selection >= 0 && selection < tokens.Count)
+                // Bucle para validar la selección
+                while (!validSelection)
                 {
-                  Token SelectedToken = tokens[selection];
-                  currentPlayer.AddToken(SelectedToken);
-                  SelectedToken.DisplayInfo();
+                  string written = Console.ReadLine() ?? string.Empty;
+                  if (int.TryParse(written, out selection) && selection >= 0 && selection < tokens.Count)
+                  {
+                    Token selectedToken = tokens[selection];
+                    currentPlayer.AddToken(selectedToken);
+                    selectedToken.DisplayInfo();
 
-                  tokens.RemoveAt(selection);
-                  Console.WriteLine($"{SelectedToken.name} has been selected by {currentPlayer.name} and is no longer available.");
+                    tokens.RemoveAt(selection);
+                    Console.WriteLine($"{selectedToken.name} has been selected by {currentPlayer.name} and is no longer available.");
+                    validSelection = true; 
+                  }
+                  else
+                  {
+                    Console.WriteLine("Not valid selection. Please select a valid token index:");
+                    // Mostrar nuevamente los tokens disponibles
+                    for (int i = 0; i < tokens.Count; i++)
+                    {
+                      Console.WriteLine($"{i} {tokens[i].name}");
+                    }
+                  }
                 }
-                else
-                {
-                  Console.WriteLine("Not valid selection.");
-                  turn--;
-                }
-
               }
             }
 
-
-            //resultados finales:
-            Console.WriteLine("\nThis are your tokens:");
-            namePlayer1.DisplayTokens();
-            namePlayer2.DisplayTokens();
-
-          }
-        }
-      }
-      else
-      {
-        throw new Exception("Please press any key to continue");
-      }
-
-      //mostrar maze en terminal:
-      Console.Clear();
-      List<Token> tokens1 = Token.CreateTokens();
-      GameActions.PrintMaze(maze, tokens1);
-      Console.WriteLine("Let the game begin...");
-
-      //turnos:
-      Console.Clear();
-      Console.WriteLine("Game has started, if you want to exit, press 1");
-
-      Console.Clear();
-      while (true)
-      {
-        Console.WriteLine("Do you wish to continue?");
-        ConsoleKeyInfo key1 = Console.ReadKey(true);
-        if (key1.KeyChar == 1)
-        {
-          break;
-        }
-        else
-        {
-          if (namePlayer1.playerTurn == false)
-          {
+            // Resultados finales:
             Console.Clear();
-            Console.WriteLine("Yeahhh, I like your actitud!!!!");
-
-            Console.Clear();
-            Console.WriteLine($"It's {namePlayer1}'s turn");
-
-            Console.Clear();
-            Console.WriteLine("With witch token do you wish to play?");
-            string tokenDesition = Console.ReadLine() ?? string.Empty;
-
-            if (tokenDesition == )
+            Console.WriteLine("\nThese are your tokens:");
+            Player1.DisplayTokens();
+            Player2.DisplayTokens();
+            
+            //mostrar maze en terminal:
+            List<Token> tokens1 = Token.CreateTokens();
+            Console.WriteLine("Let the game begin...");
+            GameActions.PrintMaze(maze, tokens1);
+            
+            Console.WriteLine("Press any key if you wish to continue, if you want to exit, press 1");
+            ConsoleKeyInfo key1 = Console.ReadKey(true);
+            if (key1.KeyChar == 1)
             {
-
+              break;
             }
-            //pedir movimiento
-            Console.WriteLine("Please enter: W if you wanna move up, S if you wanna move down, A if you wanna move left and S if you wanna move right");
-            string position = Console.ReadLine() ?? string.Empty;
 
+            //turnos:
+            else
+            {
+              Console.WriteLine("Yeahhh, I like your actitude!!!!");
+              while (true)
+              {
+                if (Player1.playerTurn)
+                {
+                  Console.WriteLine($"It's {Player1}'s turn");
+                  Player1.DisplayTokens();
+                  Console.WriteLine("Please write correctly the name of the token you wish to use");
+
+                  string tokenDesition = Console.ReadLine() ?? string.Empty;
+                  string tokenForce;
+                  string tokenShield;
+
+
+                  //pedir movimiento
+                  Console.WriteLine("Please enter: W if you wanna move up, S if you wanna move down, A if you wanna move left and S if you wanna move right");
+                  string position = Console.ReadLine() ?? string.Empty;
+
+                  //cambiar el turno
+                  Player1.playerTurn = false;
+                  Player2.playerTurn = true;
+
+                }
+                else
+                {
+                  Console.WriteLine($"It's {Player2}'s turn");
+                  Player2.DisplayTokens();
+                  Console.WriteLine("Please write correctly the name of the token you wish to use");
+
+                  string tokenDesition = Console.ReadLine() ?? string.Empty;
+
+                  // Cambiar el turno
+                  Player1.playerTurn = true;
+                  Player2.playerTurn = false;
+                }
+
+                Console.WriteLine("Do you wish to continue?");
+                Console.WriteLine("Write Yes or No");
+                string wishToContinue = Console.ReadLine() ?? string.Empty;
+
+                if (wishToContinue == "NO" || wishToContinue == "No" || wishToContinue == "no")
+                {
+                  Console.WriteLine("Game over :()");
+                  break;
+                }
+                else if (wishToContinue != "NO" || wishToContinue != "No" || wishToContinue != "no" || wishToContinue != "YES" || wishToContinue != "Yes" || wishToContinue != "yes")
+                {
+                  throw new Exception("Please write a valid answer");
+                }
+              }
+            }
           }
-          else if (namePlayer2.playerTurn == true)
-          {
-
-          }
-
-          else { break; }
-
         }
       }
     }

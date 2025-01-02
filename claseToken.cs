@@ -54,7 +54,8 @@ class Token
         {}    
             public override void Power()
         {
-            Console.WriteLine();
+            Console.WriteLine("I don't like this wall, let's bringit down 😡");
+           
             
         }
     }

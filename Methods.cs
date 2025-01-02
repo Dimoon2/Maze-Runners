@@ -15,7 +15,7 @@
           displayString = currentToken.name
           switch
           {
-            "Force" => "🥷",
+            "Force" => "😡",
             "Shield" => "🛡️",
             "Vous" => "🌀",
             "Vitality" => "🤍",
