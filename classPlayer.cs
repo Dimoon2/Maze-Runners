@@ -36,7 +36,9 @@ class Player
         if (maze[x, y] == Boxes.path || maze[x, y] == Boxes.trap)
         { return true; }
         else
-        { return false; }
+        {
+            return false;
+        }
     }
 
     //
