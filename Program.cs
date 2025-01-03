@@ -108,21 +108,21 @@ public class Programs
           Console.WriteLine("WARNING: no token can be selected twice");
 
           //inicializando tokens:
-          Token Force = new Token("Force", "Demon", 5, 2, "Breaks an obstacle", 5, 2, [1, 1]);
-          Token Shield = new Token("Shield", "Angel", 6, 1, "If this token falls into a trap, it won't hurt him", -1, 2, [1, 15]);
-          Token Vous = new Token("Vous", "Demon", 4, 2, "Leaves a trap behind", -1, 3, [1, 16]);
-          Token Vitality = new Token("Vitality", "Angel", 4, 2, "Regenerates its life", 12, 3, [16, 2]);
-          Token Crow = new Token("Crow", "Demon", 5, 2, "Upgrades 2 points of his attack", 2, -1, [16, 1]);
-          Token Cass = new Token("Cass", "Angel", 5, 2, "Disables a trap", -1, 3, [16, 16]);
+          Token Force = new Token("Force", "Demon", 5, 2, "Breaks an obstacle", 5, 1, [1, 1]);
+          Token Shield = new Token("Shield", "Angel", 6, 1, "If this token falls into a trap, it won't hurt him", -1, 1, [1, 15]);
+          Token Vous = new Token("Vous", "Demon", 4, 2, "Leaves a trap behind", -1, 1, [1, 16]);
+          Token Vitality = new Token("Vitality", "Angel", 4, 2, "Regenerates its life", 12, 1, [16, 2]);
+          Token Crow = new Token("Crow", "Demon", 5, 2, "Upgrades 2 points of his attack", -1, 1, [16, 1]);
+          Token Cass = new Token("Cass", "Angel", 5, 2, "Disables a trap", -1, 1, [16, 16]);
 
           List<Token> tokens = new List<Token>
       {
-      new Token("Force", "Demon", 5, 2, "Breaks an obstacle", 5, 2, [1,1]),
-      new Token("Shield", "Angel", 6, 1, "If this token falls into a trap, it won't hurt him", -1, 2, [1,15]),
-      new Token("Vous", "Demon", 4, 2, "Leaves a trap behind", -1, 3, [1,16]),
-      new Token("Vitality", "Angel", 4, 2, "Regenerates its life", 12 ,3, [16,2]),
-      new Token("Crow", "Demon", 5, 2, "Upgrades 2 points of his attack",2, -1, [16,1]),
-      new Token("Cass", "Angel", 5, 2, "Disables a trap", -1, 3, [16,16])
+      new Token("Force", "Demon", 5, 2, "Breaks an obstacle", 5, 1, [1,1]),
+      new Token("Shield", "Angel", 6, 1, "If this token falls into a trap, it won't hurt him", -1, 1, [1,15]),
+      new Token("Vous", "Demon", 4, 2, "Leaves a trap behind", -1, 1, [1,16]),
+      new Token("Vitality", "Angel", 4, 2, "Regenerates its life", 12 ,1, [16,2]),
+      new Token("Crow", "Demon", 5, 2, "Upgrades 2 points of his attack",-1, 1, [16,1]),
+      new Token("Cass", "Angel", 5, 2, "Disables a trap", -1, 1, [16,16])
       };
 
           // Mostrar información de los tokens
@@ -185,105 +185,228 @@ public class Programs
             Player1.DisplayTokens();
             Player2.DisplayTokens();
 
-            //mostrar maze en terminal:
+            //mostrar maze en terminal 1:
             List<Token> tokens1 = Token.CreateTokens();
             Console.WriteLine("Let the game begin...");
             GameActions.PrintMaze(maze, tokens1);
+
+
+            //Turnos en juego:
+            Player1.playerTurn = true;
+            Player2.playerTurn = false;
+            string tokenDesition = string.Empty;
 
             while (true)
             {
               if (Player1.playerTurn)
               {
-                Console.WriteLine($"It's {Player1}'s turn");
+                Console.WriteLine($"It's {Player1.name}'s turn");
                 Player1.DisplayTokens();
                 Console.WriteLine("Please write correctly the name of the token you wish to use");
 
-                string tokenDesition = Console.ReadLine() ?? string.Empty;
+                bool validToken = false;
 
-                while (tokenDesition != Player1.SelectedToken[0].name || tokenDesition != Player1.SelectedToken[1].name || tokenDesition != Player1.SelectedToken[3].name)
+                while (!validToken)
                 {
-                  Console.WriteLine("Not valid name");
-                  Console.WriteLine("Please write correctly the name of the token you wish to use");
-                  Player1.DisplayTokens();
-                  tokenDesition = Console.ReadLine() ?? string.Empty;
+                  tokenDesition = Console.ReadLine()?.ToLower() ?? string.Empty;
+
+                  // Verificar si el token ingresado es válido
+                  validToken = Player1.SelectedToken.Any(token => token.name.ToLower() == tokenDesition);
+
+                  if (!validToken)
+                  {
+                    Console.WriteLine("Not valid name. Please write correctly the name of the token you wish to use");
+                    Player1.DisplayTokens();
+                  }
                 }
 
                 Console.WriteLine("VALID SELECTION!!");
-                var currentToken = Force;
-                if (tokenDesition.ToLower() == "force")
+
+                // Asignar el token actual basado en la decisión
+                var currentToken = Player1.SelectedToken.First(token => token.name.ToLower() == tokenDesition);
+
+                //Mostrar maze 2:
+                GameActions.PrintMaze(maze, tokens1);
+
+                // Mostrar opciones de movimiento
+                Console.WriteLine("Please write: W if you wanna move up");
+                Console.WriteLine("S if you wanna move down");
+                Console.WriteLine("A if you wanna move left");
+                Console.WriteLine("D if you wanna move right");
+                Console.WriteLine("And E if you want to activate your super");
+
+                string newPosition = string.Empty; // Inicializa newPosition
+                bool validMove = false;
+
+                while (!validMove)
                 {
-                  currentToken = Force;
+                  newPosition = Console.ReadLine()?.ToLower() ?? string.Empty;
+
+                  // Verificar si la entrada es válida
+                  validMove = newPosition == "W" || newPosition == "S" || newPosition == "A" || newPosition == "D" || newPosition == "E";
+
+                  if (!validMove)
+                  {
+                    Console.WriteLine("Not valid selection. Please write: W, S, A, D, or E.");
+                  }
                 }
-                else if (tokenDesition.ToLower() == "shield")
+
+                // Intentar mover
+                int[] tokenSelectedPosition = Player1.ChangePosition(newPosition, currentToken.currentPosition[0], currentToken.currentPosition[1]);
+
+                // Verificar si puede moverse
+                bool wishPosition = Player1.ValidPosition(maze, tokenSelectedPosition[0], tokenSelectedPosition[1]);
+
+                if (wishPosition)
                 {
-                  currentToken = Shield;
-                }
-                else if (tokenDesition.ToLower() == "vous")
-                {
-                  currentToken = Vous;
-                }
-                 else if (tokenDesition.ToLower() == "vitality")
-                {
-                  
-                  currentToken = Vitality;
-                }
-                 else if (tokenDesition.ToLower() == "crow" )
-                {
-                  currentToken = Crow;
-                }
-                else if (tokenDesition.ToLower() == "cass")
-                {
-                  currentToken = Cass;
-                }
-                  //Show maze 2:
+                  currentToken.currentPosition = tokenSelectedPosition;
                   GameActions.PrintMaze(maze, tokens1);
+                }
 
-                //pedir movimiento
-                Console.WriteLine("Please enter: W if you wanna move up, S if you wanna move down, A if you wanna move left and S if you wanna move right");
-                string newPosition = Console.ReadLine() ?? string.Empty;
-              //  Player1.GetPosition(newPosition,int)
-
-
-
-                //cambiar el turno
+                // Cambiar el turno
                 Player1.playerTurn = false;
                 Player2.playerTurn = true;
-
               }
               else
               {
-                Console.WriteLine($"It's {Player2}'s turn");
+                // Lógica para el turno de Player2 
+
+                Console.WriteLine($"It's {Player2.name}'s turn");
                 Player2.DisplayTokens();
-                Console.WriteLine("Please write correctly the name of the token you wish to use");
 
-                string tokenDesition = Console.ReadLine() ?? string.Empty;
-
-                // Cambiar el turno
-                Player1.playerTurn = true;
-                Player2.playerTurn = false;
-              }
-
-              Console.WriteLine("Do you wish to continue?");
-              Console.WriteLine("Write Yes or No");
-              string wishToContinue = Console.ReadLine() ?? string.Empty;
-
-              if (wishToContinue == "NO" || wishToContinue == "No" || wishToContinue == "no")
-              {
-                Console.WriteLine("Game over :()");
-                break;
-              }
-              while (wishToContinue != "NO" || wishToContinue != "No" || wishToContinue != "no" || wishToContinue != "YES" || wishToContinue != "Yes" || wishToContinue != "yes")
-              {
-                Console.WriteLine("Please write a valid answer");
-                Console.WriteLine("Do you wish to continue?, Write Yes or No");
-                wishToContinue = Console.ReadLine() ?? string.Empty;
 
               }
             }
+            //  Player1.playerTurn = true;
+            // Player2.playerTurn = false;
+            // string tokenDesition = string.Empty;
+
+            // while (true)
+            // {
+            //   if (Player1.playerTurn)
+            //   {
+            //     Console.WriteLine($"It's {Player1.name}'s turn");
+            //     Player1.DisplayTokens();
+            //     Console.WriteLine("Please write correctly the name of the token you wish to use");
+
+            //     string tokenDesition = Console.ReadLine() ?? string.Empty;
+            //     //no me acepta 
+            //     while (tokenDesition.ToLower() != Player1.SelectedToken[0].name && tokenDesition.ToLower() != Player1.SelectedToken[1].name && tokenDesition.ToLower() != Player1.SelectedToken[2].name)
+            //     {
+            //       Console.WriteLine("Not valid name");
+            //       Console.WriteLine("Please write correctly the name of the token you wish to use");
+            //       Player1.DisplayTokens();
+            //       tokenDesition = Console.ReadLine() ?? string.Empty;
+
+            //       if (tokenDesition.ToLower() == Player1.SelectedToken[0].name && tokenDesition.ToLower() == Player1.SelectedToken[1].name && tokenDesition.ToLower() == Player1.SelectedToken[2].name)
+            //       {
+            //         break;
+            //       }
+            //     }
+
+            //     Console.WriteLine("VALID SELECTION!!");
+            //     var currentToken = Force;
+            //     if (tokenDesition.ToLower() == "force")
+            //     {
+            //       currentToken = Force;
+            //     }
+            //     else if (tokenDesition.ToLower() == "shield")
+            //     {
+            //       currentToken = Shield;
+            //     }
+            //     else if (tokenDesition.ToLower() == "vous")
+            //     {
+            //       currentToken = Vous;
+            //     }
+            //     else if (tokenDesition.ToLower() == "vitality")
+            //     {
+
+            //       currentToken = Vitality;
+            //     }
+            //     else if (tokenDesition.ToLower() == "crow")
+            //     {
+            //       currentToken = Crow;
+            //     }
+            //     else if (tokenDesition.ToLower() == "cass")
+            //     {
+            //       currentToken = Cass;
+            //     }
+            //     //Show maze 2:
+            //     GameActions.PrintMaze(maze, tokens1);
+
+            //     //pedir movimiento
+            //     Console.WriteLine("Please write: W if you wanna move up");
+            //     Console.WriteLine("S if you wanna move down");
+            //     Console.WriteLine("A if you wanna move left");
+            //     Console.WriteLine("S if you wanna move right");
+            //     Console.WriteLine("And E if you want to activate your super");
+
+            //     string newPosition = Console.ReadLine() ?? string.Empty;
+            //     while (newPosition != "W" || newPosition != "w" || newPosition != "S" || newPosition != "s"
+            // || newPosition != "A" || newPosition != "a" || newPosition != "D" || newPosition != "d" || newPosition != "E" || newPosition != "e")
+            //     {
+            //       Console.WriteLine("Not valid selection");
+            //       Console.WriteLine("Please write: W if you wanna move up");
+            //       Console.WriteLine("S if you wanna move down");
+            //       Console.WriteLine("A if you wanna move left");
+            //       Console.WriteLine("S if you wanna move right");
+            //       Console.WriteLine("And E if you want to activate your super");
+
+            //       newPosition = Console.ReadLine() ?? string.Empty;
+            //     }
+            //     //tratar de moverse:
+            //     int[] tokenSelectedPosition = Player1.ChangePosition(newPosition, currentToken.currentPosition[0], currentToken.currentPosition[1]);
+
+            //     //verificar si puede
+            //     bool wishPosition = Player1.ValidPosition(maze, tokenSelectedPosition[0], tokenSelectedPosition[1]);
+            //     if (wishPosition)
+            //     {
+            //       currentToken.currentPosition = tokenSelectedPosition;
+            //       GameActions.PrintMaze(maze, tokens1);
+            //     }
+            //     while (!wishPosition)
+            //     {
+
+            //     }
+            //     //cambiar el turno
+            //     Player1.playerTurn = false;
+            //     Player2.playerTurn = true;
+
+            //   }
+            //   else
+            //   {
+            //     Console.WriteLine($"It's {Player2.name}'s turn");
+            //     Player2.DisplayTokens();
+            //     Console.WriteLine("Please write correctly the name of the token you wish to use");
+
+            //     string tokenDesition = Console.ReadLine() ?? string.Empty;
+
+            //     // Cambiar el turno
+            //     Player1.playerTurn = true;
+            //     Player2.playerTurn = false;
+            //   }
+
+            // Console.WriteLine("Do you wish to continue?");
+            // Console.WriteLine("Write Yes or No");
+            // string wishToContinue = Console.ReadLine() ?? string.Empty;
+            // while (wishToContinue.ToLower() != "no" || wishToContinue.ToLower() != "yes")
+            // {
+            //   Console.WriteLine("Please write a valid answer");
+            //   Console.WriteLine("Do you wish to continue?, Write Yes or No");
+            //   wishToContinue = Console.ReadLine() ?? string.Empty;
+
+            // }
+            // if (wishToContinue.ToLower() == "no")
+            // {
+            //   Console.WriteLine("Game over :()");
+            //   break;
+            // }
+
           }
         }
       }
     }
   }
 }
+
 

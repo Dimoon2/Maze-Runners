@@ -38,12 +38,12 @@ class Token
     {
         return new List<Token>
         {
-      new Token("Force", "Demon", 5, 2, "Breaks an obstacle", 5, 2, [1,1]), //cada 10 celdas
-      new Token("Shield", "Angel", 6, 1, "If this token falls into a trap, it won't hurt him", -1, 2, [1,15]), //solo una vez
-      new Token("Vous", "Demon", 4, 2, "Leaves a trap behind", -1, 3, [1,16]),
-      new Token("Vitality", "Angel", 4, 2, "This token regenerates its life", 12, 3, [16,2]),
-      new Token("Crow", "Demon", 5, 2, "his attack upgrades 2 points", -1, 2, [16,1]),
-      new Token("Cass", "Angel", 5, 2, "Disables a trap",-1, 3, [16,16])
+      new Token("Force", "Demon", 5, 2, "Breaks an obstacle", 5, 1, [1,1]), //cada 10 celdas
+      new Token("Shield", "Angel", 6, 1, "If this token falls into a trap, it won't hurt him", -1, 1, [1,15]), //solo una vez
+      new Token("Vous", "Demon", 4, 2, "Leaves a trap behind", -1, 1, [1,16]),
+      new Token("Vitality", "Angel", 4, 2, "This token regenerates its life", 12, 1, [16,2]),
+      new Token("Crow", "Demon", 5, 2, "his attack upgrades 2 points", -1, 1, [16,1]),
+      new Token("Cass", "Angel", 5, 2, "Disables a trap",-1, 1, [16,16])
 
 
 

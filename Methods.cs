@@ -20,7 +20,7 @@
             "Vous" => "🌀",
             "Vitality" => "🤍",
             "Crow" => "🦅",
-            "Cass" => "✨",
+            "Cass" => "🎇",
             _ => displayString
           };
         }
