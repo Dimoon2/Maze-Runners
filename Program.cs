@@ -7,6 +7,34 @@ public class Programs
     {
       //inicio del juego:
       Console.Clear();
+      Console.WriteLine("꧁༺ 𝓣𝓱𝓮 𝓢𝓹𝓲𝓻𝓲𝓽 𝓣𝓻𝓪𝓲𝓵 ༻꧂");
+      Console.WriteLine();
+      Console.WriteLine(".                                       ,           .:'                                  `:.");
+      Console.WriteLine(")).               -===-               ,((          ::'                                    `::");
+      Console.WriteLine("))).                                 ,(((          :: :.                                  .: ::");
+      Console.WriteLine("))))).            .:::.           ,((((((           `:. `:.             .             .:'  .:'");
+      Console.WriteLine("))))))))).        :. .:        ,(((((((('             `::. `::          !           ::' .::'");
+      Console.WriteLine("`))))))))))).     : - :    ,((((((((((((                 `::.`::.    .' ! `.    .::'.::'");
+      Console.WriteLine(" ))))))))))))))))_:' ':_((((((((((((((('                   `:.  `::::'':!:``::::'   ::'");
+      Console.WriteLine(" `)))))))))))).-' |___/ '-._(((((((((((                    :'*:::.  .:' ! `:.  .:::*`:");
+      Console.WriteLine("  `))))_._.-' __)(     )(_  '-._._(((('                   :: HHH::.   ` ! '   .::HHH ::");
+      Console.WriteLine("   `))'---)___)))'|_ _/'((((__(---'(('                   ::: `H TH::.  `!'  .::HT H' :::");
+      Console.WriteLine("     `))))))))))))|' '|(((((((((((('                     ::..  `THHH:`:   :':HHHT'  ..::");
+      Console.WriteLine("       `)))))))))/'   '|((((((((('                       `::      `T: `. .' :T'      ::'");
+      Console.WriteLine("        `)))))))|       |((((((('                          `:. .   :         :   . .:'");
+      Console.WriteLine("          `))))))|     |(((((('                              `::'               `::'");
+      Console.WriteLine("                /'      '                                      :'  .`.  .  .'.  `:");
+      Console.WriteLine("               /'        '                                     :' ::.       .:: `:");
+      Console.WriteLine("              /'          '                                    :' `:::     :::' `:");
+      Console.WriteLine("             /'            '                                    `.  ``     ''  .'");
+      Console.WriteLine("            /'              '                                     :`...........':");
+      Console.WriteLine("           /'                '                                    ` :`.     .': '");
+      Console.WriteLine("             '---..___..---'                                       `:  `'''''  :' ");
+      Console.WriteLine();
+      Console.WriteLine("Press a key to continue");
+      Console.ReadKey(true);
+
+      Console.Clear();
       Console.WriteLine("◽◽◽◽MAIN MENU◽◽◽◽");
 
       Console.WriteLine("Welcome to: The Spirit Trail by Diana, press A if you want to start this adventure or 1 if you want to exit");
@@ -220,7 +248,7 @@ public class Programs
       Console.Clear();
       Console.WriteLine("Let the game begin...");
       Console.WriteLine();
-      Console.WriteLine("GENERATING THE MAZE...");
+      Console.WriteLine("⡷⠂𝙶𝙴𝙽𝙴𝚁𝙰𝚃𝙸𝙽𝙶 𝚃𝙷𝙴 𝙻𝙰𝙱𝙴𝚁𝙸𝙽𝚃𝙷 ...⠐⢾");
       GameActions.PrintMaze(maze, tokens1);
       Console.WriteLine();
 
@@ -230,7 +258,7 @@ public class Programs
       //creando objeto Boss:
       new Boss("Astharoth", 40, 10, [9, 9]);
       //llamar metodo fight:
-      
+
 
       //Turnos en juego:
       Player1.playerTurn = true;
@@ -325,7 +353,7 @@ public class Programs
 
             while (!validMove)
             {
-              Console.WriteLine("Not valid selection. Please write: W, S, A, D, or E.");
+              Console.WriteLine("Not valid selection. Please write: W, S, A, D, or E."); 
               newPosition = Console.ReadLine()?.ToLower() ?? string.Empty;
               validMove = newPosition == "w" || newPosition == "s" || newPosition == "a" || newPosition == "d" || newPosition == "e";
               if (validMove)
@@ -522,7 +550,7 @@ public class Programs
               positionToken.Add(currentToken);
 
               Console.Clear();
-              Console.WriteLine("You have move successfully!!");
+              Console.WriteLine("You have move successfully!!}");
               Console.WriteLine();
               Console.WriteLine($"The current position of {currentToken.name} is now: {currentToken.currentPosition[0]},{currentToken.currentPosition[1]}");
 
