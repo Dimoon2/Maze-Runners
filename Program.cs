@@ -125,21 +125,21 @@ public class Programs
       Console.ReadKey();
 
       //inicializando tokens:
-      Token Force = new Token("Force", "Demon", 5, 2, "Breaks an obstacle", 5, 1, [1, 1]);
-      Token Shield = new Token("Shield", "Angel", 6, 1, "If this token falls into a trap, it won't hurt him", -1, 1, [1, 15]);
-      Token Vous = new Token("Vous", "Demon", 4, 2, "Leaves a trap behind", -1, 1, [1, 16]);
-      Token Vitality = new Token("Vitality", "Angel", 4, 2, "Regenerates its life", 12, 1, [16, 2]);
-      Token Crow = new Token("Crow", "Demon", 5, 2, "Upgrades 2 points of his attack", -1, 1, [16, 1]);
-      Token Cass = new Token("Cass", "Angel", 5, 2, "Disables a trap", -1, 1, [16, 16]);
+      Token Force = new Token("Force", "Demon", 20, 8, "Breaks an obstacle", 5, 1, [1, 1]);
+      Token Shield = new Token("Shield", "Angel", 22, 5, "If this token falls into a trap, it won't hurt him", -1, 1, [1, 15]);
+      Token Vous = new Token("Vous", "Demon", 20, 6, "Leaves a trap behind", -1, 1, [1, 16]);
+      Token Vitality = new Token("Vitality", "Angel", 22, 5, "Regenerates its life", 12, 1, [16, 2]);
+      Token Crow = new Token("Crow", "Demon", 20, 6, "Upgrades 2 points of his attack", -1, 1, [16, 1]);
+      Token Cass = new Token("Cass", "Angel", 20, 6, "Disables a trap", -1, 1, [16, 16]);
 
       List<Token> tokens = new List<Token>
       {
-      new Token("Force", "Demon", 5, 2, "Breaks an obstacle", 5, 1, [1,1]),
-      new Token("Shield", "Angel", 6, 1, "If this token falls into a trap, it won't hurt him", -1, 1, [1,15]),
-      new Token("Vous", "Demon", 4, 2, "Leaves a trap behind", -1, 1, [1,16]),
-      new Token("Vitality", "Angel", 4, 2, "Regenerates its life", 12 ,1, [16,2]),
-      new Token("Crow", "Demon", 5, 2, "Upgrades 2 points of his attack",-1, 1, [16,1]),
-      new Token("Cass", "Angel", 5, 2, "Disables a trap", -1, 1, [16,16])
+      new Token("Force", "Demon", 20, 8, "Breaks an obstacle", 5, 1, [1,1]),
+      new Token("Shield", "Angel", 22, 5, "If this token falls into a trap, it won't hurt him", -1, 1, [1,15]),
+      new Token("Vous", "Demon", 20, 6, "Leaves a trap behind", -1, 1, [1,16]),
+      new Token("Vitality", "Angel", 22, 5, "Regenerates its life", 12 ,1, [16,2]),
+      new Token("Crow", "Demon", 20, 6, "Upgrades 2 points of his attack",-1, 1, [16,1]),
+      new Token("Cass", "Angel", 20, 6, "Disables a trap", -1, 1, [16,16])
       };
 
       // Mostrar información de los tokens
@@ -227,6 +227,10 @@ public class Programs
       Console.WriteLine("Press a key to continue");
       Console.ReadKey(true);
 
+      //creando objeto Boss:
+      new Boss("Astharoth", 40, 10, [9, 9]);
+      //llamar metodo fight:
+      
 
       //Turnos en juego:
       Player1.playerTurn = true;
@@ -305,6 +309,8 @@ public class Programs
           Console.WriteLine("A if you wanna move left");
           Console.WriteLine("D if you wanna move right");
           Console.WriteLine("And E if you want to activate your super");
+          Console.WriteLine();
+          Console.WriteLine($"You are currently playing with {currentToken.name}");
 
           string newPosition = string.Empty; // Inicializa newPosition
           bool validMove = true;
@@ -341,6 +347,15 @@ public class Programs
               //lista de tokens basada en la posicion
               List<Token> positionToken = Player1.SelectedToken.Where(token => token.currentPosition.SequenceEqual(tokenSelectedPosition)).ToList();
 
+              //actualizar la lista token1 para imprimir los tokens en su posicion actual:
+              for (int i = 0; i < tokens1.Count; i++)
+              {
+                if (currentToken.name == tokens1[i].name)
+                {
+                  tokens1[i].currentPosition = tokenSelectedPosition;
+                }
+              }
+
               //agregar token a la lista
               positionToken.Add(currentToken);
 
@@ -376,6 +391,8 @@ public class Programs
               Console.WriteLine("A if you wanna move left");
               Console.WriteLine("D if you wanna move right");
               Console.WriteLine("And E if you want to activate your super");
+              Console.WriteLine();
+              Console.WriteLine($"You are currently playing with {currentToken.name}");
 
               GameActions.PrintMaze(maze, tokens1);
             }
@@ -454,6 +471,8 @@ public class Programs
           Console.WriteLine("A if you wanna move left");
           Console.WriteLine("D if you wanna move right");
           Console.WriteLine("And E if you want to activate your super");
+          Console.WriteLine();
+          Console.WriteLine($"You are currently playing with {currentToken.name}");
 
           string newPosition = string.Empty; // Inicializa newPosition
           bool validMove = true;
@@ -490,6 +509,15 @@ public class Programs
               //lista de tokens basada en la posicion
               List<Token> positionToken = Player2.SelectedToken.Where(token => token.currentPosition.SequenceEqual(tokenSelectedPosition)).ToList();
 
+              //actualizar la lista token1 para imprimir los tokens en su posicion actual:
+              for (int i = 0; i < tokens1.Count; i++)
+              {
+                if (currentToken.name == tokens1[i].name)
+                {
+                  tokens1[i].currentPosition = tokenSelectedPosition;
+                }
+              }
+
               //agregar token a la lista
               positionToken.Add(currentToken);
 
@@ -525,6 +553,8 @@ public class Programs
               Console.WriteLine("A if you wanna move left");
               Console.WriteLine("D if you wanna move right");
               Console.WriteLine("And E if you want to activate your super");
+              Console.WriteLine();
+              Console.WriteLine($"You are currently playing with {currentToken.name}");
 
               GameActions.PrintMaze(maze, tokens1);
             }

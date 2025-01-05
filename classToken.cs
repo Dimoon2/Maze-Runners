@@ -38,15 +38,12 @@ class Token
     {
         return new List<Token>
         {
-      new Token("Force", "Demon", 5, 2, "Breaks an obstacle", 5, 1, [1,1]), //cada 10 celdas
-      new Token("Shield", "Angel", 6, 1, "If this token falls into a trap, it won't hurt him", -1, 1, [1,15]), //solo una vez
-      new Token("Vous", "Demon", 4, 2, "Leaves a trap behind", -1, 1, [1,16]),
-      new Token("Vitality", "Angel", 4, 2, "This token regenerates its life", 12, 1, [16,2]),
-      new Token("Crow", "Demon", 5, 2, "his attack upgrades 2 points", -1, 1, [16,1]),
-      new Token("Cass", "Angel", 5, 2, "Disables a trap",-1, 1, [16,16])
-
-
-
+      new Token("Force", "Demon", 20, 8, "Breaks an obstacle", 5, 1, [1,1]), //cada 10 celdas
+      new Token("Shield", "Angel", 22, 5, "If this token falls into a trap, it won't hurt him", -1, 1, [1,15]), //solo una vez
+      new Token("Vous", "Demon", 20, 6, "Leaves a trap behind", -1, 1, [1,16]),
+      new Token("Vitality", "Angel", 22, 5, "This token regenerates its life", 12, 1, [16,2]),
+      new Token("Crow", "Demon", 20, 6, "his attack upgrades 2 points", -1, 1, [16,1]),
+      new Token("Cass", "Angel", 20, 6, "Disables a trap",-1, 1, [16,16])
        };
     }
 
@@ -115,5 +112,26 @@ class Token
         }
 
     }
+
+    public void Attack(Boss Astharoth)
+    {
+        Console.WriteLine("Your token seeks for a chance to attack");
+        Console.WriteLine();
+        Astharoth.GetDamage(attack);
+        Console.WriteLine("💥💥💥💥💥💥💥💥💥💥💥💥");
+        //Console.WriteLine($"Atharoth's current life is: {life}"); como hacer que sea la de Atharoth
+        Console.WriteLine();
+        Console.WriteLine("TURN ENDED");
+    }
+
+    public void GetDamage(float damage)
+    {
+        life -= damage;
+        Console.WriteLine();
+        
+        Console.WriteLine($"Your token recibes {damage} of damage");
+        Console.WriteLine($"Current life: {life}");
+    }
 }
 
+//metodo fight
