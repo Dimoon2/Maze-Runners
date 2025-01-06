@@ -1,4 +1,4 @@
- class GameActions
+class GameActions
 {
   public static void PrintMaze(Boxes[,] maze, List<Token> tokens)
   {
