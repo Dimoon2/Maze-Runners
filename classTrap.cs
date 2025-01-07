@@ -34,7 +34,7 @@ class Trap
         public override void Activate(Token token, Boxes[,] laberinth)
         {
             Console.Clear();
-            Console.WriteLine("A huge bird appears from the sky and takes your token away"); //5 casillas
+            Console.WriteLine("A huge bird appears from the sky and takes your token away");
             Console.WriteLine();
             Console.WriteLine("Press any key to continue");
             Console.ReadKey(true);
@@ -43,12 +43,41 @@ class Trap
             {
                 token.currentPosition[0] = token.stepLog[0][0];
                 token.currentPosition[1] = token.stepLog[0][1];
+
+                if (token.name == "Force")
+                {
+                    token.currentPosition = [1, 1];
+                }
+                else if (token.name == "Shield")
+                {
+                    token.currentPosition = [1, 15];
+                }
+                else if (token.name == "Vous")
+                {
+                    token.currentPosition = [1, 16];
+                }
+                else if (token.name == "Vitality")
+                {
+                    token.currentPosition = [16, 2];
+                }
+                else if (token.name == "Crow")
+                {
+                    token.currentPosition = [16, 1];
+                }
+                else if (token.name == "Cass")
+                {
+                    token.currentPosition = [16, 16];
+                }
             }
             else
             {
                 token.currentPosition[0] = token.stepLog[token.stepLog.Count - 6][0];
                 token.currentPosition[0] = token.stepLog[token.stepLog.Count - 6][1];
             }
+            Console.WriteLine($"Your token moved 5 boxes back, he is now in:{token.currentPosition[0]}, {token.currentPosition[1]}");
+            Console.WriteLine();
+            Console.WriteLine("Press a key to continue");
+            Console.ReadKey(true);
         }
     }
 
@@ -57,7 +86,7 @@ class Trap
         public override void Activate(Token token, Boxes[,] laberinth)
         {
             Console.Clear();
-            Console.WriteLine("It looks like you have bad luck today, tourtoken will teleport to the begining :() ");
+            Console.WriteLine("It looks like you have bad luck today, your token will teleport to the begining :(");
             Console.WriteLine();
             Console.WriteLine("Press a key to continue");
             Console.ReadKey(true);
@@ -89,6 +118,9 @@ class Trap
 
             Console.WriteLine("(┬┬﹏┬┬)(┬┬﹏┬┬)(┬┬﹏┬┬)(┬┬﹏┬┬)(┬┬﹏┬┬)(┬┬﹏┬┬)(┬┬﹏┬┬)");
             Console.WriteLine($"The current position of your token is now:{token.currentPosition[0]},{token.currentPosition[1]}");
+            Console.WriteLine("Press a key to continue");
+            Console.ReadKey(true);
+
         }
     }
 

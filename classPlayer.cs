@@ -79,7 +79,7 @@ class Player
         }
         else
         {
-            throw new Exception("Please enter W, S, A or D :)");
+            throw new Exception("Please enter W, S, A, D or E :)");
         }
 
         return positionFinal;

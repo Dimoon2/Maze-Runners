@@ -153,27 +153,26 @@ public class Programs
       Console.ReadKey();
 
       //inicializando tokens:
-      Token Force = new Token("Force", "Demon", 20, 8, "Breaks an obstacle", 5, 1, [1, 1]);
-      Token Shield = new Token("Shield", "Angel", 22, 5, "If this token falls into a trap, it won't hurt him", -1, 1, [1, 15]);
-      Token Vous = new Token("Vous", "Demon", 20, 6, "Leaves a trap behind", -1, 1, [1, 16]);
-      Token Vitality = new Token("Vitality", "Angel", 22, 5, "Regenerates its life", 12, 1, [16, 2]);
+      Token Force = new Token("Force", "Demon", 20, 8, "Breaks an obstacle", 0, 1, [1, 1]);
+      Token Shield = new Token("Shield", "Angel", 22, 5, "If this token falls into a trap, it won't hurt him", 0, 1, [1, 15]);
+      Token Vous = new Token("Vous", "Demon", 20, 6, "Leaves a trap behind", 0, 1, [1, 16]);
+      Token Vitality = new Token("Vitality", "Angel", 22, 5, "Regenerates its life", 0, 1, [16, 2]);
       Token Crow = new Token("Crow", "Demon", 20, 6, "Upgrades 2 points of his attack", -1, 1, [16, 1]);
-      Token Cass = new Token("Cass", "Angel", 20, 6, "Disables a trap", -1, 1, [16, 16]);
+      Token Cass = new Token("Cass", "Angel", 20, 6, "Disables a trap", 0, 1, [16, 16]);
 
       List<Token> tokens = new List<Token>
       {
-      new Token("Force", "Demon", 20, 8, "Breaks an obstacle", 5, 1, [1,1]),
-      new Token("Shield", "Angel", 22, 5, "If this token falls into a trap, it won't hurt him", -1, 1, [1,15]),
-      new Token("Vous", "Demon", 20, 6, "Leaves a trap behind", -1, 1, [1,16]),
-      new Token("Vitality", "Angel", 22, 5, "Regenerates its life", 12 ,1, [16,2]),
-      new Token("Crow", "Demon", 20, 6, "Upgrades 2 points of his attack",-1, 1, [16,1]),
-      new Token("Cass", "Angel", 20, 6, "Disables a trap", -1, 1, [16,16])
+      new Token("Force", "Demon", 20, 8, "Breaks an obstacle", 0, 1, [1,1]),
+      new Token("Shield", "Angel", 22, 5, "If this token falls into a trap, it won't hurt him", 0, 1, [1,15]),
+      new Token("Vous", "Demon", 20, 6, "Leaves a trap behind", 0, 1, [1,16]),
+      new Token("Vitality", "Angel", 22, 5, "Regenerates its life", 0 ,1, [16,2]),
+      new Token("Crow", "Demon", 20, 6, "Upgrades 2 points of his attack",0, 1, [16,1]),
+      new Token("Cass", "Angel", 20, 6, "Disables a trap", 0, 1, [16,16])
       };
 
       // Mostrar información de los tokens
       Console.Clear();
-      Console.WriteLine("TOKENS AVAILABLE:");
-      Console.WriteLine();
+      Console.WriteLine("TOKENS AVAILABLE: \n");
       foreach (var token in tokens)
       {
         token.DisplayInfo();
@@ -328,16 +327,10 @@ public class Programs
 
           Console.Clear();
           //Mostrar maze 2:
-          Console.WriteLine("CURRENT MAZE:");
+          Console.WriteLine("CURRENT MAZE: \n");
           GameActions.PrintMaze(maze, tokens1);
-          Console.WriteLine();
-          Console.WriteLine("Please write:");
-          Console.WriteLine();
-          Console.WriteLine("W if you wanna move up");
-          Console.WriteLine("S if you wanna move down");
-          Console.WriteLine("A if you wanna move left");
-          Console.WriteLine("D if you wanna move right");
-          Console.WriteLine("And E if you want to activate your super");
+
+          Console.WriteLine("Please write: \n W if you wanna move up \nS if you wanna move down \nA if you wanna move left \nD if you wanna move right \n or E if you want to activate your super");
           Console.WriteLine();
           Console.WriteLine($"You are currently playing with {currentToken.name}");
 
@@ -374,11 +367,61 @@ public class Programs
             {
               currentToken.currentPosition = tokenSelectedPosition;
 
-              //lista de tokens basada en la posicion
-              //List<Token> positionToken = Player1.SelectedToken.Where(token => token.currentPosition.SequenceEqual(tokenSelectedPosition)).ToList();
-              //agregar token a la lista
-              //positionToken.Add(currentToken);
+              //utilizar steplog:
+              currentToken.stepLog.Add(new int[] { currentToken.currentPosition[0], currentToken.currentPosition[1] });
+              //lista de trampas :):
+              List<Trap> allTraps = new List<Trap>
+              {
+                new Trap.Boom(),
+                new Trap.Teleport(),
+                new Trap.BadLuck()
+              };
+              //numero aleatorio para seleccionar la trampa:
+              Random randomIndex = new Random();
+              int index = randomIndex.Next(allTraps.Count);
 
+              //para activar trampa seleccionada:
+              if (maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] == Boxes.trap)
+              {
+                Console.WriteLine("OH NO");
+                Console.WriteLine("You have fallen into a trap 💥\nDo you wish to use your super?\nPress 1 if yes");
+                ConsoleKeyInfo key1 = Console.ReadKey(true);
+
+                //ver si quiere activar el super:
+                if (key1.KeyChar == '1')
+                {
+                  //if (no puede activar el super)
+                  //{
+                  //  lo siento miloco te toca trampa
+                  //  allTraps[index].Activate(currentToken, maze);
+                  //}
+
+                  //else if (puede activar el super)
+                  //{
+                  if (currentToken.name == "Shield")
+                  {
+                    Console.WriteLine("Your token uses his shield \nThis trap won't affect him");
+                  }
+                  // te salvaste papa (logica del super)
+                  //}
+                }
+
+                Console.WriteLine("You are in a trap");
+                allTraps[index].Activate(currentToken, maze);
+                Console.WriteLine("\nPress a key to continue");
+                Console.ReadKey(true);
+              }
+              else
+              {
+                Console.WriteLine("No trap in this position");
+                Console.WriteLine("Press a key to continue");
+                Console.ReadKey(true);
+              }
+
+              Console.Clear();
+              Console.WriteLine("You have move successfully!!");
+              Console.WriteLine();
+              Console.WriteLine($"The current position of {currentToken.name} is now: {currentToken.currentPosition[0]},{currentToken.currentPosition[1]}");
 
               //actualizar la lista token1 para imprimir los tokens en su posicion actual:
               for (int i = 0; i < tokens1.Count; i++)
@@ -389,18 +432,8 @@ public class Programs
                 }
               }
 
-              //utilizar steplog:
-              currentToken.stepLog.Add(new int[] { currentToken.currentPosition[0], currentToken.currentPosition[1] });
-              //verificar si es trampa:
-
-
-              Console.Clear();
-              Console.WriteLine("You have move successfully!!");
-              Console.WriteLine();
-              Console.WriteLine($"The current position of {currentToken.name} is now: {currentToken.currentPosition[0]},{currentToken.currentPosition[1]}");
-
               //mostrar maze 3:
-              GameActions.PrintMaze(maze, tokens1); // CAMBIAR: QUE SALGAN TODOS LOS TOKENS!!!
+              GameActions.PrintMaze(maze, tokens1); // CAMBIAR: QUE SALGAN CUANDO CAIGA EN UNA TRAMPA SE IMPRIMA EL CAMBIO!!!
               Console.WriteLine();
               Console.WriteLine("Press any key to continue");
               Console.ReadKey(true);
@@ -419,18 +452,11 @@ public class Programs
               Console.ReadKey();
 
               Console.Clear();
-              Console.WriteLine("Please write:");
-              Console.WriteLine();
-              Console.WriteLine(":W if you wanna move up");
-              Console.WriteLine("S if you wanna move down");
-              Console.WriteLine("A if you wanna move left");
-              Console.WriteLine("D if you wanna move right");
-              Console.WriteLine("And E if you want to activate your super");
+              Console.WriteLine("Please write: \n W if you wanna move up \nS if you wanna move down \nA if you wanna move left \n D if you wanna move right \nor E if you want yo activate your super");
               Console.WriteLine();
               Console.WriteLine($"You are currently playing with {currentToken.name}");
 
-              List<Token> positionToken = Player1.SelectedToken.Where(token => token.currentPosition.SequenceEqual(tokenSelectedPosition)).ToList();
-              GameActions.PrintMaze(maze, positionToken);
+              GameActions.PrintMaze(maze, tokens1);
             }
           }
           // Cambiar el turno
@@ -500,13 +526,8 @@ public class Programs
           Console.WriteLine("CURRENT MAZE:");
           GameActions.PrintMaze(maze, tokens1);
           Console.WriteLine();
-          Console.WriteLine("Please write:");
-          Console.WriteLine();
-          Console.WriteLine("W if you wanna move up");
-          Console.WriteLine("S if you wanna move down");
-          Console.WriteLine("A if you wanna move left");
-          Console.WriteLine("D if you wanna move right");
-          Console.WriteLine("And E if you want to activate your super");
+          Console.WriteLine("Please write: \n W if you wanna move up \nS if you wanna move down \nA if you wanna move left \nD if you wanna move right \nor E if you want to activate your super");
+
           Console.WriteLine();
           Console.WriteLine($"You are currently playing with {currentToken.name}");
 
@@ -543,22 +564,12 @@ public class Programs
             {
               currentToken.currentPosition = tokenSelectedPosition;
 
-              //lista de tokens basada en la posicion
-              //List<Token> positionToken = Player2.SelectedToken.Where(token => token.currentPosition.SequenceEqual(tokenSelectedPosition)).ToList();
-              //agregar token a la lista
-              //positionToken.Add(currentToken);
-
-              //actualizar la lista token1 para imprimir los tokens en su posicion actual:
-              for (int i = 0; i < tokens1.Count; i++)
-              {
-                if (currentToken.name == tokens1[i].name)
-                {
-                  tokens1[i].currentPosition = tokenSelectedPosition;
-                }
-              }
-
               //utilizar steplog:
               currentToken.stepLog.Add(new int[] { currentToken.currentPosition[0], currentToken.currentPosition[1] });
+
+              //actualizar cooldown:
+                currentToken.cooldown++;
+
               //lista de trampas :):
               List<Trap> allTraps = new List<Trap>
               {
@@ -569,12 +580,58 @@ public class Programs
               //numero aleatorio para seleccionar la trampa:
               Random randomIndex = new Random();
               int index = randomIndex.Next(allTraps.Count);
-             //para activar trampa seleccionada: allTraps[index].Activate(currentToken, maze);
+
+              //para activar trampa seleccionada:
+              if (maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] == Boxes.trap)
+              {
+                Console.WriteLine("OH NO");
+                Console.WriteLine("You have fallen into a trap 💥\nDo you wish to use your super?\nPress 1 if yes");
+                ConsoleKeyInfo key1 = Console.ReadKey(true);
+
+                //ver si quiere activar el super:
+                if (key1.KeyChar == '1')
+                {
+                  //if (no puede activar el super)
+                  //{
+                  //  lo siento miloco te toca trampa
+                  //  allTraps[index].Activate(currentToken, maze);
+                  //}
+
+                  //else if (puede activar el super)
+                  //{
+                  // te salvaste papa (logica del super)
+                  //}
+                }
+                else
+                {
+                  Console.WriteLine("You are in a trap");
+                  allTraps[index].Activate(currentToken, maze);
+                  Console.WriteLine("\nPress a key to continue");
+                  Console.ReadKey(true);
+                }
+              }
+
+              //si no cayo en una trampa:
+              else
+              {
+                Console.WriteLine("Good luck!! No trap in this position");
+                Console.WriteLine("Press a key to continue");
+                Console.ReadKey(true);
+              }
 
               Console.Clear();
               Console.WriteLine("You have move successfully!!");
               Console.WriteLine();
               Console.WriteLine($"The current position of {currentToken.name} is now: {currentToken.currentPosition[0]},{currentToken.currentPosition[1]}");
+
+              //actualizar la lista token1 para imprimir los tokens en su posicion actual:
+              for (int i = 0; i < tokens1.Count; i++)
+              {
+                if (currentToken.name == tokens1[i].name)
+                {
+                  tokens1[i].currentPosition = tokenSelectedPosition;
+                }
+              }
 
               //mostrar maze 3:
               GameActions.PrintMaze(maze, tokens1);
@@ -596,18 +653,11 @@ public class Programs
               Console.ReadKey();
 
               Console.Clear();
-              Console.WriteLine("Please write:");
-              Console.WriteLine();
-              Console.WriteLine("W if you wanna move up");
-              Console.WriteLine("S if you wanna move down");
-              Console.WriteLine("A if you wanna move left");
-              Console.WriteLine("D if you wanna move right");
-              Console.WriteLine("And E if you want to activate your super");
+              Console.WriteLine("Please write: \n W if you wanna move up \nS if you wanna move down \nA if you wanna move left \nD if you wanna move right \nor E if you want to activate your super");
               Console.WriteLine();
               Console.WriteLine($"You are currently playing with {currentToken.name}");
 
-              List<Token> positionToken = Player1.SelectedToken.Where(token => token.currentPosition.SequenceEqual(tokenSelectedPosition)).ToList();
-              GameActions.PrintMaze(maze, positionToken);
+              GameActions.PrintMaze(maze, tokens1);
             }
           }
           // Cambiar el turno
