@@ -1,4 +1,4 @@
-class Boss
+public class Boss
 {
     public string name { get; set; }
     public float life { get; set; }

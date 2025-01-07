@@ -44,38 +44,42 @@ class Player
     //
 
     //dado un string el usuario me dice a que posicion quiere ir:
-    public int[] ChangePosition(string position, int positionActualX, int positionActualY)
+    public int[] SelectedAction(string action, int positionActualX, int positionActualY, Token token, Boxes[,] maze)
     {
         int x = positionActualX;
         int y = positionActualY;
         int[] positionFinal = new int[2];
 
-        if (position == "W" || position == "w")
+        if (action == "W" || action == "w")
         {
             x = positionActualX - 1;
             y = positionActualY;
             positionFinal = new int[2] { x, y };
         }
-        else if (position == "S" || position == "s")
+        else if (action == "S" || action == "s")
         {
             x = positionActualX + 1;
             y = positionActualY;
             positionFinal = new int[2] { x, y };
 
         }
-        else if (position == "D" || position == "d")
+        else if (action == "D" || action == "d")
         {
             x = positionActualX;
             y = positionActualY + 1;
             positionFinal = new int[2] { x, y };
 
         }
-        else if (position == "A" || position == "a")
+        else if (action == "A" || action == "a")
         {
             x = positionActualX;
             y = positionActualY - 1;
             positionFinal = new int[2] { x, y };
 
+        }
+        else if (action == "E" || action == "e")
+        {
+            token.Power(maze);
         }
         else
         {
