@@ -1,43 +1,137 @@
 class GameActions
 {
-  public static void PrintMaze(Boxes[,] maze, List<Token> tokens)
+  public static void fellInTrap(Token currentToken, Boxes[,] maze)
+  {
+    List<Trap> allTraps = new List<Trap>
+              {
+                new Boom(),
+                new Teleport(),
+                new BadLuck()
+              };
+    Random randomIndex = new Random();
+    int index = randomIndex.Next(allTraps.Count);
+
+      Console.WriteLine("OH NO");
+      Console.WriteLine("You have fallen into a trap 💥\nDo you wish to use your super?\nPress 1 if yes");
+      ConsoleKeyInfo key1 = Console.ReadKey(true);
+
+      //ver si quiere activar el super:
+      if (key1.KeyChar == '1')
+      {
+        bool super = currentToken.canISuper(currentToken);
+
+        if (!super)
+        {
+          Console.WriteLine("Given that you could not activate your super, the trap will affect your token :(");
+          allTraps[index].Activate(currentToken, maze);
+          Console.WriteLine("Press a key to continue");
+          Console.ReadKey(true);
+        }
+        else if (super)
+        {
+          if (currentToken.name == "Force")
+          {
+            Console.WriteLine("Sorry, it looks like Force's super does not do much in a trap");
+            allTraps[index].Activate(currentToken, maze);
+            Console.WriteLine("Press a key to continue");
+            Console.ReadKey(true);
+          }
+          else if (currentToken.name == "Shield")
+          {
+            Console.WriteLine("Your token uses his shield \nThis trap won't affect him \nPress a key to continue");
+            Console.ReadKey(true);
+          }
+          else if (currentToken.name == "Vous")
+          {
+            Console.WriteLine("Sorry, it looks like Vous's super does not do much in a trap");
+            allTraps[index].Activate(currentToken, maze);
+            Console.WriteLine("Press a key to continue");
+            Console.ReadKey(true);
+          }
+          else if (currentToken.name == "Vitality")
+          {
+            Console.WriteLine("Sorry, it looks like Vitality's super does not do much in a trap");
+            allTraps[index].Activate(currentToken, maze);
+            Console.WriteLine("Press a key to continue");
+            Console.ReadKey(true);
+          }
+          else if (currentToken.name == "Crow")
+          {
+            Console.WriteLine("Sorry, it looks like Crow's super does not do much in a trap");
+            allTraps[index].Activate(currentToken, maze);
+            Console.WriteLine("Press a key to continue");
+            Console.ReadKey(true);
+          }
+          else if (currentToken.name == "Cass")
+          {
+            Console.WriteLine("Cass has been saved by this much!!");
+            Console.WriteLine("Press a key to continue");
+            Console.ReadKey(true);
+          }
+        }
+      }
+      else //no activo el super
+      {
+        Console.WriteLine("You are in a trap");
+        allTraps[index].Activate(currentToken, maze);
+        Console.WriteLine("\nPress a key to continue");
+        Console.ReadKey(true);
+      }
+  }
+  public static void PrintMaze(Boxes[,] maze)
   {
     for (int i = 0; i < Maze.size; i++)
     {
       for (int j = 0; j < Maze.size; j++)
       {
-        //utilizo el switch como expresion en vez de casos como lo es su sintaxis basica
-        string displayString = " ";
-        Token currentToken = tokens.FirstOrDefault(t => t.currentPosition[0] == i && t.currentPosition[1] == j);
-        if (currentToken != null)
+        switch (maze[i, j])
         {
-          // Imprimir el símbolo del token
-          displayString = currentToken.name
-          switch
-          {
-            "Force" => "😡",
-            "Shield" => "🛡️",
-            "Vous" => "🌀",
-            "Vitality" => "🤍",
-            "Crow" => "🦅",
-            "Cass" => "🎇",
-            _ => displayString
-          };
-        }
-        else
-        {
-          displayString = maze[i, j]
-          switch
-          {
-            Boxes.obstacle => "🟪",
-            Boxes.path => "⬛",
-            Boxes.trap => "💥",
-            Boxes.Astharoth => "😈",
-            _ => displayString
-          };
-        }
+          case Boxes.path:
+            Console.Write("⬛");
+            break;
 
-        Console.Write(displayString);
+          case Boxes.obstacle:
+            Console.Write("🟪");
+            break;
+
+          case Boxes.trap:
+            Console.Write("💥");
+            break;
+
+          case Boxes.Astharoth:
+            Console.Write("😈");
+            break;
+
+          case Boxes.Force:
+            Console.Write("😡");
+            break;
+
+          case Boxes.Shield:
+            Console.Write("🛡️");
+            break;
+
+          case Boxes.Vous:
+            Console.Write("🌀");
+            break;
+
+          case Boxes.Vitality:
+            Console.Write("🤍");
+            break;
+
+          case Boxes.Crow:
+            Console.Write("🦅");
+            break;
+
+          case Boxes.Cass:
+            Console.Write("🎇");
+            break;
+
+
+          default:
+            Console.Write("");
+            break;
+        }
+        //Imprimir el símbolo en la consola
         if (j == Maze.size - 1)
         {
           Console.WriteLine();
@@ -45,6 +139,52 @@ class GameActions
       }
     }
   }
+
+  // public static void PrintMaze(Boxes[,] maze, List<Token> tokens)
+  // {
+  //   for (int i = 0; i < Maze.size; i++)
+  //   {
+  //     for (int j = 0; j < Maze.size; j++)
+  //     {
+  //       //utilizo el switch como expresion en vez de casos como lo es su sintaxis basica
+  //       string displayString = " ";
+  //       Token currentToken = tokens.FirstOrDefault(t => t.currentPosition[0] == i && t.currentPosition[1] == j);
+  //       if (currentToken != null)
+  //       {
+  //         // Imprimir el símbolo del token
+  //         displayString = currentToken.name
+  //         switch
+  //         {
+  //           "Force" => "😡",
+  //           "Shield" => "🛡️",
+  //           "Vous" => "🌀",
+  //           "Vitality" => "🤍",
+  //           "Crow" => "🦅",
+  //           "Cass" => "🎇",
+  //           _ => displayString
+  //         };
+  //       }
+  //       else
+  //       {
+  //         displayString = maze[i, j]
+  //         switch
+  //         {
+  //           Boxes.obstacle => "🟪",
+  //           Boxes.path => "⬛",
+  //           Boxes.trap => "💥",
+  //           Boxes.Astharoth => "😈",
+  //           _ => displayString
+  //         };
+  //       }
+
+  //       Console.Write(displayString);
+  //       if (j == Maze.size - 1)
+  //       {
+  //         Console.WriteLine();
+  //       }
+  //     }
+  //   }
+  // }
 }
 // \                           /
 //  \                         /

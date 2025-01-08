@@ -30,7 +30,7 @@ public class Boom : Trap
 }
 public class Teleport : Trap
 {
-    public override void Activate(Token token, Boxes[,] laberinth)
+    public override void Activate(Token token, Boxes[,] maze)
     {
         Console.Clear();
         Console.WriteLine("A huge bird appears from the sky and takes your token away");
@@ -40,38 +40,19 @@ public class Teleport : Trap
 
         if (token.stepLog.Count < 6)
         {
+            maze[token.currentPosition[0], token.currentPosition[1]] = Boxes.trap;
             token.currentPosition[0] = token.stepLog[0][0];
             token.currentPosition[1] = token.stepLog[0][1];
+            maze[token.currentPosition[0], token.currentPosition[1]] = token.value;
 
-            if (token.name == "Force")
-            {
-                token.currentPosition = [1, 1];
-            }
-            else if (token.name == "Shield")
-            {
-                token.currentPosition = [1, 15];
-            }
-            else if (token.name == "Vous")
-            {
-                token.currentPosition = [1, 16];
-            }
-            else if (token.name == "Vitality")
-            {
-                token.currentPosition = [16, 2];
-            }
-            else if (token.name == "Crow")
-            {
-                token.currentPosition = [16, 1];
-            }
-            else if (token.name == "Cass")
-            {
-                token.currentPosition = [16, 16];
-            }
         }
         else
         {
+            maze[token.currentPosition[0], token.currentPosition[1]] = Boxes.trap;
             token.currentPosition[0] = token.stepLog[token.stepLog.Count - 6][0];
-            token.currentPosition[0] = token.stepLog[token.stepLog.Count - 6][1];
+            token.currentPosition[1] = token.stepLog[token.stepLog.Count - 6][1];
+            maze[token.currentPosition[0], token.currentPosition[1]] = token.value;
+
         }
         Console.WriteLine($"Your token moved 5 boxes back, he is now in:{token.currentPosition[0]}, {token.currentPosition[1]}");
         Console.WriteLine();
@@ -82,13 +63,16 @@ public class Teleport : Trap
 
 public class BadLuck : Trap
 {
-    public override void Activate(Token token, Boxes[,] laberinth)
+    public override void Activate(Token token, Boxes[,] maze)
     {
         Console.Clear();
         Console.WriteLine("It looks like you have bad luck today, your token will teleport to the begining :(");
         Console.WriteLine();
         Console.WriteLine("Press a key to continue");
         Console.ReadKey(true);
+
+        maze[token.currentPosition[0], token.currentPosition[1]] = Boxes.trap;
+
 
         if (token.name == "Force")
         {
@@ -114,6 +98,7 @@ public class BadLuck : Trap
         {
             token.currentPosition = [16, 16];
         }
+        maze[token.currentPosition[0], token.currentPosition[1]] = token.value;
 
         Console.WriteLine("(┬┬﹏┬┬)(┬┬﹏┬┬)(┬┬﹏┬┬)(┬┬﹏┬┬)(┬┬﹏┬┬)(┬┬﹏┬┬)(┬┬﹏┬┬)");
         Console.WriteLine($"The current position of your token is now:{token.currentPosition[0]},{token.currentPosition[1]}");
