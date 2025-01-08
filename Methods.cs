@@ -11,73 +11,90 @@ class GameActions
     Random randomIndex = new Random();
     int index = randomIndex.Next(allTraps.Count);
 
-      Console.WriteLine("OH NO");
-      Console.WriteLine("You have fallen into a trap 💥\nDo you wish to use your super?\nPress 1 if yes");
-      ConsoleKeyInfo key1 = Console.ReadKey(true);
+    Console.WriteLine("OH NO");
+    Console.WriteLine("You have fallen into a trap 💥\nDo you wish to use your super?\nPress 1 if yes");
+    ConsoleKeyInfo key1 = Console.ReadKey(true);
 
-      //ver si quiere activar el super:
-      if (key1.KeyChar == '1')
+    //ver si quiere activar el super:
+    if (key1.KeyChar == '1')
+    {
+      bool super = currentToken.canISuper(currentToken);
+
+      if (!super)
       {
-        bool super = currentToken.canISuper(currentToken);
+        Console.WriteLine("Given that you could not activate your super, the trap will affect your token :(");
+        Console.WriteLine("Press a key to continue");
+        Console.ReadKey(true);
+        allTraps[index].Activate(currentToken, maze);
 
-        if (!super)
+      }
+      else if (super)
+      {
+        if (currentToken.name == "Force")
         {
-          Console.WriteLine("Given that you could not activate your super, the trap will affect your token :(");
+          //currentToken.Power(maze);
+          Console.WriteLine("Sorry, it looks like Force's super does not do much in a trap");
+          Console.WriteLine("Press a key to continue");
+          Console.ReadKey(true);
           allTraps[index].Activate(currentToken, maze);
           Console.WriteLine("Press a key to continue");
           Console.ReadKey(true);
         }
-        else if (super)
+        else if (currentToken.name == "Shield")
         {
-          if (currentToken.name == "Force")
-          {
-            Console.WriteLine("Sorry, it looks like Force's super does not do much in a trap");
-            allTraps[index].Activate(currentToken, maze);
-            Console.WriteLine("Press a key to continue");
-            Console.ReadKey(true);
-          }
-          else if (currentToken.name == "Shield")
-          {
-            Console.WriteLine("Your token uses his shield \nThis trap won't affect him \nPress a key to continue");
-            Console.ReadKey(true);
-          }
-          else if (currentToken.name == "Vous")
-          {
-            Console.WriteLine("Sorry, it looks like Vous's super does not do much in a trap");
-            allTraps[index].Activate(currentToken, maze);
-            Console.WriteLine("Press a key to continue");
-            Console.ReadKey(true);
-          }
-          else if (currentToken.name == "Vitality")
-          {
-            Console.WriteLine("Sorry, it looks like Vitality's super does not do much in a trap");
-            allTraps[index].Activate(currentToken, maze);
-            Console.WriteLine("Press a key to continue");
-            Console.ReadKey(true);
-          }
-          else if (currentToken.name == "Crow")
-          {
-            Console.WriteLine("Sorry, it looks like Crow's super does not do much in a trap");
-            allTraps[index].Activate(currentToken, maze);
-            Console.WriteLine("Press a key to continue");
-            Console.ReadKey(true);
-          }
-          else if (currentToken.name == "Cass")
-          {
-            currentToken.Power(maze);
-            Console.WriteLine("Cass has been saved by this much!!");
-            Console.WriteLine("Press a key to continue");
-            Console.ReadKey(true);
-          }
+          //currentToken.Power(maze);
+          Console.WriteLine("You are safe now\nCurrent trap won't do anything to your token \n\nPress a key to continue");
+          Console.ReadKey();
+          currentToken.cooldown -= 10;
+
+          Console.WriteLine("Your token uses his shield \nThis trap won't affect him \nPress a key to continue");
+          Console.ReadKey(true);
+        }
+        else if (currentToken.name == "Vous")
+        {
+          //currentToken.Power(maze);
+          Console.WriteLine("Sorry, it looks like Vous's super does not do much in a trap");
+          Console.WriteLine("Press a key to continue");
+          Console.ReadKey(true);
+          allTraps[index].Activate(currentToken, maze);
+          Console.WriteLine("Press a key to continue");
+          Console.ReadKey(true);
+        }
+        else if (currentToken.name == "Vitality")
+        {
+          //currentToken.Power(maze);
+          Console.WriteLine("Sorry, it looks like Vitality's super does not do much in a trap");
+          Console.WriteLine("Press a key to continue");
+          Console.ReadKey(true);
+          allTraps[index].Activate(currentToken, maze);
+          Console.WriteLine("Press a key to continue");
+          Console.ReadKey(true);
+        }
+        else if (currentToken.name == "Crow")
+        {
+          //currentToken.Power(maze);
+          Console.WriteLine("Sorry, it looks like Crow's super does not do much in a trap");
+          Console.WriteLine("Press a key to continue");
+          Console.ReadKey(true);
+          allTraps[index].Activate(currentToken, maze);
+          Console.WriteLine("Press a key to continue");
+          Console.ReadKey(true);
+        }
+        else if (currentToken.name == "Cass")
+        {
+          currentToken.Power(maze);
+          Console.WriteLine("Cass has been saved by this much!!");
+          Console.WriteLine("Press a key to continue");
+          Console.ReadKey(true);
         }
       }
-      else //no activo el super
-      {
-        Console.WriteLine("You are in a trap");
-        allTraps[index].Activate(currentToken, maze);
-        Console.WriteLine("\nPress a key to continue");
-        Console.ReadKey(true);
-      }
+    }
+    else //no activo el super
+    {
+      Console.WriteLine("You are in a trap \nPress a key to continue");
+      Console.ReadKey(true);
+      allTraps[index].Activate(currentToken, maze);
+    }
   }
   public static void PrintMaze(Boxes[,] maze)
   {

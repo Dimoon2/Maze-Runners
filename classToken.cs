@@ -122,15 +122,17 @@ public class Force : Token
             breakWish[0] = currentPosition[0];
             breakWish[1] = currentPosition[1];
 
-            while (key.KeyChar == 'W' || key.KeyChar == 'S' || key.KeyChar == 'A' || key.KeyChar == 'D')
+            while (key.KeyChar == 'w' || key.KeyChar == 's' || key.KeyChar == 'a' || key.KeyChar == 'd')
             {
-                if (key.KeyChar == 'W')
+                if (key.KeyChar == 'w')
                 {
                     breakWish[0] = breakWish[0] - 1;
                     breakWish[1] = breakWish[1];
                     if (maze[breakWish[0], breakWish[1]] == Boxes.obstacle)
                     {
                         maze[breakWish[0], breakWish[1]] = Boxes.path;
+                        Console.Clear();
+                        Console.WriteLine("YEAHH!");
                     }
                     else
                     {
@@ -142,13 +144,15 @@ public class Force : Token
                     }
                     break;
                 }
-                else if (key.KeyChar == 'S')
+                else if (key.KeyChar == 's')
                 {
                     breakWish[0] = breakWish[0] + 1;
                     breakWish[1] = breakWish[1];
                     if (maze[breakWish[0], breakWish[1]] == Boxes.obstacle)
                     {
                         maze[breakWish[0], breakWish[1]] = Boxes.path;
+                        Console.Clear();
+                        Console.WriteLine("YEAHH!");
                     }
                     else
                     {
@@ -160,13 +164,15 @@ public class Force : Token
                     }
                     break;
                 }
-                else if (key.KeyChar == 'A')
+                else if (key.KeyChar == 'a')
                 {
                     breakWish[0] = breakWish[0];
                     breakWish[1] = breakWish[1] - 1;
                     if (maze[breakWish[0], breakWish[1]] == Boxes.obstacle)
                     {
                         maze[breakWish[0], breakWish[1]] = Boxes.path;
+                        Console.Clear();
+                        Console.WriteLine("YEAHH!");
                     }
                     else
                     {
@@ -178,13 +184,15 @@ public class Force : Token
                     }
                     break;
                 }
-                else if (key.KeyChar == 'D')
+                else if (key.KeyChar == 'd')
                 {
                     breakWish[0] = breakWish[0];
                     breakWish[1] = breakWish[1] + 1;
                     if (maze[breakWish[0], breakWish[1]] == Boxes.obstacle)
                     {
                         maze[breakWish[0], breakWish[1]] = Boxes.path;
+                        Console.Clear();
+                        Console.WriteLine("YEAHH!");
                     }
                     else
                     {
@@ -196,22 +204,28 @@ public class Force : Token
                     }
                     break;
                 }
+                while (key.KeyChar != 'w' || key.KeyChar != 's' || key.KeyChar != 'a' || key.KeyChar != 'd')
+                {
+                    Console.WriteLine("Not a valid anwser!");
+                    Console.WriteLine("Press W,A,S,D depending of where you want to use it\n\nPress any key to continue");
+                    Console.ReadKey(true);
+                    if (key.KeyChar == 'w' || key.KeyChar == 's' || key.KeyChar == 'a' || key.KeyChar == 'd')
+                    {
+                        break;
+                    }
+                }
             }
-            while (key.KeyChar != 'W' || key.KeyChar != 'S' || key.KeyChar != 'A' || key.KeyChar != 'D')
-            {
-                Console.WriteLine("Not a valid anwser!");
-                Console.WriteLine("Press W,A,S,D depending of where you want to use it\n\nPress any key to continue");
-                Console.ReadKey(true);
-                continue;
-            }
+
             cooldown -= 6;
-            Console.WriteLine("I do not like this wall, let's bring it downnnn!!!! 😡 \n\nPress any key to continue");
+            Console.WriteLine("I do not like this wall, let's bring it downnnn!!!! 😡");
+            GameActions.PrintMaze(maze);
+            Console.WriteLine("Press any key to continue");
             Console.ReadKey(true);
         }
         else
         {
             Console.WriteLine("Sorry you can't activate Force's super yet \nHis cooldown must be of: 6 \n\nPress a key to continue");
-            Console.ReadKey(true);
+            ConsoleKeyInfo key = Console.ReadKey(true);
         }
     }
 }
@@ -333,6 +347,7 @@ public class Cass : Token
     {
         if (cooldown >= 5)
         {
+
             int[] disableTrap = new int[2];
             disableTrap[0] = currentPosition[0];
             disableTrap[1] = currentPosition[1];

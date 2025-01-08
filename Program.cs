@@ -171,11 +171,11 @@ public class Programs
       //spawn force:
       maze[1, 1] = Boxes.Force;
 
-      Shield shield = new Shield("Shield", "Angel", 22, 5, "If this token falls into a trap, it won't hurt him", 0, 1, [1, 15], Boxes.Shield);
+      Shield shield = new Shield("Shield", "Angel", 22, 5, "If this token falls into a trap, it won't hurt him", 0, 1, [1, 8], Boxes.Shield);
       tokens.Add(shield);
-      shield.stepLog.Add(new int[] { 1, 15 });
+      shield.stepLog.Add(new int[] { 1, 8 });
       //spawn shield:
-      maze[1, 15] = Boxes.Shield;
+      maze[1, 8] = Boxes.Shield;
 
       Vous vous = new Vous("Vous", "Demon", 20, 6, "Leaves a trap behind", 0, 1, [1, 16], Boxes.Vous);
       tokens.Add(vous);
@@ -183,11 +183,11 @@ public class Programs
       //spawn vous:
       maze[1, 16] = Boxes.Vous;
 
-      Vitality vitality = new Vitality("Vitality", "Angel", 22, 5, "This token regenerates its life", 0, 1, [16, 2], Boxes.Vitality);
+      Vitality vitality = new Vitality("Vitality", "Angel", 22, 5, "This token regenerates its life", 0, 1, [16, 8], Boxes.Vitality);
       tokens.Add(vitality);
-      vitality.stepLog.Add(new int[] { 16, 2 });
+      vitality.stepLog.Add(new int[] { 16, 8 });
       //spawn vitality:
-      maze[16, 2] = Boxes.Vitality;
+      maze[16, 8] = Boxes.Vitality;
 
       Crow crow = new Crow("Crow", "Demon", 20, 6, "his attack upgrades 2 points", 0, 1, [16, 1], Boxes.Crow);
       tokens.Add(crow);

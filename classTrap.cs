@@ -12,20 +12,32 @@ public class Trap
 }
 public class Boom : Trap
 {
-    public override void Activate(Token token, Boxes[,] laberinth)
+    public override void Activate(Token token, Boxes[,] maze)
     {
-        Console.Clear();
-        Console.WriteLine("A strange artefact fell of the sky, it looks like a bomb");
-        Console.WriteLine("💣");
-        Console.WriteLine("OH NO, the bomb exploted, your token's life is now 5 points smaller");
-        Console.WriteLine();
-        Console.WriteLine("Press a key to continue");
-        Console.ReadKey(true);
+        if (token.life > 5)
+        {
+            Console.Clear();
+            Console.WriteLine("A strange artefact fell of the sky, it looks like a bomb");
+            Console.WriteLine("💣");
+            Console.WriteLine("OH NO, the bomb exploted, your token's life is now 5 points smaller");
+            Console.WriteLine();
+            Console.WriteLine("Press a key to continue");
+            Console.ReadKey(true);
 
-        token.life -= 5;
-        Console.WriteLine($"Actual life: {token.life}");
-        Console.WriteLine("Press any key to continue");
-        Console.ReadKey(true);
+            token.life -= 5;
+            Console.WriteLine($"Actual life: {token.life}");
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey(true);
+        }
+        else
+        {
+            Console.WriteLine("Oh no, your token's life is almost over, he must go to his spawn point to recover");
+            token.currentPosition[0] = token.stepLog[0][0];
+            token.currentPosition[1] = token.stepLog[0][1];
+            Console.WriteLine("Press a key to continue");
+            Console.ReadKey(true);
+        }
+
     }
 }
 public class Teleport : Trap
@@ -78,7 +90,7 @@ public class BadLuck : Trap
         token.currentPosition[1] = token.stepLog[0][1];
         maze[token.currentPosition[0], token.currentPosition[1]] = token.value;
         token.trapped = false;
-        
+
         Console.WriteLine("(┬┬﹏┬┬)(┬┬﹏┬┬)(┬┬﹏┬┬)(┬┬﹏┬┬)(┬┬﹏┬┬)(┬┬﹏┬┬)(┬┬﹏┬┬)");
         Console.WriteLine($"The current position of your token is now:{token.currentPosition[0]},{token.currentPosition[1]}");
         Console.WriteLine("Press a key to continue");
