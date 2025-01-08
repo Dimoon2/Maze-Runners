@@ -44,6 +44,7 @@ public class Teleport : Trap
             token.currentPosition[0] = token.stepLog[0][0];
             token.currentPosition[1] = token.stepLog[0][1];
             maze[token.currentPosition[0], token.currentPosition[1]] = token.value;
+            token.trapped = false;
 
         }
         else
@@ -52,6 +53,7 @@ public class Teleport : Trap
             token.currentPosition[0] = token.stepLog[token.stepLog.Count - 6][0];
             token.currentPosition[1] = token.stepLog[token.stepLog.Count - 6][1];
             maze[token.currentPosition[0], token.currentPosition[1]] = token.value;
+            token.trapped = false;
 
         }
         Console.WriteLine($"Your token moved 5 boxes back, he is now in:{token.currentPosition[0]}, {token.currentPosition[1]}");
@@ -72,34 +74,11 @@ public class BadLuck : Trap
         Console.ReadKey(true);
 
         maze[token.currentPosition[0], token.currentPosition[1]] = Boxes.trap;
-
-
-        if (token.name == "Force")
-        {
-            token.currentPosition = [1, 1];
-        }
-        else if (token.name == "Shield")
-        {
-            token.currentPosition = [1, 15];
-        }
-        else if (token.name == "Vous")
-        {
-            token.currentPosition = [1, 16];
-        }
-        else if (token.name == "Vitality")
-        {
-            token.currentPosition = [16, 2];
-        }
-        else if (token.name == "Crow")
-        {
-            token.currentPosition = [16, 1];
-        }
-        else if (token.name == "Cass")
-        {
-            token.currentPosition = [16, 16];
-        }
+        token.currentPosition[0] = token.stepLog[0][0];
+        token.currentPosition[1] = token.stepLog[0][1];
         maze[token.currentPosition[0], token.currentPosition[1]] = token.value;
-
+        token.trapped = false;
+        
         Console.WriteLine("(┬┬﹏┬┬)(┬┬﹏┬┬)(┬┬﹏┬┬)(┬┬﹏┬┬)(┬┬﹏┬┬)(┬┬﹏┬┬)(┬┬﹏┬┬)");
         Console.WriteLine($"The current position of your token is now:{token.currentPosition[0]},{token.currentPosition[1]}");
         Console.WriteLine("Press a key to continue");

@@ -39,23 +39,6 @@ public class Token
         Console.WriteLine($"Token: {name}, Type: {type}, Life: {life}, Attack: {attack}, Ability: {ability}, Speed: {speed} Cooldown: {cooldown}");
     }
 
-
-
-
-
-
-    //inicializando a los tokens fuera de la lista:
-    // Force force = new Force("Force", "Demon", 20, 8, "Breaks an obstacle", 5, 1, [1, 1]);
-    // Token shield = new Token("Shield", "Angel", 22, 5, "If this token falls into a trap, it won't hurt him", -1, 1, [1Cass cass = new Cass("Cass", "Angel", 20, 6, "Disables a trap", -1, 1, [16, 16]);, 15]);
-    // Token vous = new Token("Vous", "Demon", 20, 6, "Leaves a trap behind", -1, 1, [1, 16]);
-    // Token vitality = new Token("Vitality", "Angel", 22, 5, "This token regenerates its life", 12, 1, [16, 2]);
-    // Crow crow = new Crow("Crow", "Demon", 20, 6, "his attack upgrades 2 points", -1, 1, [16, 1]);
-
-
-    //inicializando maze:
-    // Maze mazes = new Maze();
-    // Boxes[,] maze;
-
     public bool canISuper(Token token)
     {
         if (token.name == "Force")

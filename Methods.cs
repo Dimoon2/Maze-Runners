@@ -64,6 +64,7 @@ class GameActions
           }
           else if (currentToken.name == "Cass")
           {
+            currentToken.Power(maze);
             Console.WriteLine("Cass has been saved by this much!!");
             Console.WriteLine("Press a key to continue");
             Console.ReadKey(true);
