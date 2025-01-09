@@ -12,6 +12,7 @@ public class Token
     public int speed { get; set; }
 
     public bool trapped { get; set; }
+    public bool inBoss { get; set; }
 
     public int[] currentPosition { get; set; }
     public List<int[]> stepLog = new List<int[]>();
@@ -116,12 +117,99 @@ public class Force : Token
     {
         if (cooldown >= 6)
         {
-            Console.WriteLine("You have activaded Force's power \nPress W,A,S,D depending of where you want to use it\n\nPress any key to continue");
+            Console.WriteLine("You have activaded Force's power \nPress W,A,S,D depending of where you want to use it");
             ConsoleKeyInfo key = Console.ReadKey(true);
             int[] breakWish = new int[2];
             breakWish[0] = currentPosition[0];
             breakWish[1] = currentPosition[1];
 
+            while (!(key.KeyChar == 'w' || key.KeyChar == 's' || key.KeyChar == 'a' || key.KeyChar == 'd'))
+            {
+                Console.WriteLine("Not a valid anwser!");
+                Console.WriteLine("Press W,A,S,D depending of where you want to use it");
+                ConsoleKeyInfo key1 = Console.ReadKey(true);
+                if (key1.KeyChar == 'w' || key1.KeyChar == 's' || key1.KeyChar == 'a' || key1.KeyChar == 'd')
+                {
+                    while (key1.KeyChar == 'w' || key1.KeyChar == 's' || key1.KeyChar == 'a' || key1.KeyChar == 'd')
+                    {
+                        if (key1.KeyChar == 'w')
+                        {
+                            breakWish[0] = breakWish[0] - 1;
+                            breakWish[1] = breakWish[1];
+                            if (maze[breakWish[0], breakWish[1]] == Boxes.obstacle)
+                            {
+                                maze[breakWish[0], breakWish[1]] = Boxes.path;
+                                Console.Clear();
+                                Console.WriteLine("YEAHH!");
+                            }
+                            else
+                            {
+                                Console.WriteLine("There is nothing to break! \nChoose another coordinate\n\nPress a key to continue");
+                                Console.ReadKey(true);
+                            }
+                            break;
+                        }
+                        else if (key1.KeyChar == 's')
+                        {
+                            breakWish[0] = breakWish[0] + 1;
+                            breakWish[1] = breakWish[1];
+                            if (maze[breakWish[0], breakWish[1]] == Boxes.obstacle)
+                            {
+                                maze[breakWish[0], breakWish[1]] = Boxes.path;
+                                Console.Clear();
+                                Console.WriteLine("YEAHH!");
+                            }
+                            else
+                            {
+                                Console.WriteLine("There is nothing to break! \nChoose another coordinate\n\nPress a key to continue");
+                                Console.ReadKey(true);
+                            }
+                            break;
+                        }
+                        else if (key1.KeyChar == 'a')
+                        {
+                            breakWish[0] = breakWish[0];
+                            breakWish[1] = breakWish[1] - 1;
+                            if (maze[breakWish[0], breakWish[1]] == Boxes.obstacle)
+                            {
+                                maze[breakWish[0], breakWish[1]] = Boxes.path;
+                                Console.Clear();
+                                Console.WriteLine("YEAHH!");
+                            }
+                            else
+                            {
+                                Console.WriteLine("There is nothing to break! \nChoose another coordinate\n\nPress a key to continue");
+                                Console.ReadKey(true);
+                            }
+                            break;
+                        }
+                        else if (key1.KeyChar == 'd')
+                        {
+                            breakWish[0] = breakWish[0];
+                            breakWish[1] = breakWish[1] + 1;
+                            if (maze[breakWish[0], breakWish[1]] == Boxes.obstacle)
+                            {
+                                maze[breakWish[0], breakWish[1]] = Boxes.path;
+                                Console.Clear();
+                                Console.WriteLine("YEAHH!");
+                            }
+                            else
+                            {
+                                Console.WriteLine("There is nothing to break! \nChoose another coordinate\n\nPress a key to continue");
+                                Console.ReadKey(true);
+                            }
+                            break;
+                        }
+                    }
+
+                    cooldown -= 6;
+                    Console.WriteLine("I do not like this wall, let's bring it downnnn!!!! 😡");
+                    GameActions.PrintMaze(maze);
+                    Console.WriteLine("Press any key to continue");
+                    Console.ReadKey(true);
+                    break;
+                }
+            }
             while (key.KeyChar == 'w' || key.KeyChar == 's' || key.KeyChar == 'a' || key.KeyChar == 'd')
             {
                 if (key.KeyChar == 'w')
@@ -136,11 +224,8 @@ public class Force : Token
                     }
                     else
                     {
-                        while (true)
-                        {
-                            Console.WriteLine("There is nothing to break! \nChoose another coordinate");
-                            break;
-                        }
+                        Console.WriteLine("There is nothing to break! \nChoose another coordinate\n\nPress a key to continue");
+                        Console.ReadKey(true);
                     }
                     break;
                 }
@@ -156,11 +241,8 @@ public class Force : Token
                     }
                     else
                     {
-                        while (true)
-                        {
-                            Console.WriteLine("There is nothing to break! \nChoose another coordinate");
-                            break;
-                        }
+                        Console.WriteLine("There is nothing to break! \nChoose another coordinate\n\nPress a key to continue");
+                        Console.ReadKey(true);
                     }
                     break;
                 }
@@ -176,11 +258,8 @@ public class Force : Token
                     }
                     else
                     {
-                        while (true)
-                        {
-                            Console.WriteLine("There is nothing to break! \nChoose another coordinate");
-                            break;
-                        }
+                        Console.WriteLine("There is nothing to break! \nChoose another coordinate\n\nPress a key to continue");
+                        Console.ReadKey(true);
                     }
                     break;
                 }
@@ -196,27 +275,15 @@ public class Force : Token
                     }
                     else
                     {
-                        while (true)
-                        {
-                            Console.WriteLine("There is nothing to break! \nChoose another coordinate");
-                            break;
-                        }
+                        Console.WriteLine("There is nothing to break! \nChoose another coordinate\n\nPress a key to continue");
+                        Console.ReadKey(true);
                     }
                     break;
-                }
-                while (key.KeyChar != 'w' || key.KeyChar != 's' || key.KeyChar != 'a' || key.KeyChar != 'd')
-                {
-                    Console.WriteLine("Not a valid anwser!");
-                    Console.WriteLine("Press W,A,S,D depending of where you want to use it\n\nPress any key to continue");
-                    Console.ReadKey(true);
-                    if (key.KeyChar == 'w' || key.KeyChar == 's' || key.KeyChar == 'a' || key.KeyChar == 'd')
-                    {
-                        break;
-                    }
                 }
             }
 
             cooldown -= 6;
+            Console.Clear();
             Console.WriteLine("I do not like this wall, let's bring it downnnn!!!! 😡");
             GameActions.PrintMaze(maze);
             Console.WriteLine("Press any key to continue");
@@ -224,7 +291,7 @@ public class Force : Token
         }
         else
         {
-            Console.WriteLine("Sorry you can't activate Force's super yet \nHis cooldown must be of: 6 \n\nPress a key to continue");
+            Console.WriteLine($"Sorry you can't activate Force's super yet \nHis cooldown must be of: 6 \nCurrent cooldown: {cooldown}\n\nPress a key to continue");
             ConsoleKeyInfo key = Console.ReadKey(true);
         }
     }
@@ -242,7 +309,7 @@ public class Shield : Token
         {
             Console.WriteLine("You have activated Shield's power\nStarting now if he falls into a trap, it won't hurt him\n\nPress any key to continue");
             Console.ReadKey(true);
-            if (maze[currentPosition[0], currentPosition[1]] == Boxes.trap)
+            if (trapped)
             {
                 Console.WriteLine("You are safe now\nCurrent trap won't do anything to your token \n\nPress a key to continue");
                 Console.ReadKey();
@@ -256,7 +323,7 @@ public class Shield : Token
         }
         else
         {
-            Console.WriteLine("Sorry you can't activate Shield's super yet \nHis cooldown must be of: 10 \n\nPress a key to continue");
+            Console.WriteLine($"Sorry you can't activate Shield's super yet \nHis cooldown must be of: 10\nCurrent cooldown: {cooldown} \n\nPress a key to continue");
             Console.ReadKey(true);
         }
     }
@@ -276,15 +343,15 @@ public class Vous : Token
             int[] vouslog = stepLog[stepLog.Count - 1];
             newTrap[0] = vouslog[0];
             newTrap[1] = vouslog[1];
-            maze[newTrap[0], newTrap[1]] = Boxes.trap;
-
+            // maze[newTrap[0], newTrap[1]] = Boxes.trap;
+            trapped = true;
             Console.WriteLine($"Vous has leave a trap in {newTrap[0]},{newTrap[1]} \n\nPress a key to continue");
             Console.ReadKey(true);
             cooldown -= 12;
         }
         else
         {
-            Console.WriteLine("Sorry you can't activate Vous's super yet \nHis cooldown must be of: 12 \n\nPress a key to continue");
+            Console.WriteLine($"Sorry you can't activate Vous's super yet \nHis cooldown must be of: 12 \nCurrent cooldown: {cooldown} \n\nPress a key to continue");
             Console.ReadKey(true);
         }
     }
@@ -310,7 +377,7 @@ public class Vitality : Token
         }
         else
         {
-            Console.WriteLine("Sorry you can't activate Vitality's super yet \nHis cooldown must be of: 6 \n\nPress a key to continue");
+            Console.WriteLine($"Sorry you can't activate Vitality's super yet \nHis cooldown must be of: 6 \nCurrent cooldown: {cooldown}\n\nPress a key to continue");
             Console.ReadKey(true);
         }
     }
@@ -332,7 +399,7 @@ public class Crow : Token
         }
         else
         {
-            Console.WriteLine("Sorry you can't activate Crow's super yet \nHis cooldown must be of: 6 \n\nPress a key to continue");
+            Console.WriteLine($"Sorry you can't activate Crow's super yet \nHis cooldown must be of: 6 \nCurrent cooldown: {cooldown} \n\nPress a key to continue");
             Console.ReadKey(true);
         }
     }
@@ -351,10 +418,11 @@ public class Cass : Token
             int[] disableTrap = new int[2];
             disableTrap[0] = currentPosition[0];
             disableTrap[1] = currentPosition[1];
-            if (maze[disableTrap[0], disableTrap[1]] == Boxes.trap)
+            if (trapped)
             {
                 Console.WriteLine("A light appears from the sky and hits the trap \nIt looks like now tis gone");
-                maze[disableTrap[0], disableTrap[1]] = Boxes.path;
+                // maze[disableTrap[0], disableTrap[1]] = Boxes.path;
+                trapped = false;
                 Console.WriteLine("Cass has just turn a trap into a free Box!! \n\nPress a key to continue");
                 Console.ReadKey(true);
             }
@@ -366,7 +434,7 @@ public class Cass : Token
         }
         else
         {
-            Console.WriteLine("Sorry you can't activate Cass's super yet \nHis cooldown must be of: 5 \n\nPress a key to continue");
+            Console.WriteLine($"Sorry you can't activate Cass's super yet \nHis cooldown must be of: 5 \nCurrent cooldown: {cooldown} \n\nPress a key to continue");
             Console.ReadKey(true);
         }
     }

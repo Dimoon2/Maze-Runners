@@ -155,15 +155,7 @@ public class Programs
       Console.WriteLine("Press a key to continue");
       Console.ReadKey();
 
-      // //inicializando tokens:
-      // Force Forcetoken = new Token("Force", "Demon", 20, 8, "Breaks an obstacle", 0, 1, [1, 1]);
-      // Token Shield = new Token("Shield", "Angel", 22, 5, "If this token falls into a trap, it won't hurt him", 0, 1, [1, 15]);
-      // Token Vous = new Token("Vous", "Demon", 20, 6, "Leaves a trap behind", 0, 1, [1, 16]);
-      // Token Vitality = new Token("Vitality", "Angel", 22, 5, "Regenerates its life", 0, 1, [16, 2]);
-      // Token Crow = new Token("Crow", "Demon", 20, 6, "Upgrades 2 points of his attack", -1, 1, [16, 1]);
-      // Token Cass = new Token("Cass", "Angel", 20, 6, "Disables a trap", 0, 1, [16, 16]);
-      //creacion de los tokens:
-
+      //Inicializando tokens:
       List<Token> tokens = new List<Token>();
       Force force = new Force("Force", "Demon", 20, 8, "Breaks an obstacle", 0, 1, [1, 1], Boxes.Force);
       tokens.Add(force);
@@ -285,8 +277,6 @@ public class Programs
       Console.WriteLine("Press a key to continue");
       Console.ReadKey(true);
 
-      //creando objeto Boss:
-      new Boss("Astharoth", 40, 10, [9, 9]);
       //llamar metodo fight:
 
 
@@ -349,9 +339,8 @@ public class Programs
           var currentToken = Player1.SelectedToken.First(token => token.name.ToLower() == tokenDesition);
 
           // Mostrar opciones de movimiento
-          Console.WriteLine();
-          Console.WriteLine($"You are currently playing with {currentToken.name}");
-          Console.WriteLine();
+          Console.Clear();
+          Console.WriteLine($"You are currently playing with {currentToken.name}\n-Life🧬:{currentToken.life} \n-Attack💥:{currentToken.attack} \n-Cooldoown⌛:{currentToken.cooldown} \n-Ability❤️‍🔥:{currentToken.ability}\n\n");
           Console.WriteLine("Press a key to continue");
           Console.ReadKey(true);
 
@@ -424,6 +413,19 @@ public class Programs
                   currentToken.currentPosition = tokenSelectedPosition;
                   maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] = currentToken.value;
                 }
+              }
+              if (maze[tokenSelectedPosition[0], tokenSelectedPosition[1]] == Boxes.Astharoth)
+              {
+                currentToken.inBoss = true;
+
+                //creando objeto Boss:
+                new Boss("Astharoth", 40, 10, [9, 9]);
+                //llamar al metodo estatico IntroductionBoss:
+                Boss.PresentationBoss(currentToken, maze);
+                //metodo fight
+
+                //if boss.life == 0 : dar Heart y break
+                //if currentToken.life == 0 : llevarlo a la posicion inicial 
               }
 
               //utilizar steplog:
@@ -523,9 +525,8 @@ public class Programs
           var currentToken = Player2.SelectedToken.First(token => token.name.ToLower() == tokenDesition);
 
           // Mostrar opciones de movimiento
-          Console.WriteLine();
-          Console.WriteLine($"You are currently playing with {currentToken.name}");
-          Console.WriteLine();
+          Console.Clear();
+          Console.WriteLine($"You are currently playing with {currentToken.name}\n-Life🧬:{currentToken.life} \n-Attack💥:{currentToken.attack} \n-Cooldoown⌛:{currentToken.cooldown} \n-Ability❤️‍🔥:{currentToken.ability}\n\n");
           Console.WriteLine("Press a key to continue");
           Console.ReadKey(true);
 
