@@ -1,4 +1,4 @@
-class Player
+public class Player
 {
     public string name { get; set; }
     public List<Token> SelectedToken { get; set; }

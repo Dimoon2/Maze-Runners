@@ -84,25 +84,24 @@ public class Token
         }
     }
 
-    public void Attack(Boss Astharoth)
+    public static void Attack(Boss boss, Token token)
     {
-        Console.WriteLine("Your token seeks for a chance to attack");
-        Astharoth.GetDamage(attack);
+        Console.Clear();
+        Console.WriteLine("Your token seeks for a chance to attack...");
+        Boss.GetDamage(boss, token);
         Console.WriteLine("💥💥💥💥💥💥💥💥💥💥💥💥 \n\nTURN ENDED");
         Console.WriteLine("Press a key to continue");
         Console.ReadKey(true);
     }
 
-    public void GetDamage(float damage)
+    public static void GetDamage(Boss boss, Token token)
     {
-        life -= damage;
-        Console.WriteLine();
-
-        Console.WriteLine($"Your token recibes {damage} of damage");
-        Console.WriteLine($"Current life: {life}");
+        Console.Clear();
+        token.life -= boss.attack;
+        Console.WriteLine($"Your token recibes {boss.attack} of damage");
+        Console.WriteLine($"Current life: {token.life} :(\n\nPress a key to continue");
+        Console.ReadKey(true);
     }
-
-    //metodo fight
 
 
 }

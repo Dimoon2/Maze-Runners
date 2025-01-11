@@ -5,7 +5,7 @@ public class Boss
     public float attack { get; set; }
     public int[] position { get; set; }
 
-    public virtual void Power()
+    public virtual void Power(Boxes[,] maze)
     {
         Console.WriteLine("The maze has started to trumble...");
         Console.WriteLine("Look out");
@@ -57,66 +57,128 @@ public class Boss
             Console.WriteLine("Press any key to continue");
             Console.ReadKey(true);
             Console.Clear();
-            Console.WriteLine("Great warrior, you've made it! \nRemember, Astharoth is a powerful deamon, so you must be cautios\n\nPress any key to continue");
+            Console.WriteLine("Great warrior, you've made it! \nRemember, Astharoth is a powerful deamon, so you must be Cautious\n\nPress any key to continue");
             Console.ReadKey(true);
         }
     }
 
 
-    public void Attack(Token actualToken)
+    public static void Attack(Token actualToken, Boss boss)
     {
+        Console.Clear();
         Console.WriteLine("Be careful!"); //?
-        Console.WriteLine("💥💥💥💥💥💥💥💥💥💥💥💥");
-        Console.WriteLine();
-        Console.WriteLine("Astharoth attacks!!");
+        Console.WriteLine("💥💥💥💥💥💥💥💥💥💥💥💥\n");
+        Console.WriteLine("Astharoth attacks!!\n\nPress a key to continue");
+        Console.ReadKey(true);
 
-        actualToken.GetDamage(attack);
+        Token.GetDamage(boss, actualToken);
     }
 
-    public void GetDamage(float damage)
+    public static void GetDamage(Boss boss, Token token)
     {
-        life -= damage;
-        Console.WriteLine($"YOUR TOKEN ATTACKS ATHAROTH AND DEALS HIM {attack} OF DAMAGE!! ");
-        Console.WriteLine($"Astharoth current life: {life}");
-        Console.WriteLine();
+        Console.Clear();
+        boss.life -= token.attack;
+        Console.WriteLine($"YOUR TOKEN ATTACKS ATHAROTH AND DEALS HIM {token.attack} OF DAMAGE!! ");
+        Console.WriteLine($"Astharoth current life: {boss.life}\n\nPress a key to continue");
+        Console.ReadKey(true);
     }
 
-    // public static string Fight(Token token, Boss boss)
-    // {
-    //     while (true)
-    //     {
+    public static void Fight(Token token, Boss boss, Boxes[,] maze, Player player)
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("THE POWERFUL ASTHAROTH APEARS\n!!");
+            Console.WriteLine("Astharoth: How dare you enter my mazeeee!!??\n");
+            Console.WriteLine(@"                                              ,--,  ,.-.");
+            Console.WriteLine(@"                ,                   \,       '-,-`,'-.' | ._");
+            Console.WriteLine(@"               /|           \    ,   |\         }  )/  / `-,',");
+            Console.WriteLine(@"               [ ,          |\  /|   | |        /  \|  |/`  ,`");
+            Console.WriteLine(@"               | |       ,.`  `,` `, | |  _,...(   (      .',");
+            Console.WriteLine(@"               \  \  __ ,-` `  ,  , `/ |,'      Y     (   /_L\");
+            Console.WriteLine(@"                \  \_\,``,   ` , ,  /  |         )         _,/");
+            Console.WriteLine(@"                 \  '  `  ,_ _`_,-,<._.<        /         /");
+            Console.WriteLine(@"                  ', `>.,`  `  `   ,., |_      |         /");
+            Console.WriteLine(@"                    \/`  `,   `   ,`  | /__,.-`    _,   `\");
+            Console.WriteLine(@"                -,-..\  _  \  `  /  ,  / `._) _,-\`       \");
+            Console.WriteLine(@"                 \_,,.) /\    ` /  / ) (-,, ``    ,        |");
+            Console.WriteLine(@"                ,` )  | \_\       '-`  |  `(               \");
+            Console.WriteLine(@"               /  /```(   , --, ,' \   |`<`    ,            |");
+            Console.WriteLine(@"              /  /_,--`\   <\  V /> ,` )<_/)  | \      _____)");
+            Console.WriteLine(@"        ,-, ,`   `   (_,\ \    |   /) / __/  /   `----`");
+            Console.WriteLine(@"       (-, \           ) \ ('_.-._)/ /,`    /");
+            Console.WriteLine(@"       | /  `          `/ \\ V   V, /`     /");
+            Console.WriteLine(@"    ,--\(        ,     <_/`\\     ||      /");
+            Console.WriteLine(@"   (   ,``-     \/|         \-A.A-`|     /");
+            Console.WriteLine(@"  ,>,_ )_,..(    )\          -,,_-`  _--`");
+            Console.WriteLine(@" (_ \|`   _,/_  /  \_            ,--`");
+            Console.WriteLine(@"  \( `   <.,../`     `-.._   _,-`");
+            Console.WriteLine("\n\nPress a key to continue");
+            Console.ReadKey(true);
+            Console.Clear();
+            Console.WriteLine("Cautious! The fight will now beging \n\nPress a key to continue");
+            Console.ReadKey(true);
+            Console.Clear();
 
-    //     }
-    // }
+            //llamar al metodo attack de token
+            Token.Attack(boss, token);
+            //llamar al metodo GetDamage de boss
+            Boss.GetDamage(boss, token);
+            //llamar al metodo attack de boss
+            Boss.Attack(token, boss);
+            //llamar al metodo GetDamage de token
+            Token.GetDamage(boss, token);
+
+            if (token.life <= 0)
+            {
+                token.currentPosition[0] = token.stepLog[0][0];
+                token.currentPosition[1] = token.stepLog[0][1];
+                Console.Clear();
+                Console.WriteLine($"Oh no, it looks like we underestimate the power of the demon \nBut don't worry, {token.name} will recover his strength in the starting point.\n\nPress a key to continue");
+                Console.ReadKey(true);
+                Console.WriteLine("CURRENT MAZE:");
+                GameActions.PrintMaze(maze);
+                Console.WriteLine("\nPress a key to continue");
+                Console.ReadKey(true);
+                break;
+            }
+            //Condicion de victoria
+            if (boss.life <= 0)
+            {
+                Console.Clear();
+                Console.WriteLine("Atharoth is dead...\nThe Celestial heart is now yours\n\nPress a key to continue");
+                Console.ReadKey(true);
+                Console.WriteLine("A bright light apears \nEverything is silent..\n\nPress a key to continue");
+                Console.ReadKey(true);
+                Console.Clear();
+                Console.WriteLine("Then.....");
+                Console.WriteLine(@"                                    .''.       ");
+                Console.WriteLine(@"        .''.      .        *''*    :_\/_:     . ");
+                Console.WriteLine(@"       :_\/_:   _\(/_  .:.*_\/_*   : /\ :  .'.:.'.");
+                Console.WriteLine(@"   .''.: /\ :   ./)\   ':'* /\ * :  '..'.  -=:o:=-");
+                Console.WriteLine(@"  :_\/_:'.:::.    ' *''*    * '.\'/.' _\(/_'.':'.'");
+                Console.WriteLine(@"  : /\ : :::::     *_\/_*     -= o =-  /)\    '  *");
+                Console.WriteLine(@"   '..'  ':::'     * /\ *     .'/.\'.   '");
+                Console.WriteLine(@"       *            *..*         :");
+                Console.WriteLine(@"        *");
+                Console.WriteLine(@"         *\n\nPress a key to continue");
+                Console.ReadKey(true);
+                Console.Clear();
+                Console.WriteLine($"{player.name} YOU'VE WONNN!!!!!!!!!\nWe have a huge debt with you warrior, if you ever need anything, don't ever doubt to call\n\nPress a key to continue");
+                Console.ReadKey(true);
+                Console.Clear();
+
+
+            }
+        }
+    }
 
     //en program:
     //crear al objeto boss: new Boss(name,damage...)
     //llamar al metodo: Astharoth.Power()
 
 
-    //                                              ,--,  ,.-.
-    //                ,                   \,       '-,-`,'-.' | ._
-    //               /|           \    ,   |\         }  )/  / `-,',
-    //               [ ,          |\  /|   | |        /  \|  |/`  ,`
-    //               | |       ,.`  `,` `, | |  _,...(   (      .',
-    //               \  \  __ ,-` `  ,  , `/ |,'      Y     (   /_L\
-    //                \  \_\,``,   ` , ,  /  |         )         _,/
-    //                 \  '  `  ,_ _`_,-,<._.<        /         /
-    //                  ', `>.,`  `  `   ,., |_      |         /
-    //                    \/`  `,   `   ,`  | /__,.-`    _,   `\
-    //                -,-..\  _  \  `  /  ,  / `._) _,-\`       \
-    //                 \_,,.) /\    ` /  / ) (-,, ``    ,        |
-    //                ,` )  | \_\       '-`  |  `(               \
-    //               /  /```(   , --, ,' \   |`<`    ,            |
-    //              /  /_,--`\   <\  V /> ,` )<_/)  | \      _____)
-    //        ,-, ,`   `   (_,\ \    |   /) / __/  /   `----`
-    //       (-, \           ) \ ('_.-._)/ /,`    /
-    //       | /  `          `/ \\ V   V, /`     /
-    //    ,--\(        ,     <_/`\\     ||      /
-    //   (   ,``-     \/|         \-A.A-`|     /
-    //  ,>,_ )_,..(    )\          -,,_-`  _--`
-    // (_ \|`   _,/_  /  \_            ,--`
-    //  \( `   <.,../`     `-.._   _,-`
+
 
 
 
