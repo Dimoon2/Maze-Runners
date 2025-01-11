@@ -84,7 +84,7 @@ public class Token
         }
     }
 
-    public static void Attack(Boss boss, Token token)
+    public static float Attack(Boss boss, Token token)
     {
         Console.Clear();
         Console.WriteLine("Your token seeks for a chance to attack...");
@@ -92,6 +92,8 @@ public class Token
         Console.WriteLine("💥💥💥💥💥💥💥💥💥💥💥💥 \n\nTURN ENDED");
         Console.WriteLine("Press a key to continue");
         Console.ReadKey(true);
+        float bossLife = boss.life;
+        return bossLife;
     }
 
     public static void GetDamage(Boss boss, Token token)

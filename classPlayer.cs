@@ -33,7 +33,7 @@ public class Player
     //para verificar si la posicion es valida:
     public bool ValidPosition(Boxes[,] maze, int x, int y)
     {
-        if (maze[x, y] == Boxes.path || maze[x, y] == Boxes.trap)
+        if (maze[x, y] == Boxes.path || maze[x, y] == Boxes.trap || maze[x,y] == Boxes.Astharoth)
         { return true; }
         else
         {

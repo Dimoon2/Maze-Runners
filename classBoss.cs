@@ -1,3 +1,5 @@
+using System.Security.Cryptography.X509Certificates;
+
 public class Boss
 {
     public string name { get; set; }
@@ -13,7 +15,6 @@ public class Boss
 
 
         Console.WriteLine("Astharoth double attacks by making an expansive wave");
-        //metodo de ataque
     }
 
     public Boss(string name, float life, float attack, int[] position)
@@ -57,36 +58,9 @@ public class Boss
             Console.WriteLine("Press any key to continue");
             Console.ReadKey(true);
             Console.Clear();
-            Console.WriteLine("Great warrior, you've made it! \nRemember, Astharoth is a powerful deamon, so you must be Cautious\n\nPress any key to continue");
+
+            Console.WriteLine("Great! warrior, you've made it! \nRemember, Astharoth is a powerful deamon, so you must be Cautious\n\nPress any key to continue");
             Console.ReadKey(true);
-        }
-    }
-
-
-    public static void Attack(Token actualToken, Boss boss)
-    {
-        Console.Clear();
-        Console.WriteLine("Be careful!"); //?
-        Console.WriteLine("💥💥💥💥💥💥💥💥💥💥💥💥\n");
-        Console.WriteLine("Astharoth attacks!!\n\nPress a key to continue");
-        Console.ReadKey(true);
-
-        Token.GetDamage(boss, actualToken);
-    }
-
-    public static void GetDamage(Boss boss, Token token)
-    {
-        Console.Clear();
-        boss.life -= token.attack;
-        Console.WriteLine($"YOUR TOKEN ATTACKS ATHAROTH AND DEALS HIM {token.attack} OF DAMAGE!! ");
-        Console.WriteLine($"Astharoth current life: {boss.life}\n\nPress a key to continue");
-        Console.ReadKey(true);
-    }
-
-    public static void Fight(Token token, Boss boss, Boxes[,] maze, Player player)
-    {
-        while (true)
-        {
             Console.Clear();
             Console.WriteLine("THE POWERFUL ASTHAROTH APEARS\n!!");
             Console.WriteLine("Astharoth: How dare you enter my mazeeee!!??\n");
@@ -118,23 +92,79 @@ public class Boss
             Console.Clear();
             Console.WriteLine("Cautious! The fight will now beging \n\nPress a key to continue");
             Console.ReadKey(true);
-            Console.Clear();
+        }
+    }
 
+
+    public static void Attack(Token actualToken, Boss boss)
+    {
+        Console.Clear();
+        Console.WriteLine("Be careful!"); //?
+        Console.WriteLine("💥💥💥💥💥💥💥💥💥💥💥💥\n");
+        Console.WriteLine("Astharoth attacks!!\n\nPress a key to continue");
+        Console.ReadKey(true);
+
+        Token.GetDamage(boss, actualToken);
+    }
+
+    public static void GetDamage(Boss boss, Token token)
+    {
+        Console.Clear();
+        boss.life -= token.attack;
+        Console.WriteLine($"{token.name} ATTACKS ATHAROTH AND DEALS HIM {token.attack} POINTS OF DAMAGE!! ");
+        Console.WriteLine($"Astharoth current life: {boss.life}\n\nPress a key to continue");
+        Console.ReadKey(true);
+    }
+
+    public static void Fight(Token token, Boss boss, Boxes[,] maze, Player player)
+    {
+        while (true)
+        {
+            Console.Clear();
             //llamar al metodo attack de token
             Token.Attack(boss, token);
             //llamar al metodo GetDamage de boss
-            Boss.GetDamage(boss, token);
+            //Boss.GetDamage(boss, token);
             //llamar al metodo attack de boss
             Boss.Attack(token, boss);
             //llamar al metodo GetDamage de token
-            Token.GetDamage(boss, token);
+            // Token.GetDamage(boss, token);
 
             if (token.life <= 0)
             {
+                //llevar a los tokens a la posicon inicial: 
                 token.currentPosition[0] = token.stepLog[0][0];
                 token.currentPosition[1] = token.stepLog[0][1];
+                token.inBoss = false;
                 Console.Clear();
-                Console.WriteLine($"Oh no, it looks like we underestimate the power of the demon \nBut don't worry, {token.name} will recover his strength in the starting point.\n\nPress a key to continue");
+                Console.WriteLine($"Oh no, it looks like we underestimate the power of the demon \nBut don't worry, {token.name} will recover his strength in the starting point.\nYou will have better luck next time, Astharoth health is now of:{boss.life} \n\nPress a key to continue");
+
+                //subirle la vida a mis tokens :"(
+                if (token.name == "Force")
+                {
+                    token.life = 20;
+                }
+                else if (token.name == "Shield")
+                {
+                    token.life = 22;
+                }
+                else if (token.name == "Vous")
+                {
+                    token.life = 20;
+                }
+                else if (token.name == "Vitality")
+                {
+                    token.life = 22;
+                }
+                else if (token.name == "Crow")
+                {
+                    token.life = 20;
+                }
+                else if (token.name == "Cass")
+                {
+                    token.life = 20;
+                }
+
                 Console.ReadKey(true);
                 Console.WriteLine("CURRENT MAZE:");
                 GameActions.PrintMaze(maze);
@@ -164,19 +194,23 @@ public class Boss
                 Console.WriteLine(@"         *\n\nPress a key to continue");
                 Console.ReadKey(true);
                 Console.Clear();
-                Console.WriteLine($"{player.name} YOU'VE WONNN!!!!!!!!!\nWe have a huge debt with you warrior, if you ever need anything, don't ever doubt to call\n\nPress a key to continue");
+                Console.WriteLine($"{player.name} YOU'VE WONNN!!!!!!!!!\nWe have a huge debt with you warrior, honor will grow within your generation, if you ever need anything, don't ever doubt to call\n\nPress a key to continue");
                 Console.ReadKey(true);
                 Console.Clear();
-
-
+                Console.WriteLine($"And that's how the leyend of {player.name} was born\n By the mysteries of 𝓣𝓱𝓮 𝓢𝓹𝓲𝓻𝓲𝓽 𝓣𝓻𝓪𝓲𝓵...\n\nPress a key to continue");
+                Console.ReadKey(true);
+                Console.Clear();
+                Console.WriteLine("𝓣𝓱𝓮 𝓮𝓷𝓭\n\nPress a key to continue");
+                Console.ReadKey(true);
+                Console.Clear();
+                Console.WriteLine("Thank you so much for playing my game :)");
+                Console.ReadKey(true);
+                break;
             }
         }
     }
 
-    //en program:
-    //crear al objeto boss: new Boss(name,damage...)
-    //llamar al metodo: Astharoth.Power()
-
+    
 
 
 

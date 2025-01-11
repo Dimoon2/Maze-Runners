@@ -419,21 +419,24 @@ public class Programs
                 currentToken.inBoss = true;
 
                 //creando objeto Boss:
-                new Boss("Astharoth", 40, 10, [9, 9]);
+                Boss boss = new Boss("Astharoth", 40, 10, [9, 9]);
                 //llamar al metodo estatico IntroductionBoss:
                 Boss.PresentationBoss(currentToken, maze);
                 //metodo fight
-
-                //if boss.life == 0 : dar Heart y break
-                //if currentToken.life == 0 : llevarlo a la posicion inicial 
+                Boss.Fight(currentToken, boss, maze, Player1);
+               // boss.life;
+                //condicion de victoria:
+                if (boss.life <= 0)
+                {
+                  break;
+                }
               }
 
               //utilizar steplog:
               currentToken.stepLog.Add(new int[] { currentToken.currentPosition[0], currentToken.currentPosition[1] });
 
               Console.Clear();
-              Console.WriteLine("You have move successfully!!");
-              Console.WriteLine();
+              Console.WriteLine($"You have move successfully!! \n{currentToken.name}'s current life is {currentToken.life}\n\n");
               Console.WriteLine($"The current position of {currentToken.name} is now: {currentToken.currentPosition[0]},{currentToken.currentPosition[1]}");
 
               //mostrar maze 3:
@@ -600,6 +603,23 @@ public class Programs
                   maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] = currentToken.value;
                 }
               }
+              if (maze[tokenSelectedPosition[0], tokenSelectedPosition[1]] == Boxes.Astharoth)
+              {
+                currentToken.inBoss = true;
+
+                //creando objeto Boss:
+                Boss boss = new Boss("Astharoth", 40, 10, [9, 9]);
+                //llamar al metodo estatico IntroductionBoss:
+                Boss.PresentationBoss(currentToken, maze);
+                //metodo fight
+                Boss.Fight(currentToken, boss, maze, Player2);
+                //condicion de victoria:
+                if (boss.life <= 0)
+                {
+                  break;
+                }
+              }
+
               //utilizar steplog:
               currentToken.stepLog.Add(new int[] { currentToken.currentPosition[0], currentToken.currentPosition[1] });
 
