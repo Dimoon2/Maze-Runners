@@ -1,7 +1,5 @@
 public class Magic
 {
-    //sword, elixir
-
     public static void Sword(Token token)
     {
         Console.WriteLine("Congrats!!\n\nYou've won the Sword of the Depths, it will upgrade your attack by 20 points\n\nNow go save us warrior\n\n!");
@@ -93,6 +91,22 @@ public class Magic
         Console.Clear();
         Console.WriteLine("NEW OBJECT:\n");
 
+        Console.WriteLine(@"    o--o--=g=--o--o");
+        Console.WriteLine(@"   /      .'       \");
+        Console.WriteLine(@"   o      '.       o");
+        Console.WriteLine(@"    \             /");
+        Console.WriteLine(@"     o           o");
+        Console.WriteLine(@"      \         /");
+        Console.WriteLine(@"       o       o");
+        Console.WriteLine(@"        \     /");
+        Console.WriteLine(@"         o   o");
+        Console.WriteLine(@"          \_/");
+        Console.WriteLine(@"           =");
+        Console.WriteLine(@"          .^.");
+        Console.WriteLine(@"         '   '");
+        Console.WriteLine(@"         '. .'");
+        Console.WriteLine(@"           !  ");
+        Console.WriteLine();
         Console.WriteLine("█░░ █░█ █▀▀ █▄▀ █▄█    █▀▀ █░█ ▄▀█ █▀█ █▀▄▀█");
         Console.WriteLine("█▄▄ █▄█ █▄▄ █░█ ░█░    █▄▄ █▀█ █▀█ █▀▄ █░▀░█\n\nPress a key to continue");
         Console.ReadKey(true);
@@ -100,5 +114,3 @@ public class Magic
 }
 
 
-//
-//

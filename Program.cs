@@ -415,9 +415,22 @@ public class Programs
                 }
               }
               //si recogio un objeto:
-              if (maze[tokenSelectedPosition[0],tokenSelectedPosition[1]] == Boxes.sword)
+              if (maze[tokenSelectedPosition[0],tokenSelectedPosition[1]] == Boxes.sword || maze[tokenSelectedPosition[0],tokenSelectedPosition[1]] == Boxes.elixir || maze[tokenSelectedPosition[0],tokenSelectedPosition[1]] == Boxes.parchment || maze[tokenSelectedPosition[0],tokenSelectedPosition[1]] == Boxes.charm)
               {
-                
+                //verificar en cual cayo:
+                if (maze[tokenSelectedPosition[0],tokenSelectedPosition[1]] == Boxes.sword)
+                {
+                  currentToken.haveSword = true;
+                  if (currentToken.haveElixir == true || currentToken.haveParchment == true || currentToken.haveCharm == true)
+                  {
+                    Console.Clear();
+                    Console.WriteLine($"{currentToken.name} has just The sword of the depths\n\nBut he already has another magic object so he can't pick it!");
+                    Console.WriteLine("Press a key to continue..");
+                    Console.ReadKey(true);
+                  }
+                  else{}
+                }
+
               }
               //si llego a Astharoth:
               if (maze[tokenSelectedPosition[0], tokenSelectedPosition[1]] == Boxes.Astharoth)

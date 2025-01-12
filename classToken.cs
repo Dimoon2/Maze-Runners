@@ -40,7 +40,7 @@ public class Token
         this.currentPosition = currentPosition;
         this.value = value;
     }
-    // Common method for all tokens
+    // Metodo comun para todos los tokens:
     public virtual void DisplayInfo()
     {
         Console.WriteLine($"Token: {name}, Type: {type}, Life: {life}, Attack: {attack}, Ability: {ability}, Speed: {speed} Cooldown: {cooldown}");
