@@ -133,6 +133,7 @@ public class Programs
 
       Console.Clear();
       Console.WriteLine("Whoever kills the beast first, wins the game, you will start in oposite places and have the same chances to win");
+      Console.WriteLine("And it looks like you are in look, there are four hidden objects in the maze that can help you give an end to this\n");
       Console.WriteLine($"But be cautious, there are {NumOfTraps} traps in the maze");
       Console.WriteLine("For each turn, your tokens cooldown will be 1 time bigger");
       Console.WriteLine();
@@ -277,10 +278,6 @@ public class Programs
       Console.WriteLine("Press a key to continue");
       Console.ReadKey(true);
 
-      //crear boss:
-      Boss boss = null;
-
-
       //Turnos en juego:
       Player1.playerTurn = true;
       Player2.playerTurn = false;
@@ -384,6 +381,7 @@ public class Programs
 
             if (wishPosition)
             {
+              //si cayo en una trampa:
               if (maze[tokenSelectedPosition[0], tokenSelectedPosition[1]] == Boxes.trap)
               {
 
@@ -395,6 +393,7 @@ public class Programs
                 GameActions.fellInTrap(currentToken, maze);
 
               }
+              //si es un camino libre
               if (maze[tokenSelectedPosition[0], tokenSelectedPosition[1]] == Boxes.path)
               {
                 if (currentToken.trapped)
@@ -407,7 +406,7 @@ public class Programs
                 else
                 {
                   //si no cayo en una trampa:
-                  Console.WriteLine("No trap in this position");
+                  Console.WriteLine("Lucky one! No trap in this position");
                   Console.WriteLine("Press a key to continue");
                   Console.ReadKey(true);
                   maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] = Boxes.path;
@@ -415,16 +414,23 @@ public class Programs
                   maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] = currentToken.value;
                 }
               }
+              //si recogio un objeto:
+              if (maze[tokenSelectedPosition[0],tokenSelectedPosition[1]] == Boxes.sword)
+              {
+                
+              }
+              //si llego a Astharoth:
               if (maze[tokenSelectedPosition[0], tokenSelectedPosition[1]] == Boxes.Astharoth)
               {
                 //creando objeto Boss:
-                boss = new Boss("Astharoth", 40, 10, [9, 9]);
+                Boss boss = new Boss("Astharoth", 40, 10, [9, 9]);
                 currentToken.inBoss = true;
 
                 //llamar al metodo estatico IntroductionBoss:
                 Boss.PresentationBoss(currentToken, maze);
                 //metodo fight
-                Boss.Fight(currentToken, boss, maze, Player1);
+                boss.life = Boss.Fight(currentToken, boss, maze, Player1);
+
                 //condicion de victoria:
                 if (boss.life <= 0)
                 {
@@ -597,7 +603,7 @@ public class Programs
                 else
                 {
                   //si no cayo en una trampa:
-                  Console.WriteLine("No trap in this position");
+                  Console.WriteLine("Lucky one! No trap in this position");
                   Console.WriteLine("Press a key to continue");
                   Console.ReadKey(true);
                   maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] = Boxes.path;
@@ -608,9 +614,9 @@ public class Programs
               if (maze[tokenSelectedPosition[0], tokenSelectedPosition[1]] == Boxes.Astharoth)
               {
                 //creando objeto Boss:
-                boss = new Boss("Astharoth", 40, 10, [9, 9]);
+                Boss boss = new Boss("Astharoth", 40, 10, [9, 9]);
                 currentToken.inBoss = true;
-                
+
                 //llamar al metodo estatico IntroductionBoss:
                 Boss.PresentationBoss(currentToken, maze);
                 //metodo fight
@@ -620,6 +626,7 @@ public class Programs
                 {
                   Boss.Victory(Player2);
                   break;
+
                 }
                 break;
               }

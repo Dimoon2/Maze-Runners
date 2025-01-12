@@ -10,14 +10,20 @@ public class Token
     public string ability { get; set; }
     public int cooldown { get; set; }
     public int speed { get; set; }
-
-    public bool trapped { get; set; }
-    public bool inBoss { get; set; }
-
+    public Boxes value;
     public int[] currentPosition { get; set; }
     public List<int[]> stepLog = new List<int[]>();
-    public Boxes value;
 
+    //para el movimiento:(no van en el contructor)
+    public bool trapped { get; set; }
+    public bool inBoss { get; set; }
+    public bool haveMagic { get; set; }
+    public bool haveSword { get; set; }
+    public bool haveElixir { get; set; }
+    public bool haveParchment { get; set; }
+    public bool haveCharm { get; set; }
+
+    //Power para override:
     public virtual void Power(Boxes[,] maze)
     {
         Console.WriteLine("Using power");
@@ -92,7 +98,7 @@ public class Token
         Console.WriteLine("💥💥💥💥💥💥💥💥💥💥💥💥 \n\nTURN ENDED");
         Console.WriteLine("Press a key to continue");
         Console.ReadKey(true);
-       
+
     }
 
     public static void GetDamage(Boss boss, Token token)
