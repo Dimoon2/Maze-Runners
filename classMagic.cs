@@ -1,5 +1,11 @@
 public class Magic
 {
+    public int[] position { get; set; }
+
+    public Magic(int[] position)
+    {
+        this.position = position;
+    }
     public static void Sword(Token token)
     {
         Console.WriteLine("Congrats!!\n\nYou've won the Sword of the Depths, it will upgrade your attack by 20 points\n\nNow go save us warrior\n\n!");

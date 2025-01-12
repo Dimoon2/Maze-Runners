@@ -414,21 +414,105 @@ public class Programs
                   maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] = currentToken.value;
                 }
               }
-              //si recogio un objeto:
-              if (maze[tokenSelectedPosition[0],tokenSelectedPosition[1]] == Boxes.sword || maze[tokenSelectedPosition[0],tokenSelectedPosition[1]] == Boxes.elixir || maze[tokenSelectedPosition[0],tokenSelectedPosition[1]] == Boxes.parchment || maze[tokenSelectedPosition[0],tokenSelectedPosition[1]] == Boxes.charm)
+
+              //si va a recoger un objeto:
+              if (maze[tokenSelectedPosition[0], tokenSelectedPosition[1]] == Boxes.sword || maze[tokenSelectedPosition[0], tokenSelectedPosition[1]] == Boxes.elixir || maze[tokenSelectedPosition[0], tokenSelectedPosition[1]] == Boxes.parchment || maze[tokenSelectedPosition[0], tokenSelectedPosition[1]] == Boxes.charm)
               {
                 //verificar en cual cayo:
-                if (maze[tokenSelectedPosition[0],tokenSelectedPosition[1]] == Boxes.sword)
+                //si cayo en la espada:
+                if (maze[tokenSelectedPosition[0], tokenSelectedPosition[1]] == Boxes.sword)
                 {
-                  currentToken.haveSword = true;
                   if (currentToken.haveElixir == true || currentToken.haveParchment == true || currentToken.haveCharm == true)
                   {
                     Console.Clear();
-                    Console.WriteLine($"{currentToken.name} has just The sword of the depths\n\nBut he already has another magic object so he can't pick it!");
+                    Console.WriteLine($"{currentToken.name} has just find The sword of the depths\n\nBut he already has another magic object so he can't pick it!");
                     Console.WriteLine("Press a key to continue..");
                     Console.ReadKey(true);
+
+                    maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] = Boxes.path;
+                    currentToken.currentPosition = tokenSelectedPosition;
+                    maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] = currentToken.value;
+                    currentToken.isInASword = true;
                   }
-                  else{}
+                  else
+                  {
+                    currentToken.haveSword = true;
+                    Magic.Sword(currentToken);
+                    maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] = Boxes.path;
+                    currentToken.currentPosition = tokenSelectedPosition;
+                    maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] = currentToken.value;
+                  }
+                }
+                else if (maze[tokenSelectedPosition[0], tokenSelectedPosition[1]] == Boxes.elixir)
+                {
+                  if (currentToken.haveSword == true || currentToken.haveParchment == true || currentToken.haveCharm == true)
+                  {
+                    Console.Clear();
+                    Console.WriteLine($"{currentToken.name} has just find the Elixir of life\n\nBut he already has another magic object so he can't pick it!");
+                    Console.WriteLine("Press a key to continue..");
+                    Console.ReadKey(true);
+
+                    maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] = Boxes.path;
+                    currentToken.currentPosition = tokenSelectedPosition;
+                    maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] = currentToken.value;
+                    currentToken.isInAElixir = true;
+                  }
+                  else
+                  {
+                    currentToken.haveElixir = true;
+                    Magic.Elixir(currentToken);
+                    maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] = Boxes.path;
+                    currentToken.currentPosition = tokenSelectedPosition;
+                    maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] = currentToken.value;
+                  }
+                }
+                //si encontro el pergamino:
+                else if (maze[tokenSelectedPosition[0], tokenSelectedPosition[1]] == Boxes.parchment)
+                {
+                  if (currentToken.haveSword == true || currentToken.haveElixir == true || currentToken.haveCharm == true)
+                  {
+                    Console.Clear();
+                    Console.WriteLine($"{currentToken.name} has just find the Wisdom Parchment\n\nBut he already has another magic object so he can't pick it!");
+                    Console.WriteLine("Press a key to continue..");
+                    Console.ReadKey(true);
+
+                    maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] = Boxes.path;
+                    currentToken.currentPosition = tokenSelectedPosition;
+                    maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] = currentToken.value;
+                    currentToken.isInAParchment = true;
+                  }
+                  else
+                  {
+                    currentToken.haveParchment = true;
+                    Magic.Parchment(currentToken);
+                    maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] = Boxes.path;
+                    currentToken.currentPosition = tokenSelectedPosition;
+                    maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] = currentToken.value;
+                  }
+                }
+                //si encontro el amuleto:
+                else if (maze[tokenSelectedPosition[0], tokenSelectedPosition[1]] == Boxes.charm)
+                {
+                  if (currentToken.haveSword == true || currentToken.haveParchment == true || currentToken.haveElixir == true)
+                  {
+                    Console.Clear();
+                    Console.WriteLine($"{currentToken.name} has just find the Lucky Charm\n\nBut he already has another magic object so he can't pick it!");
+                    Console.WriteLine("Press a key to continue..");
+                    Console.ReadKey(true);
+
+                    maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] = Boxes.path;
+                    currentToken.currentPosition = tokenSelectedPosition;
+                    maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] = currentToken.value;
+                    currentToken.isInACharm = true;
+                  }
+                  else
+                  {
+                    currentToken.haveCharm = true;
+                    Magic.Charm(currentToken);
+                    maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] = Boxes.path;
+                    currentToken.currentPosition = tokenSelectedPosition;
+                    maze[currentToken.currentPosition[0], currentToken.currentPosition[1]] = currentToken.value;
+                  }
                 }
 
               }
@@ -455,6 +539,40 @@ public class Programs
 
               //utilizar steplog:
               currentToken.stepLog.Add(new int[] { currentToken.currentPosition[0], currentToken.currentPosition[1] });
+
+              //verificar si estaba en un objeto:
+              if (currentToken.isInASword == true)
+              {
+                maze[currentToken.stepLog[currentToken.stepLog.Count - 2][0], currentToken.stepLog[currentToken.stepLog.Count - 2][1]] = Boxes.sword;
+              }
+              else if (currentToken.isInAElixir == true)
+              {
+                maze[currentToken.stepLog[currentToken.stepLog.Count - 2][0], currentToken.stepLog[currentToken.stepLog.Count - 2][1]] = Boxes.elixir;
+              }
+              else if (currentToken.isInAParchment == true)
+              {
+                maze[currentToken.stepLog[currentToken.stepLog.Count - 2][0], currentToken.stepLog[currentToken.stepLog.Count - 2][1]] = Boxes.parchment;
+              }
+              else if (currentToken.isInACharm == true)
+              {
+                maze[currentToken.stepLog[currentToken.stepLog.Count - 2][0], currentToken.stepLog[currentToken.stepLog.Count - 2][1]] = Boxes.charm;
+              }
+
+              //Si tiene los objetos que suben por turno:
+              if (currentToken.haveParchment == true)
+              {
+                Console.Clear();
+                currentToken.life += 5;
+                Console.WriteLine($"{currentToken.name}'s current health is now of: {currentToken.life} points\n\nPress a key to continue");
+                Console.ReadKey(true);
+              }
+              if (currentToken.haveCharm == true)
+              {
+                Console.Clear();
+                currentToken.attack += 5;
+                Console.WriteLine($"{currentToken.name}'s current attack is now of: {currentToken.attack} points\n\nPress a key to continue");
+                Console.ReadKey(true);
+              }
 
               Console.Clear();
               Console.WriteLine($"You have move successfully!! \n{currentToken.name}'s current life is {currentToken.life}\n\n");

@@ -19,9 +19,13 @@ public class Token
     public bool inBoss { get; set; }
     public bool haveMagic { get; set; }
     public bool haveSword { get; set; }
+    public bool isInASword { get; set; }
     public bool haveElixir { get; set; }
+    public bool isInAElixir { get; set; }
     public bool haveParchment { get; set; }
+    public bool isInAParchment { get; set; }
     public bool haveCharm { get; set; }
+    public bool isInACharm { get; set; }
 
     //Power para override:
     public virtual void Power(Boxes[,] maze)
