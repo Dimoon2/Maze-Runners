@@ -277,7 +277,8 @@ public class Programs
       Console.WriteLine("Press a key to continue");
       Console.ReadKey(true);
 
-      //llamar metodo fight:
+      //crear boss:
+      Boss boss = null;
 
 
       //Turnos en juego:
@@ -416,20 +417,21 @@ public class Programs
               }
               if (maze[tokenSelectedPosition[0], tokenSelectedPosition[1]] == Boxes.Astharoth)
               {
+                //creando objeto Boss:
+                boss = new Boss("Astharoth", 40, 10, [9, 9]);
                 currentToken.inBoss = true;
 
-                //creando objeto Boss:
-                Boss boss = new Boss("Astharoth", 40, 10, [9, 9]);
                 //llamar al metodo estatico IntroductionBoss:
                 Boss.PresentationBoss(currentToken, maze);
                 //metodo fight
                 Boss.Fight(currentToken, boss, maze, Player1);
-               // boss.life;
                 //condicion de victoria:
                 if (boss.life <= 0)
                 {
+                  Boss.Victory(Player1);
                   break;
                 }
+                break;
               }
 
               //utilizar steplog:
@@ -605,19 +607,21 @@ public class Programs
               }
               if (maze[tokenSelectedPosition[0], tokenSelectedPosition[1]] == Boxes.Astharoth)
               {
-                currentToken.inBoss = true;
-
                 //creando objeto Boss:
-                Boss boss = new Boss("Astharoth", 40, 10, [9, 9]);
+                boss = new Boss("Astharoth", 40, 10, [9, 9]);
+                currentToken.inBoss = true;
+                
                 //llamar al metodo estatico IntroductionBoss:
                 Boss.PresentationBoss(currentToken, maze);
                 //metodo fight
-                Boss.Fight(currentToken, boss, maze, Player2);
+                boss.life = Boss.Fight(currentToken, boss, maze, Player2);
                 //condicion de victoria:
                 if (boss.life <= 0)
                 {
+                  Boss.Victory(Player2);
                   break;
                 }
+                break;
               }
 
               //utilizar steplog:

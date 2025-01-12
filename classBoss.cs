@@ -116,23 +116,21 @@ public class Boss
         Console.ReadKey(true);
     }
 
-    public static void Fight(Token token, Boss boss, Boxes[,] maze, Player player)
+    public static float Fight(Token token, Boss boss, Boxes[,] maze, Player player)
     {
         while (true)
         {
             Console.Clear();
             //llamar al metodo attack de token
             Token.Attack(boss, token);
-            //llamar al metodo GetDamage de boss
-            //Boss.GetDamage(boss, token);
+
             //llamar al metodo attack de boss
             Boss.Attack(token, boss);
-            //llamar al metodo GetDamage de token
-            // Token.GetDamage(boss, token);
+
 
             if (token.life <= 0)
             {
-                //llevar a los tokens a la posicon inicial: 
+                //llevar a los tokens a la posicion inicial: 
                 token.currentPosition[0] = token.stepLog[0][0];
                 token.currentPosition[1] = token.stepLog[0][1];
                 token.inBoss = false;
@@ -170,55 +168,46 @@ public class Boss
                 GameActions.PrintMaze(maze);
                 Console.WriteLine("\nPress a key to continue");
                 Console.ReadKey(true);
-                break;
+                return boss.life;
             }
-            //Condicion de victoria
+
             if (boss.life <= 0)
             {
-                Console.Clear();
-                Console.WriteLine("Atharoth is dead...\nThe Celestial heart is now yours\n\nPress a key to continue");
-                Console.ReadKey(true);
-                Console.WriteLine("A bright light apears \nEverything is silent..\n\nPress a key to continue");
-                Console.ReadKey(true);
-                Console.Clear();
-                Console.WriteLine("Then.....");
-                Console.WriteLine(@"                                    .''.       ");
-                Console.WriteLine(@"        .''.      .        *''*    :_\/_:     . ");
-                Console.WriteLine(@"       :_\/_:   _\(/_  .:.*_\/_*   : /\ :  .'.:.'.");
-                Console.WriteLine(@"   .''.: /\ :   ./)\   ':'* /\ * :  '..'.  -=:o:=-");
-                Console.WriteLine(@"  :_\/_:'.:::.    ' *''*    * '.\'/.' _\(/_'.':'.'");
-                Console.WriteLine(@"  : /\ : :::::     *_\/_*     -= o =-  /)\    '  *");
-                Console.WriteLine(@"   '..'  ':::'     * /\ *     .'/.\'.   '");
-                Console.WriteLine(@"       *            *..*         :");
-                Console.WriteLine(@"        *");
-                Console.WriteLine(@"         *\n\nPress a key to continue");
-                Console.ReadKey(true);
-                Console.Clear();
-                Console.WriteLine($"{player.name} YOU'VE WONNN!!!!!!!!!\nWe have a huge debt with you warrior, honor will grow within your generation, if you ever need anything, don't ever doubt to call\n\nPress a key to continue");
-                Console.ReadKey(true);
-                Console.Clear();
-                Console.WriteLine($"And that's how the leyend of {player.name} was born\n By the mysteries of 𝓣𝓱𝓮 𝓢𝓹𝓲𝓻𝓲𝓽 𝓣𝓻𝓪𝓲𝓵...\n\nPress a key to continue");
-                Console.ReadKey(true);
-                Console.Clear();
-                Console.WriteLine("𝓣𝓱𝓮 𝓮𝓷𝓭\n\nPress a key to continue");
-                Console.ReadKey(true);
-                Console.Clear();
-                Console.WriteLine("Thank you so much for playing my game :)");
-                Console.ReadKey(true);
-                break;
+                return boss.life;
             }
         }
     }
-
-    
-
-
-
-
-
-
-
-
-
-
+    public static void Victory(Player player)
+    {
+        Console.Clear();
+        Console.WriteLine("Atharoth is dead...\nThe Celestial heart is now ours\n\nPress a key to continue");
+        Console.ReadKey(true);
+        Console.WriteLine("A bright light apears \nEverything is silent..\n\nPress a key to continue");
+        Console.ReadKey(true);
+        Console.Clear();
+        Console.WriteLine("Then.....");
+        Console.WriteLine(@"                                    .''.       ");
+        Console.WriteLine(@"        .''.      .        *''*    :_\/_:     . ");
+        Console.WriteLine(@"       :_\/_:   _\(/_  .:.*_\/_*   : /\ :  .'.:.'.");
+        Console.WriteLine(@"   .''.: /\ :   ./)\   ':'* /\ * :  '..'.  -=:o:=-");
+        Console.WriteLine(@"  :_\/_:'.:::.    ' *''*    * '.\'/.' _\(/_'.':'.'");
+        Console.WriteLine(@"  : /\ : :::::     *_\/_*     -= o =-  /)\    '  *");
+        Console.WriteLine(@"   '..'  ':::'     * /\ *     .'/.\'.   '");
+        Console.WriteLine(@"       *            *..*         :");
+        Console.WriteLine(@"        *");
+        Console.WriteLine(@"         *\n\nPress a key to continue");
+        Console.ReadKey(true);
+        Console.Clear();
+        Console.WriteLine($"{player.name} YOU'VE WONNN!!!!!!!!!\nWe have an eternal debt with you warrior, honor will grow within your generation, if you ever need anything, don't ever doubt to call\n\nPress a key to continue");
+        Console.ReadKey(true);
+        Console.Clear();
+        Console.WriteLine($"And that's how the leyend of {player.name} was born\n By the mysteries of 𝓣𝓱𝓮 𝓢𝓹𝓲𝓻𝓲𝓽 𝓣𝓻𝓪𝓲𝓵...\n\nPress a key to continue");
+        Console.ReadKey(true);
+        Console.Clear();
+        Console.WriteLine("𝓣𝓱𝓮 𝓮𝓷𝓭\n\nPress a key to continue");
+        Console.ReadKey(true);
+        Console.Clear();
+        Console.WriteLine("Thank you so much for playing my game :)");
+        Console.ReadKey(true);
+    }
 }
