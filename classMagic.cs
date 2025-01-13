@@ -54,17 +54,43 @@ public class Magic
 
     public static void Elixir(Token token)
     {
-        Console.WriteLine("Congrats!!\n\nYou've won the Elixir of life, it will upgrade your attack by 20 points\n\nNow go save us warrior\n\n!");
-        token.attack += 20;
+        Console.WriteLine("Congrats!!\n\nYou've won the Elixir of life, it will upgrade your health by 20 points\n\nNow go save us warrior!\n\n!");
+        token.life += 20;
         Console.WriteLine("Press a key to continue..");
         Console.ReadKey(true);
         Console.Clear();
         Console.WriteLine("NEW OBJECT:\n");
+        Console.WriteLine(@"              __ ");
+        Console.WriteLine(@"            [()()]");
+        Console.WriteLine(@"           ///  \\\");
+        Console.WriteLine(@"          //      \\");
+        Console.WriteLine(@"          //      \\");
+        Console.WriteLine(@"           \      /");
+        Console.WriteLine(@"           _\\\///_");
+        Console.WriteLine(@"         /          \");
+        Console.WriteLine(@"         \\   0    //");
+        Console.WriteLine(@"       | \\\      /// |");
+        Console.WriteLine(@"       |_[==========]_|");
+        Console.WriteLine(@"");
 
+
+//              __  
+//            [()()]
+//           ///  \\\
+//          //      \\
+//           \      /                         
+//           _\\\///_
+//         /          \
+//         \\   0    //
+//       | \\\      /// |
+//       |_[==========]_|
 
 
         // █▀▀ █░░ █ ▀▄▀ █ █▀█   █▀█ █▀▀   █░░ █ █▀▀ █▀▀
         // ██▄ █▄▄ █ █░█ █ █▀▄   █▄█ █▀░   █▄▄ █ █▀░ ██▄
+        Console.WriteLine($"{token.name}'s life:{token.life}\n\nPress a key to continue..");
+        Console.ReadKey(true);
+
     }
 
     public static void Parchment(Token token)

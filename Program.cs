@@ -160,39 +160,39 @@ public class Programs
       List<Token> tokens = new List<Token>();
       Force force = new Force("Force", "Demon", 20, 8, "Breaks an obstacle", 0, 1, [1, 1], Boxes.Force);
       tokens.Add(force);
-      force.stepLog.Add(new int[] { 1, 1 });
+     // force.stepLog.Add(new int[] { 1, 1 });
       //spawn force:
-      maze[1, 1] = Boxes.Force;
+     // maze[1, 1] = Boxes.Force;
 
       Shield shield = new Shield("Shield", "Angel", 22, 5, "If this token falls into a trap, it won't hurt him", 0, 1, [1, 8], Boxes.Shield);
       tokens.Add(shield);
-      shield.stepLog.Add(new int[] { 1, 8 });
+     // shield.stepLog.Add(new int[] { 1, 8 });
       //spawn shield:
-      maze[1, 8] = Boxes.Shield;
+     // maze[1, 8] = Boxes.Shield;
 
       Vous vous = new Vous("Vous", "Demon", 20, 6, "Leaves a trap behind", 0, 1, [1, 16], Boxes.Vous);
       tokens.Add(vous);
-      vous.stepLog.Add(new int[] { 1, 16 });
+     // vous.stepLog.Add(new int[] { 1, 16 });
       //spawn vous:
-      maze[1, 16] = Boxes.Vous;
+      // maze[1, 16] = Boxes.Vous;
 
       Vitality vitality = new Vitality("Vitality", "Angel", 22, 5, "This token regenerates its life", 0, 1, [16, 8], Boxes.Vitality);
       tokens.Add(vitality);
-      vitality.stepLog.Add(new int[] { 16, 8 });
+      //   vitality.stepLog.Add(new int[] { 16, 8 });
       //spawn vitality:
-      maze[16, 8] = Boxes.Vitality;
+      //  maze[16, 8] = Boxes.Vitality;
 
       Crow crow = new Crow("Crow", "Demon", 20, 6, "his attack upgrades 2 points", 0, 1, [16, 1], Boxes.Crow);
       tokens.Add(crow);
-      crow.stepLog.Add(new int[] { 16, 1 });
+      //  crow.stepLog.Add(new int[] { 16, 1 });
       //spawn crow:
-      maze[16, 1] = Boxes.Crow;
+      //  maze[16, 1] = Boxes.Crow;
 
       Cass cass = new Cass("Cass", "Angel", 20, 6, "Disables a trap", 0, 1, [16, 16], Boxes.Cass);
       tokens.Add(cass);
-      cass.stepLog.Add(new int[] { 16, 16 });
+      //  cass.stepLog.Add(new int[] { 16, 16 });
       //spawn cass:
-      maze[16, 16] = Boxes.Cass;
+      // maze[16, 16] = Boxes.Cass;
 
       // Mostrar información de los tokens
       Console.Clear();
@@ -277,6 +277,9 @@ public class Programs
 
       Console.WriteLine("Press a key to continue");
       Console.ReadKey(true);
+
+      maze[7, 14] = Boxes.sword;
+      maze[1, 2] = Boxes.elixir;
 
       //Turnos en juego:
       Player1.playerTurn = true;
