@@ -70,24 +70,11 @@ public class Magic
         Console.WriteLine(@"         /          \");
         Console.WriteLine(@"         \\   0    //");
         Console.WriteLine(@"       | \\\      /// |");
-        Console.WriteLine(@"       |_[==========]_|");
-        Console.WriteLine(@"");
+        Console.WriteLine(@"       |_[==========]_|\n");
 
+        Console.WriteLine(" █▀▀ █░░ █ ▀▄▀ █ █▀█   █▀█ █▀▀   █░░ █ █▀▀ █▀▀");
+        Console.WriteLine(" ██▄ █▄▄ █ █░█ █ █▀▄   █▄█ █▀░   █▄▄ █ █▀░ ██▄\n\n");
 
-//              __  
-//            [()()]
-//           ///  \\\
-//          //      \\
-//           \      /                         
-//           _\\\///_
-//         /          \
-//         \\   0    //
-//       | \\\      /// |
-//       |_[==========]_|
-
-
-        // █▀▀ █░░ █ ▀▄▀ █ █▀█   █▀█ █▀▀   █░░ █ █▀▀ █▀▀
-        // ██▄ █▄▄ █ █░█ █ █▀▄   █▄█ █▀░   █▄▄ █ █▀░ ██▄
         Console.WriteLine($"{token.name}'s life:{token.life}\n\nPress a key to continue..");
         Console.ReadKey(true);
 
