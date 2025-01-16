@@ -103,7 +103,7 @@ class GameActions
         switch (maze[i, j])
         {
           case Boxes.path:
-            Console.Write("⬛");
+            Console.Write("  ");
             break;
 
           case Boxes.obstacle:
