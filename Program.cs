@@ -111,13 +111,6 @@ public class Programs
       Console.WriteLine("Press a key to continue");
       Console.ReadKey();
 
-
-      //inicializacion del mapa:<3
-      Maze mazes = new Maze();
-      Boxes[,] maze = mazes.GenerateMaze();
-      int NumOfTraps = mazes.NumTraps(maze);
-
-
       //Reglas:
       Console.Clear();
       Console.WriteLine("◽◽◽◽◽◽◽◽◽◽◽◽◽◽◽◽◽◽◽◽◽◽");
@@ -130,6 +123,11 @@ public class Programs
 
       Console.WriteLine("Press any key to continue");
       Console.ReadKey(true);
+
+      //inicializacion del mapa:<3
+      Maze mazes = new Maze();
+      Boxes[,] maze = mazes.GenerateMaze();
+      int NumOfTraps = mazes.NumTraps(maze);
 
       Console.Clear();
       Console.WriteLine("Whoever kills the beast first, wins the game, you will start in oposite places and have the same chances to win");
@@ -160,39 +158,43 @@ public class Programs
       List<Token> tokens = new List<Token>();
       Force force = new Force("Force", "Demon", 20, 8, "Breaks an obstacle", 0, 1, [1, 1], Boxes.Force);
       tokens.Add(force);
-     // force.stepLog.Add(new int[] { 1, 1 });
+      force.stepLog.Add(new int[] { 1, 1 });
       //spawn force:
-     // maze[1, 1] = Boxes.Force;
+      maze[1, 1] = Boxes.Force;
 
-      Shield shield = new Shield("Shield", "Angel", 22, 5, "If this token falls into a trap, it won't hurt him", 0, 1, [1, 8], Boxes.Shield);
+      Shield shield = new Shield("Shield", "Angel", 22, 5, "If this token falls into a trap, it won't hurt him", 0, 1, [1, Maze.size / 2], Boxes.Shield);
       tokens.Add(shield);
-     // shield.stepLog.Add(new int[] { 1, 8 });
+      shield.stepLog.Add(new int[] { 1, Maze.size / 2 });
       //spawn shield:
-     // maze[1, 8] = Boxes.Shield;
+      maze[1, Maze.size / 2] = Boxes.Shield;
 
-      Vous vous = new Vous("Vous", "Demon", 20, 6, "Leaves a trap behind", 0, 1, [1, 16], Boxes.Vous);
+      Vous vous = new Vous("Vous", "Demon", 20, 6, "Leaves a trap behind", 0, 1, [1, Maze.size - 2], Boxes.Vous);
       tokens.Add(vous);
-     // vous.stepLog.Add(new int[] { 1, 16 });
+      vous.stepLog.Add(new int[] { 1, Maze.size - 2 });
       //spawn vous:
-      // maze[1, 16] = Boxes.Vous;
+      maze[1, Maze.size - 2] = Boxes.Vous;
 
-      Vitality vitality = new Vitality("Vitality", "Angel", 22, 5, "This token regenerates its life", 0, 1, [16, 8], Boxes.Vitality);
+      Vitality vitality = new Vitality("Vitality", "Angel", 22, 5, "This token regenerates its life", 0, 1, [Maze.size - 2, Maze.size / 2], Boxes.Vitality);
       tokens.Add(vitality);
-      //   vitality.stepLog.Add(new int[] { 16, 8 });
+      vitality.stepLog.Add(new int[] { Maze.size - 2, Maze.size / 2 });
       //spawn vitality:
-      //  maze[16, 8] = Boxes.Vitality;
+      maze[Maze.size - 2, Maze.size / 2] = Boxes.Vitality;
 
-      Crow crow = new Crow("Crow", "Demon", 20, 6, "his attack upgrades 2 points", 0, 1, [16, 1], Boxes.Crow);
+      Crow crow = new Crow("Crow", "Demon", 20, 6, "his attack upgrades 2 points", 0, 1, [Maze.size - 2, 1], Boxes.Crow);
       tokens.Add(crow);
-      //  crow.stepLog.Add(new int[] { 16, 1 });
+      crow.stepLog.Add(new int[] { Maze.size - 2, 1 });
       //spawn crow:
-      //  maze[16, 1] = Boxes.Crow;
+      maze[Maze.size - 2, 1] = Boxes.Crow;
 
-      Cass cass = new Cass("Cass", "Angel", 20, 6, "Disables a trap", 0, 1, [16, 16], Boxes.Cass);
+      Cass cass = new Cass("Cass", "Angel", 20, 6, "Disables a trap", 0, 1, [Maze.size - 2, Maze.size - 2], Boxes.Cass);
       tokens.Add(cass);
-      //  cass.stepLog.Add(new int[] { 16, 16 });
+      cass.stepLog.Add(new int[] { Maze.size - 2, Maze.size - 2 });
       //spawn cass:
-      // maze[16, 16] = Boxes.Cass;
+      maze[Maze.size - 2, Maze.size - 2] = Boxes.Cass;
+
+      //creando objeto Boss:
+      Boss boss = new Boss("Astharoth", 40, 10, [Maze.size / 2, Maze.size / 2]);
+      maze[Maze.size /2, Maze.size /2] = Boxes.Astharoth;
 
       // Mostrar información de los tokens
       Console.Clear();
@@ -267,7 +269,6 @@ public class Programs
       Console.ReadKey(true);
 
       //mostrar maze en terminal 1:
-
       Console.Clear();
       Console.WriteLine("Let the game begin...");
       Console.WriteLine();
@@ -522,8 +523,6 @@ public class Programs
               //si llego a Astharoth:
               if (maze[tokenSelectedPosition[0], tokenSelectedPosition[1]] == Boxes.Astharoth)
               {
-                //creando objeto Boss:
-                Boss boss = new Boss("Astharoth", 40, 10, [9, 9]);
                 currentToken.inBoss = true;
 
                 //llamar al metodo estatico IntroductionBoss:
@@ -747,8 +746,6 @@ public class Programs
               }
               if (maze[tokenSelectedPosition[0], tokenSelectedPosition[1]] == Boxes.Astharoth)
               {
-                //creando objeto Boss:
-                Boss boss = new Boss("Astharoth", 40, 10, [9, 9]);
                 currentToken.inBoss = true;
 
                 //llamar al metodo estatico IntroductionBoss:

@@ -110,6 +110,10 @@ class GameActions
             Console.Write("🟪");
             break;
 
+          case Boxes.wall:
+            Console.Write("⬛");
+            break;
+
           case Boxes.trap:
             Console.Write("💥");
             break;
