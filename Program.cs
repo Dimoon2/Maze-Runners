@@ -8,39 +8,7 @@ public class Programs
     while (true)
     {
       //inicio del juego:
-      Console.Clear();
-      Console.WriteLine("꧁༺ 𝓣𝓱𝓮 𝓢𝓹𝓲𝓻𝓲𝓽 𝓣𝓻𝓪𝓲𝓵 ༻꧂");
-      Console.WriteLine();
-      Console.WriteLine(".                                       ,           .:'                                  `:.");
-      Console.WriteLine(")).               -===-               ,((          ::'                                    `::");
-      Console.WriteLine("))).                                 ,(((          :: :.                                  .: ::");
-      Console.WriteLine("))))).            .:::.           ,((((((           `:. `:.             .             .:'  .:'");
-      Console.WriteLine("))))))))).        :. .:        ,(((((((('             `::. `::          !           ::' .::'");
-      Console.WriteLine("`))))))))))).     : - :    ,((((((((((((                 `::.`::.    .' ! `.    .::'.::'");
-      Console.WriteLine(" ))))))))))))))))_:' ':_((((((((((((((('                   `:.  `::::'':!:``::::'   ::'");
-      Console.WriteLine(" `)))))))))))).-' |___/ '-._(((((((((((                    :'*:::.  .:' ! `:.  .:::*`:");
-      Console.WriteLine("  `))))_._.-' __)(     )(_  '-._._(((('                   :: HHH::.   ` ! '   .::HHH ::");
-      Console.WriteLine("   `))'---)___)))'|_ _/'((((__(---'(('                   ::: `H TH::.  `!'  .::HT H' :::");
-      Console.WriteLine("     `))))))))))))|' '|(((((((((((('                     ::..  `THHH:`:   :':HHHT'  ..::");
-      Console.WriteLine("       `)))))))))/'   '|((((((((('                       `::      `T: `. .' :T'      ::'");
-      Console.WriteLine("        `)))))))|       |((((((('                          `:. .   :         :   . .:'");
-      Console.WriteLine("          `))))))|     |(((((('                              `::'               `::'");
-      Console.WriteLine("                /'      '                                      :'  .`.  .  .'.  `:");
-      Console.WriteLine("               /'        '                                     :' ::.       .:: `:");
-      Console.WriteLine("              /'          '                                    :' `:::     :::' `:");
-      Console.WriteLine("             /'            '                                    `.  ``     ''  .'");
-      Console.WriteLine("            /'              '                                     :`...........':");
-      Console.WriteLine("           /'                '                                    ` :`.     .': '");
-      Console.WriteLine("             '---..___..---'                                       `:  `'''''  :' ");
-      Console.WriteLine();
-      Console.WriteLine("Press a key to continue");
-      Console.ReadKey(true);
-
-      Console.Clear();
-      Console.WriteLine("◽◽◽◽MAIN MENU◽◽◽◽");
-
-      Console.WriteLine("Welcome to: The Spirit Trail by Diana, press A if you want to start this adventure or 1 if you want to exit");
-      Console.WriteLine("WARNING: if you don't press any the game will close");
+      Menu.MainMenu();
       ConsoleKeyInfo key = Console.ReadKey(true);
 
       if (key.KeyChar == 'A' || key.KeyChar == 'a')
@@ -194,7 +162,7 @@ public class Programs
 
       //creando objeto Boss:
       Boss boss = new Boss("Astharoth", 40, 10, [Maze.size / 2, Maze.size / 2]);
-      maze[Maze.size /2, Maze.size /2] = Boxes.Astharoth;
+      maze[Maze.size / 2, Maze.size / 2] = Boxes.Astharoth;
 
       // Mostrar información de los tokens
       Console.Clear();
@@ -258,8 +226,7 @@ public class Programs
 
       // Resultados finales:
       Console.Clear();
-      Console.WriteLine("\nTOKENS SELECTED:");
-      Console.WriteLine();
+      Console.WriteLine("\nTOKENS SELECTED:\n");
       Player1.DisplayTokens();
       Console.WriteLine();
       Player2.DisplayTokens();
@@ -285,47 +252,52 @@ public class Programs
       //Turnos en juego:
       Player1.playerTurn = true;
       Player2.playerTurn = false;
-      string tokenDesition = string.Empty;
+      //string tokenDesition = string.Empty;
 
       while (true)
       {
         if (Player1.playerTurn)
         {
           Console.Clear();
-          Console.WriteLine($"It's {Player1.name}'s turn");
-          Console.WriteLine();
+          Console.WriteLine($"It's {Player1.name}'s turn!\n");
           Player1.DisplayTokens();
-          Console.WriteLine();
-          Console.WriteLine();
+          Thread.Sleep(1000);
+          Thread.Sleep(1000);
+          bool playerSelection = false;
+          int selectedToken = 0;
 
-          Console.WriteLine("Press a key to continue");
-          Console.ReadKey(true);
-          Console.WriteLine();
-          Console.WriteLine("Please write correctly the name of the token you wish to use");
-
-          bool validToken = false;
-
-          while (!validToken)
+        //para seleccionar el currentToken:
+          while (!playerSelection)
           {
-            tokenDesition = Console.ReadLine()?.ToLower() ?? string.Empty;
-
-            // Verificar si el token ingresado es válido
-            validToken = Player1.SelectedToken.Any(token => token.name.ToLower() == tokenDesition);
-
-            if (!validToken)
+            Console.Clear();
+            Console.WriteLine("Select the token you wish to use!");
+            for (int i = 0; i < Player1.SelectedToken.Count; i++)
             {
-              Console.WriteLine("Not valid name. Please write correctly the name of the token you wish to use");
-              Player1.DisplayTokens();
+              Console.WriteLine(Player1.SelectedToken[i] + (selectedToken == i ? "⬅️" : ""));
+            }
+            ConsoleKeyInfo move = Console.ReadKey(true);
+
+            if (move.Key == ConsoleKey.UpArrow)
+            {
+              selectedToken--;
+              if (selectedToken < 0) selectedToken = Player1.SelectedToken.Count - 1;
+            }
+            else if (move.Key == ConsoleKey.DownArrow)
+            {
+              selectedToken++;
+              if (selectedToken >= Player1.SelectedToken.Count) selectedToken = 0;
+            }
+            else if (move.Key == ConsoleKey.Enter)
+            {
+              playerSelection = true;
             }
           }
-
           Console.Clear();
-          Console.WriteLine("VALID SELECTION!!");
-          Console.WriteLine();
+          Console.WriteLine("VALID SELECTION!!\n");
           Console.WriteLine("Press a key to continue");
           Console.ReadKey(true);
-          Console.WriteLine();
 
+          Console.Clear();
           Console.WriteLine("◽◽◽◽LEYEND◽◽◽◽");
           Console.WriteLine("😡 represents FORCE");
           Console.WriteLine("🛡️ represents SHIELD");
@@ -338,7 +310,8 @@ public class Programs
           Console.ReadKey(true);
 
           // Asignar el token actual basado en la decisión
-          var currentToken = Player1.SelectedToken.First(token => token.name.ToLower() == tokenDesition);
+          var currentToken = Player1.SelectedToken[selectedToken];
+
 
           // Mostrar opciones de movimiento
           Console.Clear();
@@ -351,8 +324,7 @@ public class Programs
           Console.WriteLine("CURRENT MAZE: \n");
           GameActions.PrintMaze(maze);
 
-          Console.WriteLine("Please write: \n W if you wanna move up \nS if you wanna move down \nA if you wanna move left \nD if you wanna move right \n or E if you want to activate your super");
-          Console.WriteLine();
+          Console.WriteLine("Please write: \n W if you wanna move up \nS if you wanna move down \nA if you wanna move left \nD if you wanna move right \n or E if you want to activate your super\n");
           Console.WriteLine($"You are currently playing with {currentToken.name}");
 
           string action = string.Empty; // Inicializa action
@@ -568,7 +540,7 @@ public class Programs
                 Console.WriteLine($"{currentToken.name}'s current health is now of: {currentToken.life} points\n\nPress a key to continue");
                 Console.ReadKey(true);
               }
-              if (currentToken.haveCharm == true)
+              else if (currentToken.haveCharm == true)
               {
                 Console.Clear();
                 currentToken.attack += 5;
@@ -591,17 +563,10 @@ public class Programs
             else if (!wishPosition)
             {
               Console.Clear();
-              Console.WriteLine("You can't move there!");
-              Console.WriteLine();
-              Console.WriteLine("Please move to a valid position");
-              Console.WriteLine();
-              Console.WriteLine();
-              Console.WriteLine("Press any key to continue");
-              Console.ReadKey();
+              Console.WriteLine("You can't move there!\nPlease move to a valid position\n\nPress any key to continue");
 
               Console.Clear();
-              Console.WriteLine("Please write: \n W if you wanna move up \nS if you wanna move down \nA if you wanna move left \n D if you wanna move right \nor E if you want yo activate your super");
-              Console.WriteLine();
+              Console.WriteLine("Please write: \n W if you wanna move up \nS if you wanna move down \nA if you wanna move left \n D if you wanna move right \nor E if you want yo activate your super\n");
               Console.WriteLine($"You are currently playing with {currentToken.name}");
 
               GameActions.PrintMaze(maze);
@@ -621,39 +586,43 @@ public class Programs
         {
           Console.Clear();
           Console.WriteLine($"It's {Player2.name}'s turn");
-          Console.WriteLine();
           Player2.DisplayTokens();
-          Console.WriteLine();
-          Console.WriteLine();
+          Thread.Sleep(1000);
+          Thread.Sleep(1000);
+          bool playerSelection = false;
+          int selectedToken = 0;
 
-          Console.WriteLine("Press a key to continue");
-          Console.ReadKey(true);
-          Console.WriteLine();
-          Console.WriteLine("Please write correctly the name of the token you wish to use");
-
-          bool validToken = false;
-
-          while (!validToken)
+          while (!playerSelection)
           {
-            tokenDesition = Console.ReadLine()?.ToLower() ?? string.Empty;
-
-            // Verificar si el token ingresado es válido
-            validToken = Player2.SelectedToken.Any(token => token.name.ToLower() == tokenDesition);
-
-            if (!validToken)
+            Console.Clear();
+            Console.WriteLine("Select the token you wish to use!\n");
+            for (int i = 0; i < Player2.SelectedToken.Count; i++)
             {
-              Console.WriteLine("Not valid name. Please write correctly the name of the token you wish to use");
-              Player2.DisplayTokens();
+              Console.WriteLine(Player2.SelectedToken[i] + (selectedToken == i ? "⬅️" : ""));
+            }
+            ConsoleKeyInfo move = Console.ReadKey(true);
+
+            if (move.Key == ConsoleKey.UpArrow)
+            {
+              selectedToken--;
+              if (selectedToken < 0) selectedToken = Player2.SelectedToken.Count - 1;
+            }
+            else if (move.Key == ConsoleKey.DownArrow)
+            {
+              selectedToken++;
+              if (selectedToken >= Player2.SelectedToken.Count) selectedToken = 0;
+            }
+            else if (move.Key == ConsoleKey.Enter)
+            {
+              playerSelection = true;
             }
           }
-
           Console.Clear();
-          Console.WriteLine("VALID SELECTION!!");
-          Console.WriteLine();
+          Console.WriteLine("VALID SELECTION!!\n");
           Console.WriteLine("Press a key to continue");
           Console.ReadKey(true);
-          Console.WriteLine();
 
+          Console.Clear();
           Console.WriteLine("◽◽◽◽LEYEND◽◽◽◽");
           Console.WriteLine("😡 represents FORCE");
           Console.WriteLine("🛡️ represents SHIELD");
@@ -666,7 +635,7 @@ public class Programs
           Console.ReadKey(true);
 
           // Asignar el token actual basado en la decisión
-          var currentToken = Player2.SelectedToken.First(token => token.name.ToLower() == tokenDesition);
+          var currentToken = Player2.SelectedToken[selectedToken];
 
           // Mostrar opciones de movimiento
           Console.Clear();
@@ -781,17 +750,11 @@ public class Programs
             else if (!wishPosition)
             {
               Console.Clear();
-              Console.WriteLine("You can't move there!");
-              Console.WriteLine();
-              Console.WriteLine("Please move to a valid position");
-              Console.WriteLine();
-              Console.WriteLine();
-              Console.WriteLine("Press any key to continue");
+              Console.WriteLine("You can't move there!\nPlease move to a valid position\n\n");
               Console.ReadKey();
 
               Console.Clear();
-              Console.WriteLine("Please write: \n W if you wanna move up \nS if you wanna move down \nA if you wanna move left \nD if you wanna move right \nor E if you want to activate your super");
-              Console.WriteLine();
+              Console.WriteLine("Please write: \n W if you wanna move up \nS if you wanna move down \nA if you wanna move left \nD if you wanna move right \nor E if you want to activate your super\n");
               Console.WriteLine($"You are currently playing with {currentToken.name}");
 
               GameActions.PrintMaze(maze);
@@ -808,23 +771,6 @@ public class Programs
           Player2.playerTurn = false;
         }
       }
-
-      // Console.WriteLine("Do you wish to continue?");
-      // Console.WriteLine("Write Yes or No");
-      // string wishToContinue = Console.ReadLine() ?? string.Empty;
-      // while (wishToContinue.ToLower() != "no" || wishToContinue.ToLower() != "yes")
-      // {
-      //   Console.WriteLine("Please write a valid answer");
-      //   Console.WriteLine("Do you wish to continue?, Write Yes or No");
-      //   wishToContinue = Console.ReadLine() ?? string.Empty;
-
-      // }
-      // if (wishToContinue.ToLower() == "no")
-      // {
-      //   Console.WriteLine("Game over :()");
-      //   break;
-      // }
-
     }
   }
 }
