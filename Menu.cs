@@ -33,7 +33,7 @@ class Menu
         Console.Clear();
         Console.WriteLine("◽◽◽◽MAIN MENU◽◽◽◽");
 
-        Console.WriteLine("Welcome to: The Spirit Trail by Diana, press A if you want to start this adventure or 1 if you want to exit");
-        Console.WriteLine("WARNING: if you don't press any the game will close");
+        Console.WriteLine("Welcome to: The Spirit Trail by Diana, press a key if you want to start this adventure or 1 if you want to exit");
+        
     }
 }

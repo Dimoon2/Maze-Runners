@@ -284,6 +284,7 @@ public class Maze
         }
         return maze;
     }
+
     //metodo que recorre la matriz y que agrega a una lista los caminos libres
     public List<int[]> PathList(Boxes[,] maze)
     {
@@ -301,6 +302,7 @@ public class Maze
         }
         return paths;
     }
+
 
     int traps;
     public int NumTraps(Boxes[,] maze)

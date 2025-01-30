@@ -87,7 +87,8 @@ class GameActions
         }
       }
     }
-    else //no activo el super
+    //no activo el super:
+    else
     {
       Console.WriteLine("You are in a trap \nPress a key to continue");
       Console.ReadKey(true);
@@ -146,6 +147,21 @@ class GameActions
             Console.Write("🎇");
             break;
 
+          case Boxes.sword:
+            Console.Write("⚔️");
+            break;
+
+          case Boxes.elixir:
+            Console.Write("🍵");
+            break;
+
+            case Boxes.parchment:
+            Console.Write("📖");
+            break;
+
+            case Boxes.charm:
+            Console.Write("📿");
+            break;
 
           default:
             Console.Write("");
