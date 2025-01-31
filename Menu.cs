@@ -36,4 +36,25 @@ class Menu
         Console.WriteLine("Welcome to: The Spirit Trail by Diana, press a key if you want to start this adventure or 1 if you want to exit");
         
     }
+
+    public static void Intro()
+    {
+        Console.Clear();
+        Console.WriteLine("In a world where the celestial realm of Elysium and the infernal depths of the Abyss have long been at war");
+        Thread.Sleep(1000);Thread.Sleep(1000);Thread.Sleep(1000);Thread.Sleep(1000);
+
+        Console.Clear();
+        Console.WriteLine("A fragile truce is shattered when a poweful artifact known as the Celestial Heart is stolen from the Archangels");
+        Console.WriteLine("This heart, said to contain the essence of creation itself, has fallen into the hands of a cunning demon, Astharoth, who seeks chaos upon both realms");
+        Thread.Sleep(1000);Thread.Sleep(1000);Thread.Sleep(1000);Thread.Sleep(1000);
+
+        Console.Clear();
+        Console.WriteLine("It is known that lord Astharoth hides in a dangerous maze called The Spirit Trail full of mortal traps");
+        Console.WriteLine("It is your quest, if you dare, to help the angels and demons recover the weapon and face The Spirit Trail by meeting Astharoth at the middle of the trail");
+        Thread.Sleep(1000);Thread.Sleep(1000);Thread.Sleep(1000);Thread.Sleep(1000);
+
+        Console.Clear();
+        Console.WriteLine("We shall wish you luck, you'll need it ...`\n\nPress a key to continue");
+        Console.ReadKey(true);
+    }
 }

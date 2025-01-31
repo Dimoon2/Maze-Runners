@@ -30,6 +30,10 @@ public class Boss
     {
         if (token.inBoss == true)
         {
+            if (!token.haveMagic)
+            {
+                Console.WriteLine("Mmmm it looks like you don't have any of the magic objects, be careful, Astharoth is a dangerous demon...");
+            }
             Console.Clear();
             Console.WriteLine("He is close, they can feel it\n");
             Console.WriteLine(@" \                           /                 88888888888888888888888888888888888888888888888888888888888888888888888");
@@ -116,17 +120,23 @@ public class Boss
         Console.ReadKey(true);
     }
 
-    public static float Fight(Token token, Boss boss, Boxes[,] maze, Player player)
+    public static void Fight(Token token, Boss boss, Boxes[,] maze, Player player)
     {
         while (true)
         {
             Console.Clear();
             //llamar al metodo attack de token
             Token.Attack(boss, token);
+            if (boss.life > 0)
+            {
+                //llamar al metodo attack de boss
+                Boss.Attack(token, boss);
+            }
 
-            //llamar al metodo attack de boss
-            Boss.Attack(token, boss);
-
+            if (boss.life <= 0)
+            {
+                break;
+            }
 
             if (token.life <= 0)
             {
@@ -135,7 +145,7 @@ public class Boss
                 token.currentPosition[1] = token.stepLog[0][1];
                 token.inBoss = false;
                 Console.Clear();
-                Console.WriteLine($"Oh no, it looks like we underestimate the power of the demon \nBut don't worry, {token.name} will recover his strength in the starting point.\nYou will have better luck next time, Astharoth health is now of:{boss.life} \n\nPress a key to continue");
+                Console.WriteLine($"Oh no, it looks like we underestimate the power of the demon \nBut don't worry, {token.name} will recover his strength in the starting point.\nYou will have better luck next time.. \n\nPress a key to continue");
 
                 //subirle la vida a mis tokens :"(
                 if (token.name == "Force")
@@ -168,13 +178,9 @@ public class Boss
                 GameActions.PrintMaze(maze);
                 Console.WriteLine("\nPress a key to continue");
                 Console.ReadKey(true);
-                return boss.life;
             }
 
-            if (boss.life <= 0)
-            {
-                return boss.life;
-            }
+
         }
     }
     public static void Victory(Player player)

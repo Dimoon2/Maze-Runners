@@ -10,6 +10,7 @@ public class Token
     public string ability { get; set; }
     public int cooldown { get; set; }
     public int speed { get; set; }
+    public string visual { get; set; }
     public Boxes value;
     public int[] currentPosition { get; set; }
     public List<int[]> stepLog = new List<int[]>();
@@ -26,13 +27,14 @@ public class Token
     public bool isInAParchment { get; set; }
     public bool haveCharm { get; set; }
     public bool isInACharm { get; set; }
+    public bool won { get; set; }
 
     //Power para override:
     public virtual void Power(Boxes[,] maze)
     {
         Console.WriteLine("Using power");
     }
-    public Token(string name, string type, float life, int attack, string ability, int cooldown, int speed, int[] currentPosition, Boxes value)
+    public Token(string name, string type, float life, int attack, string ability, int cooldown, int speed, int[] currentPosition, Boxes value, string visual)
     {
         this.name = name;
         this.type = type;
@@ -43,55 +45,47 @@ public class Token
         this.speed = speed;
         this.currentPosition = currentPosition;
         this.value = value;
+        this.visual = visual;
     }
     // Metodo comun para todos los tokens:
     public virtual void DisplayInfo()
     {
-        Console.WriteLine($"Token: {name}, Type: {type}, Life: {life}, Attack: {attack}, Ability: {ability}, Speed: {speed} Cooldown: {cooldown}");
+        Console.WriteLine($"꧁༺ 𝓣𝓞𝓚𝓔𝓝: {name} {visual} ༻꧂\n");
+        Console.WriteLine($"𝓣𝔂𝓹𝓮: {type}\n 𝓛𝓲𝓯𝓮 🧬: {life}\n 𝓐𝓽𝓽𝓪𝓬𝓴 💣: {attack}\n 𝓐𝓫𝓲𝓵𝓲𝓽𝔂 ✨: {ability}\n 𝓢𝓹𝓮𝓮𝓭 🚄: {speed}\n 𝓒𝓾𝓻𝓻𝓮𝓷𝓽 𝓬𝓸𝓸𝓵𝓭𝓸𝔀𝓷 ❄️: {cooldown}\n\n");
     }
-
     public bool canISuper(Token token)
     {
         if (token.name == "Force")
         {
-            if (token.cooldown >= 6)
-            { return true; }
+            if (token.cooldown >= 6) { return true; }
             else { return false; }
         }
         if (token.name == "Shield")
         {
-            if (token.cooldown >= 10)
-            { return true; }
+            if (token.cooldown >= 10) { return true; }
             else { return false; }
         }
         if (token.name == "Vous")
         {
-            if (token.cooldown >= 12)
-            { return true; }
+            if (token.cooldown >= 12) { return true; }
             else { return false; }
         }
         if (token.name == "Vitality")
         {
-            if (token.cooldown >= 6)
-            { return true; }
+            if (token.cooldown >= 6) { return true; }
             else { return false; }
         }
         if (token.name == "Crow")
         {
-            if (token.cooldown >= 6)
-            { return true; }
+            if (token.cooldown >= 6) { return true; }
             else { return false; }
         }
         if (token.name == "Cass")
         {
-            if (token.cooldown >= 5)
-            { return true; }
+            if (token.cooldown >= 5) { return true; }
             else { return false; }
         }
-        else
-        {
-            return false;
-        }
+        else { return false; }
     }
 
     public static void Attack(Boss boss, Token token)
@@ -113,15 +107,13 @@ public class Token
         Console.WriteLine($"Current life: {token.life} :(\n\nPress a key to continue");
         Console.ReadKey(true);
     }
-
-
 }
 
 //CLASES QUE HEREDAN:
 public class Force : Token
 {
 
-    public Force(string name, string type, float life, int attack, string ability, int cooldown, int speed, int[] currentPosition, Boxes value) : base(name, type, life, attack, ability, cooldown, speed, currentPosition, value)
+    public Force(string name, string type, float life, int attack, string ability, int cooldown, int speed, int[] currentPosition, Boxes value, string visual) : base(name, type, life, attack, ability, cooldown, speed, currentPosition, value, visual)
     { }
     public override void Power(Boxes[,] maze)
     {
@@ -310,7 +302,7 @@ public class Force : Token
 
 public class Shield : Token
 {
-    public Shield(string name, string type, float life, int attack, string ability, int cooldown, int speed, int[] currentPosition, Boxes value) : base(name, type, life, attack, ability, cooldown, speed, currentPosition, value)
+    public Shield(string name, string type, float life, int attack, string ability, int cooldown, int speed, int[] currentPosition, Boxes value, string visual) : base(name, type, life, attack, ability, cooldown, speed, currentPosition, value, visual)
     { }
 
     public override void Power(Boxes[,] maze)
@@ -342,7 +334,7 @@ public class Shield : Token
 
 public class Vous : Token
 {
-    public Vous(string name, string type, float life, int attack, string ability, int cooldown, int speed, int[] currentPosition, Boxes value) : base(name, type, life, attack, ability, cooldown, speed, currentPosition, value)
+    public Vous(string name, string type, float life, int attack, string ability, int cooldown, int speed, int[] currentPosition, Boxes value, string visual) : base(name, type, life, attack, ability, cooldown, speed, currentPosition, value, visual)
     { }
     public override void Power(Boxes[,] maze)
     {
@@ -370,7 +362,7 @@ public class Vous : Token
 
 public class Vitality : Token
 {
-    public Vitality(string name, string type, float life, int attack, string ability, int cooldown, int speed, int[] currentPosition, Boxes value) : base(name, type, life, attack, ability, cooldown, speed, currentPosition, value)
+    public Vitality(string name, string type, float life, int attack, string ability, int cooldown, int speed, int[] currentPosition, Boxes value, string visual) : base(name, type, life, attack, ability, cooldown, speed, currentPosition, value, visual)
     { }
     public override void Power(Boxes[,] maze)
     {
@@ -396,7 +388,7 @@ public class Vitality : Token
 
 public class Crow : Token
 {
-    public Crow(string name, string type, float life, int attack, string ability, int cooldown, int speed, int[] currentPosition, Boxes value) : base(name, type, life, attack, ability, cooldown, speed, currentPosition, value)
+    public Crow(string name, string type, float life, int attack, string ability, int cooldown, int speed, int[] currentPosition, Boxes value, string visual) : base(name, type, life, attack, ability, cooldown, speed, currentPosition, value, visual)
     { }
     public override void Power(Boxes[,] maze)
     {
@@ -418,7 +410,7 @@ public class Crow : Token
 
 public class Cass : Token
 {
-    public Cass(string name, string type, float life, int attack, string ability, int cooldown, int speed, int[] currentPosition, Boxes value) : base(name, type, life, attack, ability, cooldown, speed, currentPosition, value)
+    public Cass(string name, string type, float life, int attack, string ability, int cooldown, int speed, int[] currentPosition, Boxes value, string visual) : base(name, type, life, attack, ability, cooldown, speed, currentPosition, value, visual)
     { }
     public override void Power(Boxes[,] maze)
     {

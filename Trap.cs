@@ -1,13 +1,32 @@
 public class Trap
 {
     Maze mazes = new Maze();
-
+    
     public virtual void Activate(Token token, Boxes[,] laberinth)
     {
         Console.WriteLine("You have fallen into a trap 💥");
         Console.WriteLine();
         Console.WriteLine("Press a key to continue");
         Console.ReadKey(true);
+    }
+
+    public static void implementedTraps(Boxes[,] maze)
+    {
+     List<int[]> paths = Maze.PathList(maze);
+
+      Random random = new Random();
+      for (int i = 0; i < 16; i++)
+      {
+        int index = random.Next(paths.Count);
+        //para que ninguna trampa caiga al lado de la otra
+        if (maze[paths[index][0] - 1, paths[index][1]] == Boxes.trap || maze[paths[index][0], paths[index][1] + 1] == Boxes.trap || maze[paths[index][0], paths[index][1] - 1] == Boxes.trap || maze[paths[index][0], paths[index][1] + 1] == Boxes.trap)
+        {
+          index = random.Next(paths.Count);
+          maze[paths[index][0], paths[index][1]] = Boxes.trap;
+        }
+        else { maze[paths[index][0], paths[index][1]] = Boxes.trap; }
+        paths.RemoveAt(index);
+      }
     }
 }
 public class Boom : Trap

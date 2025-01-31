@@ -27,23 +27,14 @@ public class Player
         }
     }
 
-    //turno de jugadores
-
-
     //para verificar si la posicion es valida:
     public bool ValidPosition(Boxes[,] maze, int x, int y)
     {
-        if (maze[x, y] == Boxes.path || maze[x, y] == Boxes.trap || maze[x,y] == Boxes.Astharoth || maze[x,y] == Boxes.sword || maze[x,y] == Boxes.elixir ||  maze[x,y] == Boxes.parchment ||  maze[x,y] == Boxes.charm)
+        if (maze[x, y] == Boxes.path || maze[x, y] == Boxes.trap || maze[x, y] == Boxes.Astharoth || maze[x, y] == Boxes.sword || maze[x, y] == Boxes.elixir || maze[x, y] == Boxes.parchment || maze[x, y] == Boxes.charm)
         { return true; }
-        else
-        {
-            return false;
-        }
+        else { return false; }
     }
 
-    //
-
-    //dado un string el usuario me dice a que posicion quiere ir:
     public int[] SelectedAction(string action, int positionActualX, int positionActualY, Token token, Boxes[,] maze)
     {
         int x = positionActualX;

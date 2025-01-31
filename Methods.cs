@@ -3,11 +3,9 @@ class GameActions
   public static void fellInTrap(Token currentToken, Boxes[,] maze)
   {
     List<Trap> allTraps = new List<Trap>
-              {
-                new Boom(),
-                new Teleport(),
-                new BadLuck()
-              };
+     {
+     new Boom(), new Teleport(), new BadLuck()
+     };
     Random randomIndex = new Random();
     int index = randomIndex.Next(allTraps.Count);
 
@@ -155,11 +153,11 @@ class GameActions
             Console.Write("🍵");
             break;
 
-            case Boxes.parchment:
+          case Boxes.parchment:
             Console.Write("📖");
             break;
 
-            case Boxes.charm:
+          case Boxes.charm:
             Console.Write("📿");
             break;
 
