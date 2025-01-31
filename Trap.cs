@@ -1,7 +1,7 @@
 public class Trap
 {
     Maze mazes = new Maze();
-    
+
     public virtual void Activate(Token token, Boxes[,] laberinth)
     {
         Console.WriteLine("You have fallen into a trap 💥");
@@ -24,19 +24,24 @@ public class Trap
                 }
             }
         }
-      Random random = new Random();
-      for (int i = 0; i < 16; i++)
-      {
-        int index = random.Next(paths.Count);
-        //para que ninguna trampa caiga al lado de la otra
-        if (maze[paths[index][0] - 1, paths[index][1]] == Boxes.trap || maze[paths[index][0], paths[index][1] + 1] == Boxes.trap || maze[paths[index][0], paths[index][1] - 1] == Boxes.trap || maze[paths[index][0], paths[index][1] + 1] == Boxes.trap)
+        Random random = new Random();
+        for (int i = 0; i < 16; i++)
         {
-          index = random.Next(paths.Count);
-          maze[paths[index][0], paths[index][1]] = Boxes.trap;
+            int index = random.Next(paths.Count);
+            //para que ninguna trampa caiga al lado de la otra
+            if (maze[paths[index][0] - 1, paths[index][1]] == Boxes.trap ||
+             maze[paths[index][0] + 1, paths[index][1]] == Boxes.trap ||
+             maze[paths[index][0], paths[index][1] - 1] == Boxes.trap ||
+             maze[paths[index][0], paths[index][1] + 1] == Boxes.trap ||
+             maze[paths[index][0]+1, paths[index][1] + 1] == Boxes.trap||
+             maze[paths[index][0]-1, paths[index][1] - 1] == Boxes.trap)
+            {
+                index = random.Next(paths.Count);
+                maze[paths[index][0], paths[index][1]] = Boxes.trap;
+            }
+            else { maze[paths[index][0], paths[index][1]] = Boxes.trap; }
+            paths.RemoveAt(index);
         }
-        else { maze[paths[index][0], paths[index][1]] = Boxes.trap; }
-        paths.RemoveAt(index);
-      }
     }
 }
 public class Boom : Trap
@@ -74,8 +79,7 @@ public class Teleport : Trap
     public override void Activate(Token token, Boxes[,] maze)
     {
         Console.Clear();
-        Console.WriteLine("A huge bird appears from the sky and takes your token away");
-        Console.WriteLine();
+        Console.WriteLine("A huge bird appears from the sky and takes your token away\n");
         Console.WriteLine("Press any key to continue");
         Console.ReadKey(true);
 
@@ -127,5 +131,5 @@ public class BadLuck : Trap
 
     }
 
-    
+
 }

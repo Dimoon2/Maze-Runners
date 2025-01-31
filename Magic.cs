@@ -153,7 +153,10 @@ public class Magic
         //elixir:
         int elixir = random.Next(paths.Count);
         //para que ninguna objeto caiga al lado del otro
-        if (maze[paths[elixir][0] - 1, paths[elixir][1]] == Boxes.sword || maze[paths[elixir][0], paths[elixir][1] + 1] == Boxes.sword || maze[paths[elixir][0], paths[elixir][1] - 1] == Boxes.sword || maze[paths[elixir][0], paths[elixir][1] + 1] == Boxes.sword)
+        if (maze[paths[elixir][0] - 1, paths[elixir][1]] == Boxes.sword ||
+        maze[paths[elixir][0] + 1, paths[elixir][1]] == Boxes.sword ||
+        maze[paths[elixir][0], paths[elixir][1] - 1] == Boxes.sword ||
+         maze[paths[elixir][0], paths[elixir][1] + 1] == Boxes.sword)
         {
             elixir = random.Next(paths.Count);
             maze[paths[elixir][0], paths[elixir][1]] = Boxes.elixir;
@@ -163,12 +166,18 @@ public class Magic
 
         //parchment:
         int parchment = random.Next(paths.Count);
-        if (maze[paths[parchment][0] - 1, paths[parchment][1]] == Boxes.sword || maze[paths[parchment][0], paths[parchment][1] + 1] == Boxes.sword || maze[paths[parchment][0], paths[parchment][1] - 1] == Boxes.sword || maze[paths[parchment][0], paths[parchment][1] + 1] == Boxes.sword)
+        if (maze[paths[parchment][0] - 1, paths[parchment][1]] == Boxes.sword ||
+        maze[paths[parchment][0] + 1, paths[parchment][1]] == Boxes.sword ||
+        maze[paths[parchment][0], paths[parchment][1] - 1] == Boxes.sword ||
+        maze[paths[parchment][0], paths[parchment][1] + 1] == Boxes.sword)
         {
             parchment = random.Next(paths.Count);
             maze[paths[parchment][0], paths[parchment][1]] = Boxes.parchment;
         }
-        else if (maze[paths[parchment][0] - 1, paths[parchment][1]] == Boxes.elixir || maze[paths[parchment][0], paths[parchment][1] + 1] == Boxes.elixir || maze[paths[parchment][0], paths[parchment][1] - 1] == Boxes.elixir || maze[paths[parchment][0], paths[parchment][1] + 1] == Boxes.elixir)
+        else if (maze[paths[parchment][0] - 1, paths[parchment][1]] == Boxes.elixir ||
+         maze[paths[parchment][0] + 1, paths[parchment][1]] == Boxes.elixir ||
+         maze[paths[parchment][0], paths[parchment][1] - 1] == Boxes.elixir ||
+         maze[paths[parchment][0], paths[parchment][1] + 1] == Boxes.elixir)
         {
             parchment = random.Next(paths.Count);
             maze[paths[parchment][0], paths[parchment][1]] = Boxes.parchment;
@@ -178,17 +187,26 @@ public class Magic
 
         //charm:
         int charm = random.Next(paths.Count);
-        if (maze[paths[charm][0] - 1, paths[charm][1]] == Boxes.sword || maze[paths[charm][0], paths[charm][1] + 1] == Boxes.sword || maze[paths[charm][0], paths[charm][1] - 1] == Boxes.sword || maze[paths[charm][0], paths[charm][1] + 1] == Boxes.sword)
+        if (maze[paths[charm][0] - 1, paths[charm][1]] == Boxes.sword ||
+        maze[paths[charm][0] + 1, paths[charm][1]] == Boxes.sword ||
+        maze[paths[charm][0], paths[charm][1] - 1] == Boxes.sword ||
+        maze[paths[charm][0], paths[charm][1] + 1] == Boxes.sword)
         {
             charm = random.Next(paths.Count);
             maze[paths[charm][0], paths[charm][1]] = Boxes.charm;
         }
-        else if (maze[paths[charm][0] - 1, paths[charm][1]] == Boxes.elixir || maze[paths[charm][0], paths[charm][1] + 1] == Boxes.elixir || maze[paths[charm][0], paths[charm][1] - 1] == Boxes.elixir || maze[paths[charm][0], paths[charm][1] + 1] == Boxes.elixir)
+        else if (maze[paths[charm][0] - 1, paths[charm][1]] == Boxes.elixir ||
+        maze[paths[charm][0] + 1, paths[charm][1]] == Boxes.elixir ||
+        maze[paths[charm][0], paths[charm][1] - 1] == Boxes.elixir ||
+        maze[paths[charm][0], paths[charm][1] + 1] == Boxes.elixir)
         {
             charm = random.Next(paths.Count);
             maze[paths[charm][0], paths[charm][1]] = Boxes.charm;
         }
-        else if (maze[paths[charm][0] - 1, paths[charm][1]] == Boxes.parchment || maze[paths[charm][0], paths[charm][1] + 1] == Boxes.parchment || maze[paths[charm][0], paths[charm][1] - 1] == Boxes.parchment || maze[paths[charm][0], paths[charm][1] + 1] == Boxes.parchment)
+        else if (maze[paths[charm][0] - 1, paths[charm][1]] == Boxes.parchment ||
+         maze[paths[charm][0] + 1, paths[charm][1]] == Boxes.parchment || 
+         maze[paths[charm][0], paths[charm][1] - 1] == Boxes.parchment || 
+         maze[paths[charm][0], paths[charm][1] + 1] == Boxes.parchment)
         {
             charm = random.Next(paths.Count);
             maze[paths[charm][0], paths[charm][1]] = Boxes.charm;
