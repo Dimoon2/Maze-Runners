@@ -113,7 +113,6 @@ public class Programs
       Console.WriteLine("To select the tokens you must input the number of the one you want\n\nPress any key to continue");
       Console.ReadKey(true);
 
-      //llamar a los tokens:
       Console.WriteLine("There are six tokens, select wisely\nWARNING: no token can be selected twice\n\nPress a key to continue");
       Console.ReadKey();
 
@@ -169,7 +168,6 @@ public class Programs
               // Mostrar nuevamente los tokens disponibles
               for (int i = 0; i < tokens.Count; i++)
               {
-                Console.Clear();
                 Console.WriteLine($"{i} {tokens[i].name}");
               }
             }
