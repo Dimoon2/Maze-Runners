@@ -8,7 +8,7 @@ public class Programs
     while (true)
     {
       //inicio del juego:
-      Menu.MainMenu();
+       Menu.MainMenu();
       ConsoleKeyInfo key = Console.ReadKey(true);
       if (key.KeyChar == '1')
       {
@@ -37,7 +37,7 @@ public class Programs
         Player2 = new Player(Console.ReadLine() ?? string.Empty, true);
       }
       Console.WriteLine($"{Player2.name}, you are Player 2\n\nPress a key to continue");
-      Console.ReadKey();
+      Console.ReadKey(true);
 
       //Reglas:
       Console.Clear();
@@ -90,13 +90,13 @@ public class Programs
       //creando objeto Boss:
       Boss boss = new Boss("Astharoth", 40, 10, [Maze.size / 2, Maze.size / 2]);
       maze[Maze.size / 2, Maze.size / 2] = Boxes.Astharoth;
-     
+
       //agregar trampas:
       Trap.implementedTraps(maze);
       int NumOfTraps = mazes.NumTraps(maze);
 
       // //agregar objetos:
-     Magic.implementMagic(maze);
+      Magic.implementMagic(maze);
 
       Console.Clear();
       Console.WriteLine("Whoever kills the beast first, wins the game, you will start in oposite places and have the same chances to win");
@@ -436,7 +436,7 @@ public class Programs
               if (maze[tokenSelectedPosition[0], tokenSelectedPosition[1]] == Boxes.Astharoth)
               {
                 currentToken.inBoss = true;
-                
+
                 //llamar al metodo estatico IntroductionBoss:
                 Boss.PresentationBoss(currentToken, maze);
                 //metodo fight
@@ -577,19 +577,20 @@ public class Programs
 
           // Asignar el token actual basado en la decisión
           var currentToken = Player2.SelectedToken[selectedToken];
+          //Mostrar maze 2:
+          Console.Clear();
+          Console.WriteLine("CURRENT MAZE: \n");
+          GameActions.PrintMaze(maze);
 
           // Mostrar opciones de movimiento
-          Console.Clear();
           Console.WriteLine($"You are currently playing with {currentToken.name}{currentToken.visual}\n-Life🧬:{currentToken.life} \n-Attack💥:{currentToken.attack} \n-Cooldoown⌛:{currentToken.cooldown} \n-Ability❤️‍🔥:{currentToken.ability}\n\n");
           Console.WriteLine("Press a key to continue");
           Console.ReadKey(true);
 
           Console.Clear();
-          //Mostrar maze 2:
           Console.WriteLine("CURRENT MAZE: \n");
           GameActions.PrintMaze(maze);
-
-          Console.WriteLine("Please write: \n W if you wanna move up \nS if you wanna move down \nA if you wanna move left \nD if you wanna move right \nor E if you want to activate your super\n");
+          Console.WriteLine("\nPlease write: \n W if you wanna move up \nS if you wanna move down \nA if you wanna move left \nD if you wanna move right \nor E if you want to activate your super\n");
           Console.WriteLine($"You are currently playing with {currentToken.name} {currentToken.visual}");
 
           string action = string.Empty; // Inicializa action
@@ -618,11 +619,6 @@ public class Programs
 
             // Verificar si puede moverse
             bool wishPosition = Player2.ValidPosition(maze, tokenSelectedPosition[0], tokenSelectedPosition[1]);
-            if (maze[tokenSelectedPosition[0], tokenSelectedPosition[1]] == Boxes.wall)
-            {
-              Console.WriteLine("You can't move there!\nSelect a valid answer\n\nPress a key to continue");
-              Console.ReadKey(true);
-            }
             if (wishPosition)
             {
               if (maze[tokenSelectedPosition[0], tokenSelectedPosition[1]] == Boxes.trap)

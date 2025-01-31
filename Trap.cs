@@ -12,8 +12,18 @@ public class Trap
 
     public static void implementedTraps(Boxes[,] maze)
     {
-     List<int[]> paths = Maze.PathList(maze);
+        List<int[]> paths = new List<int[]>();
 
+        for (int i = 0; i < Maze.size; i++)
+        {
+            for (int j = 0; j < Maze.size; j++)
+            {
+                if (maze[i, j] == Boxes.path)
+                {
+                    paths.Add(new int[] { i, j });
+                }
+            }
+        }
       Random random = new Random();
       for (int i = 0; i < 16; i++)
       {

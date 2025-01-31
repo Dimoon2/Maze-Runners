@@ -258,7 +258,7 @@ public class Maze
     }
 
     //metodo que recorre la matriz y que agrega a una lista los caminos libres
-    public static List<int[]> PathList(Boxes[,] maze)
+    public List<int[]> PathList(Boxes[,] maze)
     {
         List<int[]> paths = new List<int[]>();
 
