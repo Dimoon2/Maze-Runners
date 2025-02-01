@@ -7,13 +7,8 @@ public class Maze
     public static int size = 23;
     public Boxes[,] GenerateMaze()
     {
-
-
-        //HUNT AND KILL :)
-        //INITIALIZATION:
-        //1. laberinto generico dividido por habitaciones:
-        Boxes[,] maze =
-        {
+        Boxes[,] defaultt =
+                {
             {Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall, Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall },
             {Boxes.wall,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle, Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.wall},
             {Boxes.wall,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle, Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.wall },
@@ -40,42 +35,74 @@ public class Maze
 
 
         };
-        //mascara para facilitar el algoritmo:
-        Mask[,] mask =
-        {
-            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
-            {Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall},
-            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
-            {Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall},
-            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
-            {Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall},
-            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
-            {Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall},
-            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
-            {Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall},
-            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
-            {Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall},
-            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
-            {Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall},
-            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
-            {Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall},
-            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
-            {Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall},
-            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
-            {Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall},
-            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
-            {Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall},
-            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
-
-
-        };
-        int Count = 0;
-        //Lista de caminos no visitados:
-        List<int[]> unvisited = new List<int[]>();
-
         bool se_partio = true;
         while (se_partio)
         {
+            //HUNT AND KILL :)
+            //INITIALIZATION:
+            //1. laberinto generico dividido por habitaciones:
+            Boxes[,] maze =
+            {
+            {Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall, Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall },
+            {Boxes.wall,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle, Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.wall},
+            {Boxes.wall,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle, Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.wall },
+            {Boxes.wall,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle, Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.wall},
+            {Boxes.wall,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle, Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.wall },
+            {Boxes.wall,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle, Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.wall},
+            {Boxes.wall,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle, Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.wall },
+            {Boxes.wall,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle, Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.wall},
+            {Boxes.wall,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle, Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.wall },
+            {Boxes.wall,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle, Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.wall},
+            {Boxes.wall,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle, Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.wall },
+            {Boxes.wall,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle, Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.wall},
+            {Boxes.wall,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle, Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.wall },
+            {Boxes.wall,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle, Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.wall},
+            {Boxes.wall,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle, Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.wall },
+            {Boxes.wall,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle, Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.wall},
+            {Boxes.wall,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle, Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.wall },
+            {Boxes.wall,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle, Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.wall},
+            {Boxes.wall,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle, Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.wall },
+            {Boxes.wall,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle, Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.wall},
+            {Boxes.wall,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle, Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.obstacle,Boxes.wall },
+            {Boxes.wall,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle, Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.obstacle,Boxes.path,Boxes.wall},
+            {Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall, Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall,Boxes.wall },
+
+
+        };
+            //mascara para facilitar el algoritmo:
+            Mask[,] mask =
+            {
+            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
+            {Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall},
+            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
+            {Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall},
+            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
+            {Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall},
+            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
+            {Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall},
+            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
+            {Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall},
+            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
+            {Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall},
+            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
+            {Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall},
+            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
+            {Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall},
+            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
+            {Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall},
+            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
+            {Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall},
+            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
+            {Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall,Mask.unvisited,Mask.wall},
+            {Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall,Mask.wall },
+
+
+        };
+            int Count = 0;
+            //Lista de caminos no visitados:
+            List<int[]> unvisited = new List<int[]>();
+
+
             se_partio = false;
             Stopwatch clock = new Stopwatch();
 
@@ -175,10 +202,10 @@ public class Maze
 
 
                     }
-                if (se_partio)
-                {
-                    break;
-                }
+                    if (se_partio)
+                    {
+                        break;
+                    }
                 }
                 else
                 {
@@ -293,8 +320,10 @@ public class Maze
                 }
 
             }
+            if (!se_partio)
+                return maze;
         }
-        return maze;
+        return defaultt;
     }
 
     //metodo que recorre la matriz y que agrega a una lista los caminos libres

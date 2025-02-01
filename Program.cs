@@ -16,13 +16,13 @@ public class Programs
     while (true)
     {
       //inicio del juego:
-      Menu.MainMenu();
+     // Menu.MainMenu();
       ConsoleKeyInfo key = Console.ReadKey(true);
       if (key.KeyChar == '1')
       {
         break;
       }
-      Menu.Intro();
+    //  Menu.Intro();
 
       //jugadores:
       Console.Clear();
