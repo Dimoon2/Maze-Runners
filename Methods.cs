@@ -148,7 +148,7 @@ class GameActions
             break;
 
           case Boxes.trap:
-            Console.Write("💥");
+            Console.Write("  ");
             break;
 
           case Boxes.Astharoth:

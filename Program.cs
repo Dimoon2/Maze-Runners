@@ -10,7 +10,7 @@ using System.Threading;
 public class Programs
 {
   static void Main(string[] args)
-  {
+  { //AUDIO:
     string audiopath = @"C:\Users\Diana\Desktop\Programacion\PROYECTO!!\Maze Runners\data\dianamainn.wav";
     GameActions.DisplaySound(audiopath);
     while (true)
@@ -111,7 +111,7 @@ public class Programs
       Console.WriteLine("It looks like you are in luck, there are four hidden objects in the maze that can help you give an end to this\n");
       Thread.Sleep(1000); Thread.Sleep(1000);
 
-      Console.WriteLine($"But be cautious, there are {NumOfTraps} traps in the maze");
+      Console.WriteLine($"But be cautious, there are {NumOfTraps} traps in the maze, and they are invisible!!");
       Thread.Sleep(1000); Thread.Sleep(1000);
 
       Console.WriteLine("WARNING: For each turn, your tokens cooldown will be 1 time bigger\n\nPress any key to continue");
@@ -224,6 +224,8 @@ public class Programs
           {
             Console.Clear();
             Console.WriteLine("Select the token you wish to use!");
+            GameActions.PrintMaze(maze);
+            Console.WriteLine();
             for (int i = 0; i < Player1.SelectedToken.Count; i++)
             {
               Console.WriteLine(Player1.SelectedToken[i] + (selectedToken == i ? "⬅️" : ""));
@@ -553,6 +555,8 @@ public class Programs
           {
             Console.Clear();
             Console.WriteLine("Select the token you wish to use!\n");
+            GameActions.PrintMaze(maze);
+            Console.WriteLine();
             for (int i = 0; i < Player2.SelectedToken.Count; i++)
             {
               Console.WriteLine(Player2.SelectedToken[i] + (selectedToken == i ? "⬅️" : ""));
