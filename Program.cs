@@ -1,14 +1,22 @@
 ﻿
 using System.Security.Cryptography.X509Certificates;
+using System;
+using NAudio.Wave;
+using System.Runtime.InteropServices;
+using System.Diagnostics;
+using System.IO;
+using System.Threading;
 
 public class Programs
 {
   static void Main(string[] args)
   {
+    string audiopath = @"C:\Users\Diana\Desktop\Programacion\PROYECTO!!\Maze Runners\data\dianamainn.wav";
+    GameActions.DisplaySound(audiopath);
     while (true)
     {
       //inicio del juego:
-       Menu.MainMenu();
+      Menu.MainMenu();
       ConsoleKeyInfo key = Console.ReadKey(true);
       if (key.KeyChar == '1')
       {

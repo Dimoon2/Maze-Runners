@@ -1,5 +1,39 @@
+using NAudio.Wave;
+using System.Runtime.InteropServices;
+using System.Diagnostics;
+using System.IO;
+using System.Threading;
 class GameActions
 {
+
+  public static void DisplaySound(string audioPath)
+  {
+    if (!File.Exists(audioPath))
+    {
+      Console.WriteLine("Audio file not found :(");
+    }
+    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+    {
+      Thread audioThread = new Thread(() => PlayAudioLoopW(audioPath));
+      audioThread.Start();
+    }
+    static void PlayAudioLoopW(string audio)
+    {
+      while (true)
+      {
+        using (var audioFile = new AudioFileReader(audio))
+        using (var outputDevice = new WaveOutEvent())
+        {
+          outputDevice.Init(audioFile);
+          outputDevice.Play();
+          while (outputDevice.PlaybackState == PlaybackState.Playing)
+          {
+            Thread.Sleep(100);
+          }
+        }
+      }
+    }
+  }
   public static void fellInTrap(Token currentToken, Boxes[,] maze)
   {
     List<Trap> allTraps = new List<Trap>
