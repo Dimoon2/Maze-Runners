@@ -11,7 +11,7 @@ public class Programs
 {
   static void Main(string[] args)
   { //AUDIO:
-    string audiopath = @"C:\Users\Diana\Desktop\Programacion\PROYECTO!!\Maze Runners\data\dianamainn.wav";
+    string audiopath = "dianamainn.wav";
     GameActions.DisplaySound(audiopath);
     while (true)
     {

@@ -3,18 +3,21 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using System.ComponentModel.DataAnnotations;
 class GameActions
 {
 
   public static void DisplaySound(string audioPath)
   {
+    string folder = "Audios";
+    string dirPath = Path.Combine(Directory.GetCurrentDirectory(), folder, audioPath);
     if (!File.Exists(audioPath))
     {
       Console.WriteLine("Audio file not found :(");
     }
     if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
     {
-      Thread audioThread = new Thread(() => PlayAudioLoopW(audioPath));
+      Thread audioThread = new Thread(() => PlayAudioLoopW(dirPath));
       audioThread.Start();
     }
     static void PlayAudioLoopW(string audio)
