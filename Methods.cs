@@ -11,7 +11,7 @@ class GameActions
   {
     string folder = "Audios";
     string dirPath = Path.Combine(Directory.GetCurrentDirectory(), folder, audioPath);
-    if (!File.Exists(audioPath))
+    if (!File.Exists(dirPath))
     {
       Console.WriteLine("Audio file not found :(");
     }
