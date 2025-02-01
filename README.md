@@ -3,13 +3,15 @@
 
 ## ❄️ UNO: Requerimientos para que el juego funcione correctamente
 - Hecho en Windows, con .NET versión 9.0.100.
-- Agregué una única librería: NAudio (para agregarla se utiliza el comando: dotnet add newpackage NAudio).
+- Agregué librería: NAudio (para agregarla se utiliza el comando: dotnet add newpackage NAudio).
+- Y librería: System.Threading (dotnet add new package System.Threading)
 - Las funcionalidades de audio solo funcionan para Windows.
+- Recomendable cargar el juego desde el escritorio para mejor funcionalidad de audio.
 
 ## ❄️ DOS: Funcionalidad
 El objetivo del juego es enfrentarte al jefe que se encuentra en el medio del laberinto. Para ello, el token debe recoger uno de los objetos esparcidos aleatoriamente en el mapa.
 
-1. Descripción de la historia del juego: Se debe ingresar el nombre de los dos jugadores permitidos.
+1. Capacidad de jugadores: Se debe ingresar el nombre de los dos jugadores permitidos.
 2. Selección de tokens: Cada jugador debe seleccionar tres tokens.
    - Para seleccionar un token, se utilizan las teclas: ⬆️⬇️ para moverse hacia arriba o abajo y luego se presiona Enter para seleccionar.
 3. Mensajes en la consola: A medida que avanza el juego, aparecen mensajes que indican lo que se espera que haga el jugador.
