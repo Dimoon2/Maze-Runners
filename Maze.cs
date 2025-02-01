@@ -35,8 +35,8 @@ public class Maze
 
 
         };
-        bool se_partio = true;
-        while (se_partio)
+        bool broken = true;
+        while (broken)
         {
             //HUNT AND KILL :)
             //INITIALIZATION:
@@ -103,7 +103,7 @@ public class Maze
             List<int[]> unvisited = new List<int[]>();
 
 
-            se_partio = false;
+            broken = false;
             Stopwatch clock = new Stopwatch();
 
             clock.Start();
@@ -144,10 +144,9 @@ public class Maze
             //5.seleccionar un vecino random adyacente:
             while (Count > 0)
             {
-                System.Console.WriteLine(clock.Elapsed.Seconds);
                 if (clock.Elapsed.Seconds > 5)
                 {
-                    se_partio = true;
+                    broken = true;
                     break;
                 }
                 //escojo random direction para moverme
@@ -167,7 +166,7 @@ public class Maze
                     {
                         if (clock.Elapsed.Seconds > 8)
                         {
-                            se_partio = true;
+                            broken = true;
                             break;
                         }
 
@@ -202,7 +201,7 @@ public class Maze
 
 
                     }
-                    if (se_partio)
+                    if (broken)
                     {
                         break;
                     }
@@ -219,7 +218,7 @@ public class Maze
                 {
                     if (clock.Elapsed.Seconds > 8)
                     {
-                        se_partio = true;
+                        broken = true;
                         break;
                     }
 
@@ -303,7 +302,7 @@ public class Maze
                     break;
                 }
 
-                if (se_partio)
+                if (broken)
                 {
                     break;
                 }
@@ -320,7 +319,7 @@ public class Maze
                 }
 
             }
-            if (!se_partio)
+            if (!broken)
                 return maze;
         }
         return defaultt;
