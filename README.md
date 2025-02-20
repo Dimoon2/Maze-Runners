@@ -3,10 +3,9 @@
 
 ## ❄️ UNO: Requerimientos para que el juego funcione correctamente
 - Hecho en Windows, con .NET versión 9.0.100.
-- Agregué librería: NAudio (para agregarla se utiliza el comando: dotnet add newpackage NAudio).
+- Agregué librería: NAudio (para agregarla se utiliza el comando: dotnet add newpackage NAudio || dotnet add package NAudio).
 - Y librería: System.Threading (dotnet add new package System.Threading)
-- Las funcionalidades de audio solo funcionan para Windows.
-- Recomendable cargar el juego desde el escritorio para mejor funcionalidad de audio.
+- Las funcionalidades de audio posiblemente solo funcionen para Windows.
 
 ## ❄️ DOS: Funcionalidad
 El objetivo del juego es enfrentarte al jefe que se encuentra en el medio del laberinto. Para ello, el token debe recoger uno de los objetos esparcidos aleatoriamente en el mapa.
