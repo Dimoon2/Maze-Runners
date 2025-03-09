@@ -10,16 +10,64 @@ using System.Threading;
 public class Programs
 {
   static void Main(string[] args)
-  { //AUDIO:
-    string audiopath = "dianamainn.wav";
-    GameActions.DisplaySound(audiopath);
+  {
     while (true)
     {
+      //AUDIO:
+      GameActions.audioPlaying = true;
+      string audiopath = "dianamainn.wav";
+      GameActions.DisplaySound(audiopath);
       //inicio del juego:
       Menu.MainMenu();
-      ConsoleKeyInfo key = Console.ReadKey(true);
-      if (key.KeyChar == '1')
+
+      Console.WriteLine();
+      List<string> desition = new List<string>();
+      desition.Add("Continue");
+      desition.Add("Leave");
+
+      bool closeGame = false;
+      int selectedDesition = 0;
+
+      while (true)
       {
+        Console.Clear();
+        Console.WriteLine("Select your destiny\n");
+        for (int i = 0; i < 2; i++)
+        {
+          Console.WriteLine(desition[i] + (selectedDesition == i ? "⬅️" : ""));
+        }
+        ConsoleKeyInfo select = Console.ReadKey(true);
+
+        if (select.Key == ConsoleKey.UpArrow)
+        {
+          selectedDesition--;
+          if (selectedDesition < 0) selectedDesition = desition.Count - 1;
+        }
+        else if (select.Key == ConsoleKey.DownArrow)
+        {
+          selectedDesition++;
+          if (selectedDesition >= desition.Count) selectedDesition = 0;
+        }
+        else if (select.Key == ConsoleKey.Enter)
+        {
+          if (selectedDesition == 1)
+          {
+            Console.WriteLine("I KNOW WHERE YOU LIVE 😡");
+            Thread.Sleep(1000);
+            closeGame = true;
+            break;
+          }
+          else
+          {
+            break;
+          }
+        }
+      }
+      if (closeGame)
+      {
+        GameActions.audioPlaying = false;
+        GameActions.DisplaySound(audiopath);
+        Thread.Sleep(1000);
         break;
       }
       Menu.Intro();
@@ -109,10 +157,10 @@ public class Programs
       Console.Clear();
       Console.WriteLine("Whoever kills the beast first, wins the game, you will start in oposite places and have the same chances to win");
       Console.WriteLine("It looks like you are in luck, there are four hidden objects in the maze that can help you give an end to this\n");
-      Thread.Sleep(1000); Thread.Sleep(1000);
+      Thread.Sleep(2000);
 
       Console.WriteLine($"But be cautious, there are {NumOfTraps} traps in the maze, and they are invisible!!");
-      Thread.Sleep(1000); Thread.Sleep(1000);
+      Thread.Sleep(2000); 
 
       Console.WriteLine("WARNING: For each turn, your tokens cooldown will be 1 time bigger\n\nPress any key to continue");
       Console.ReadKey(true);
@@ -456,6 +504,7 @@ public class Programs
                 {
                   Boss.Victory(Player1);
                   currentToken.won = true;
+                  closeGame = true;
                   break;
                 }
               }
@@ -788,6 +837,7 @@ public class Programs
                 {
                   Boss.Victory(Player2);
                   currentToken.won = true;
+                  closeGame = true;
                   break;
                 }
               }

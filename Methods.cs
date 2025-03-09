@@ -6,7 +6,7 @@ using System.Threading;
 using System.ComponentModel.DataAnnotations;
 class GameActions
 {
-
+  public static bool audioPlaying = true;
   public static void DisplaySound(string audioPath)
   {
     string folder = "Audios";
@@ -22,7 +22,7 @@ class GameActions
     }
     static void PlayAudioLoopW(string audio)
     {
-      while (true)
+      while (audioPlaying)
       {
         using (var audioFile = new AudioFileReader(audio))
         using (var outputDevice = new WaveOutEvent())
@@ -31,6 +31,11 @@ class GameActions
           outputDevice.Play();
           while (outputDevice.PlaybackState == PlaybackState.Playing)
           {
+            if(!audioPlaying)
+            {
+              outputDevice.Stop();
+              break;
+            }
             Thread.Sleep(100);
           }
         }
