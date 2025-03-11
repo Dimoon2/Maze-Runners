@@ -151,7 +151,7 @@ public class Programs
       Trap.implementedTraps(maze);
       int NumOfTraps = mazes.NumTraps(maze);
 
-      // //agregar objetos:
+      //agregar objetos:
       Magic.implementMagic(maze);
 
       Console.Clear();
@@ -295,6 +295,9 @@ public class Programs
               playerSelection = true;
             }
           }
+          // Asignar el token actual basado en la decisión
+          var currentToken = Player1.SelectedToken[selectedToken];
+
           Console.Clear();
           Console.WriteLine("VALID SELECTION!!\nPress a key to continue");
           Console.ReadKey(true);
@@ -304,8 +307,6 @@ public class Programs
           Console.WriteLine("😡 represents FORCE\n🛡️ represents SHIELD\n🌀 represents VOUS\n🤍 represents VITALITY\n🦅 represents CROW\n🎇 represents CASS\nPress a key to continue");
           Console.ReadKey(true);
 
-          // Asignar el token actual basado en la decisión
-          var currentToken = Player1.SelectedToken[selectedToken];
           // Mostrar opciones de movimiento
           Console.Clear();
           Console.WriteLine($"You are currently playing with {currentToken.name}{currentToken.visual}\n-Life🧬:{currentToken.life} \n-Attack💥:{currentToken.attack} \n-Cooldoown⌛:{currentToken.cooldown} \n-Ability❤️‍🔥:{currentToken.ability}\n\n");

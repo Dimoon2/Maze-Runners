@@ -1,11 +1,8 @@
 public class Trap
 {
-    Maze mazes = new Maze();
-
     public virtual void Activate(Token token, Boxes[,] laberinth)
     {
-        Console.WriteLine("You have fallen into a trap 💥");
-        Console.WriteLine();
+        Console.WriteLine("You have fallen into a trap 💥\n");
         Console.WriteLine("Press a key to continue");
         Console.ReadKey(true);
     }

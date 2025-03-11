@@ -35,6 +35,7 @@ public class Maze
 
 
         };
+
         bool broken = true;
         while (broken)
         {
@@ -121,8 +122,6 @@ public class Maze
                 }
             }
 
-
-
             //KILL MODE:
             //3. seleccion de habitacion random de la lista de visitadas:
             Random randomIndex = new Random();
@@ -170,7 +169,7 @@ public class Maze
                             break;
                         }
 
-                        //ver si elvecino es no visitado
+                        //ver si el vecino es no visitado
                         if (mask[adjacentCell[0], adjacentCell[1]] == Mask.unvisited)
                         {
                             //7.rompo pared entre donde estoy y mi vecino
@@ -206,6 +205,7 @@ public class Maze
                         break;
                     }
                 }
+                //fuera del limite la direccion
                 else
                 {
                     Direction.RemoveAt(indexOfDir);
@@ -294,7 +294,7 @@ public class Maze
                             }
 
                         }
-                        if (found == true)
+                        if (found)
                         {
                             break;
                         }
@@ -320,7 +320,7 @@ public class Maze
 
             }
             if (!broken)
-                return maze;
+            { return maze; }
         }
         return defaultt;
     }

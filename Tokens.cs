@@ -113,7 +113,8 @@ public class Token
 public class Force : Token
 {
 
-    public Force(string name, string type, float life, int attack, string ability, int cooldown, int speed, int[] currentPosition, Boxes value, string visual) : base(name, type, life, attack, ability, cooldown, speed, currentPosition, value, visual)
+    public Force(string name, string type, float life, int attack, string ability, int cooldown, int speed, int[] currentPosition, Boxes value, string visual) :
+     base(name, type, life, attack, ability, cooldown, speed, currentPosition, value, visual)
     { }
     public override void Power(Boxes[,] maze)
     {

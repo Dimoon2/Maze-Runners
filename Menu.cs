@@ -34,7 +34,7 @@ class Menu
         Console.WriteLine("◽◽◽◽MAIN MENU◽◽◽◽");
 
         Console.WriteLine("Welcome to: 𝓣𝓱𝓮 𝓢𝓹𝓲𝓻𝓲𝓽 𝓣𝓻𝓪𝓲𝓵 by Diana");
-        Thread.Sleep(5000);
+        Thread.Sleep(3000);
        
         }
     public static void Intro()
